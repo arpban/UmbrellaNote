@@ -1,0 +1,81 @@
+//FONTS
+$lato: 'Lato', sans-serif;
+$opensans: 'Open Sans', sans-serif;
+$consolas: "Consolas, 'Courier New', monospace";
+$sourceSansPro: 'SourceSansPro-Regular', sans-serif;
+$sourceSansProItalic: 'SourceSansPro-Italic', sans-serif;
+$sourceSansProLight: 'SourceSansPro-Light', sans-serif;
+$sourceSansProBold: 'SourceSansPro-Bold', sans-serif;
+$sourceSansProSemiBold: 'SourceSansPro-SemiBold', sans-serif;
+
+$ubuntu_mono_italic: 'UbuntuMono-Italic', monospace;
+
+$open_sans_light_italic: 'OpenSans-LightItalic', sans-serif;
+
+//COLORS
+$white: #FAFAFA;
+$white2: #fdfdfd;
+$black: black;
+$black2: #1f1f1f;
+$grey: #ababab;
+$orange: #ff8000;
+$blue: #338fff;
+$yellow: #F9FD65;
+$green: #7ce810;
+$lightgreen: #c7fd91;
+$lightlightgrey: #f3eeee; 
+$pinkred: #f5004f;
+$pink_orange: #f58d70;
+$coral: coral;
+
+$paper0: #fefff2;
+$paper1: #fdf6e3;
+$paper2: #ddd6c1;
+$paper3: #d3cbb7;
+$papertext: #333333;
+
+//coral theme
+// $umbrella_primary: #f58d70;
+// $umbrella_secondary: #F3A86D;
+
+//dark blue - lightblue theme
+$umbrella_primary: #1c1925;
+$umbrella_secondary: #338fff;
+
+//dark blue - coral theme
+// $umbrella_primary: #1c1925;
+// $umbrella_secondary: #f58d70;
+
+
+@font-face {
+    font-family: 'SourceSansPro-Regular';
+    src: url('../fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'SourceSansPro-Italic';
+    src: url('../fonts/Source_Sans_Pro/SourceSansPro-Italic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'SourceSansPro-Light';
+    src: url('../fonts/Source_Sans_Pro/SourceSansPro-Light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'SourceSansPro-Bold';
+    src: url('../fonts/Source_Sans_Pro/SourceSansPro-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'SourceSansPro-SemiBold';
+    src: url('../fonts/Source_Sans_Pro/SourceSansPro-SemiBold.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'UbuntuMono-Italic';
+    src: url('../fonts/Ubuntu_Mono/UbuntuMono-Italic.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'OpenSans-LightItalic';
+    src: url('../fonts/Open_Sans/OpenSans-LightItalic.ttf') format('truetype');
+}
+
+
