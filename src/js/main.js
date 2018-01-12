@@ -206,9 +206,9 @@ function raven(){
 function sendRaven(message) {
     $('.raven .body').html(message);
     raven();
-    setTimeout(() => {
-        $('.raven').removeClass('open');
-    }, 300000);
+    // setTimeout(() => {
+    //     $('.raven').removeClass('open');
+    // }, 300000);
 }
 
 function toggleWritePage() {
@@ -970,5 +970,12 @@ function editNotebook(event){
 
 ipcRenderer.on('message', function (event, text) {
     console.log('Message from app.js:', text);
-    sendRaven(text)
+    if(text == 'update-downloaded'){
+        sendRaven('<button class="update" onclick="update()">Update Software</button>')
+    }
 });
+
+function update(){
+    console.log('going to update now.')
+    ipcRenderer.send('update-now');
+}

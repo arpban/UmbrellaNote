@@ -1022,3 +1022,8 @@ header {
 .points label:nth-child(1) {
   -webkit-animation: myAnimation 3s 500ms infinite ease-in-out;
   animation: myAnimation 3s 500ms infinite ease-in-out; }
+
+button.update {
+  background: transparent;
+  border: none;
+  color: white; }

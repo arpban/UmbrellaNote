@@ -111,12 +111,16 @@ autoUpdater.on('download-progress', function (progressObj) {
 });
 
 autoUpdater.on('update-downloaded', function (info) {
-	sendStatusToWindow('Update downloaded; will install now');
-	setTimeout(function () {
-		autoUpdater.quitAndInstall();
-	}, 5000);
+	sendStatusToWindow('update-downloaded');
+	// setTimeout(function() {
+	//   autoUpdater.quitAndInstall();  
+	// }, 5000)
 });
 
 app.on('ready', function () {
 	autoUpdater.checkForUpdates();
+});
+
+ipcMain.on('update-now', function () {
+	autoUpdater.quitAndInstall();
 });

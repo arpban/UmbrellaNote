@@ -77,6 +77,7 @@ ipcMain.on('show-signup-in-browser', ()=>{
 })
 
 
+
 //-------------------------------------------------------------------
 // Auto updates
 //-------------------------------------------------------------------
@@ -110,12 +111,16 @@ autoUpdater.on('download-progress', progressObj => {
 });
 
 autoUpdater.on('update-downloaded', info => {
-  sendStatusToWindow('Update downloaded; will install now');
-  setTimeout(function() {
-    autoUpdater.quitAndInstall();  
-  }, 5000)
+  sendStatusToWindow('update-downloaded');
+  // setTimeout(function() {
+  //   autoUpdater.quitAndInstall();  
+  // }, 5000)
 });
 
 app.on('ready', function()  {
   autoUpdater.checkForUpdates();
 });
+
+ipcMain.on('update-now', ()=>{
+	autoUpdater.quitAndInstall();
+})

@@ -1,5 +1,1 @@
-{"task":"CREATE_NOTE","priority":5,"notebook":"Notebook One","date":"Fri, 12 January 2018","time":"9:37:03 PM","note":"<p>Write Here</p>","localdb_id":"LQDzwRvKPASXNMIt","timestamp":1515773223175,"_id":"23qZCKhPNAz8yCdU"}
-{"task":"CREATE_NOTEBOOK","priority":1,"title":"Notebook One","summary":"This is the default notebook. All the untagged posts are stored here.","cover":"img/1.jpg","time":"Fri, 12 January 2018","_id":"JwQuDjIFPc6nSJTa"}
-{"task":"CREATE_NOTE","priority":4,"notebook":"Journal 2018","date":"Fri, 12 January 2018","time":"9:36:55 PM","note":"<p>Arpti b</p>","localdb_id":"Cg0C6Ctr1HHYCs93","timestamp":1515773215763,"_id":"RXpJ9s4zpxKibe3e"}
-{"task":"CREATE_NOTE","priority":2,"notebook":"Notebook One","date":"Fri, 12 January 2018","time":"9:25:20 PM","note":"<p>fjaklsd</p>","localdb_id":"QrWgdbI0Xap1RA0T","timestamp":1515772520041,"_id":"T3GzXrG2CoyNNgzC"}
-{"task":"CREATE_NOTEBOOK","priority":3,"title":"Journal 2018","summary":"my journal for the year 2018","cover":"img/13.jpeg","time":"Fri, 12 January 2018","_id":"XXKSZJE2DvUCVDvL"}
+{"task":"CREATE_NOTEBOOK","priority":1,"title":"Notebook One","summary":"This is the default notebook. All the untagged posts are stored here.","cover":"img/1.jpg","time":"Fri, 12 January 2018","_id":"t2OM5AqWbPEq3pXd"}
