@@ -44,7 +44,7 @@
     "publish": [
       {
         "provider": "generic",
-        "url": "http://localhost:8080"
+        "url": "https://umbrellanote.com/updates"
       }
     ],
     "appId": "com.umbrellanote.arban",
