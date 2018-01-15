@@ -26,11 +26,15 @@
   font-family: 'OpenSans-LightItalic';
   src: url("../fonts/Open_Sans/OpenSans-LightItalic.ttf") format("truetype"); }
 
+@font-face {
+  font-family: 'Consolas-Mac';
+  src: url("../fonts/Consolas.ttf") format("truetype"); }
+
 html,
 body {
   height: 100%;
   width: 100%;
-  background-color: transparent;
+  background-color: #FAFAFA;
   margin: 0;
   padding: 0;
   font-family: "SourceSansPro-Regular", sans-serif;
@@ -188,7 +192,7 @@ header {
   justify-content: space-between;
   -webkit-app-region: drag; }
   header .name {
-    color: black;
+    color: #353535;
     font-size: 14px; }
   header .nav {
     -webkit-app-region: no-drag; }
@@ -200,7 +204,7 @@ header {
       margin-right: 2px;
       outline: none; }
       header .nav .nav-item:hover {
-        color: black; }
+        color: #353535; }
     header .nav .close {
       background-color: #fb6452;
       color: #fb6452; }
@@ -290,7 +294,7 @@ header {
       display: block; }
     .wrap #editPage .header, .wrap #writePage .header {
       font-size: 14px;
-      font-family: consolas, "UbuntuMono-Italic", monospace;
+      font-family: consolas, "Consolas-Mac", "UbuntuMono-Italic", monospace;
       background: #338fff;
       color: white;
       font-style: italic;
@@ -307,7 +311,7 @@ header {
       -webkit-app-region: no-drag; }
       .wrap #editPage form .main-editor, .wrap #writePage form .main-editor {
         -webkit-app-region: no-drag;
-        font-family: consolas, "UbuntuMono-Italic", monospace, "SourceSansPro-Regular", sans-serif;
+        font-family: consolas, "Consolas-Mac", "UbuntuMono-Italic", monospace, "SourceSansPro-Regular", sans-serif;
         font-style: italic;
         border: none;
         outline: none;
@@ -317,7 +321,7 @@ header {
         font-size: 18px;
         font-weight: lighter;
         line-height: 1.3em;
-        color: black;
+        color: #353535;
         padding-right: 20%; }
         .wrap #editPage form .main-editor h1, .wrap #editPage form .main-editor h2, .wrap #editPage form .main-editor h3, .wrap #editPage form .main-editor h4, .wrap #writePage form .main-editor h1, .wrap #writePage form .main-editor h2, .wrap #writePage form .main-editor h3, .wrap #writePage form .main-editor h4 {
           font-family: "OpenSans-LightItalic", sans-serif; }
@@ -352,7 +356,7 @@ header {
     .wrap #homePage.open, .wrap #settingsPage.open, .wrap #quicknotesPage.open {
       display: block; }
     .wrap #homePage .header, .wrap #settingsPage .header, .wrap #quicknotesPage .header {
-      color: black;
+      color: #353535;
       font-size: 30px;
       padding: 5px 10px;
       font-family: "SourceSansPro-Light", sans-serif; }
@@ -367,7 +371,7 @@ header {
       flex-wrap: wrap; }
       .wrap #homePage .quicknotes .note, .wrap #quicknotesPage .quicknotes .note {
         padding: 20px;
-        font-family: consolas, "UbuntuMono-Italic", monospace;
+        font-family: consolas, "Consolas-Mac", "UbuntuMono-Italic", monospace;
         font-size: 16px;
         font-style: italic;
         position: relative;
@@ -391,7 +395,7 @@ header {
         .wrap #homePage .quicknotes .note .box, .wrap #quicknotesPage .quicknotes .note .box {
           position: absolute;
           display: none;
-          background-color: black;
+          background-color: #353535;
           padding: 5px 0px;
           border-radius: 4px;
           top: 8px;
@@ -449,7 +453,7 @@ header {
               border-style: none; }
           .wrap #homePage .notebooks .notebook a .description, .wrap #quicknotesPage .notebooks .notebook a .description {
             padding: 10px 12px;
-            color: black;
+            color: #353535;
             background-color: #FAFAFA; }
             .wrap #homePage .notebooks .notebook a .description .title, .wrap #quicknotesPage .notebooks .notebook a .description .title {
               font-size: 16px; }
@@ -493,7 +497,7 @@ header {
       display: block; }
     .wrap #notebookPage .header {
       font-size: 14px;
-      font-family: consolas, "UbuntuMono-Italic", monospace;
+      font-family: consolas, "Consolas-Mac", "UbuntuMono-Italic", monospace;
       background: #338fff;
       color: white;
       font-style: italic;
@@ -505,7 +509,7 @@ header {
       /* border-bottom-left-radius: 4px; */ }
     .wrap #notebookPage .posts .post {
       padding: 20px;
-      font-family: consolas, "UbuntuMono-Italic", monospace;
+      font-family: consolas, "Consolas-Mac", "UbuntuMono-Italic", monospace;
       font-size: 18px;
       font-style: italic;
       position: relative;
@@ -535,7 +539,7 @@ header {
       .wrap #notebookPage .posts .post .box {
         position: absolute;
         display: none;
-        background-color: black;
+        background-color: #353535;
         padding: 5px 0px;
         border-radius: 4px;
         top: 8px;
@@ -625,7 +629,7 @@ header {
 .options-menu {
   position: absolute;
   background: #FAFAFA;
-  color: black;
+  color: #353535;
   padding: 20px;
   border-radius: 2px;
   font-size: 14px; }

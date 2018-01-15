@@ -12,10 +12,12 @@ $ubuntu_mono_italic: 'UbuntuMono-Italic', monospace;
 
 $open_sans_light_italic: 'OpenSans-LightItalic', sans-serif;
 
+$consolas-mac: 'Consolas-Mac';
+
 //COLORS
 $white: #FAFAFA;
 $white2: #fdfdfd;
-$black: black;
+$black: #353535;
 $black2: #1f1f1f;
 $grey: #ababab;
 $orange: #ff8000;
@@ -78,4 +80,7 @@ $umbrella_secondary: #338fff;
     src: url('../fonts/Open_Sans/OpenSans-LightItalic.ttf') format('truetype');
 }
 
-
+@font-face {
+    font-family: 'Consolas-Mac';
+    src: url('../fonts/Consolas.ttf') format('truetype');
+}

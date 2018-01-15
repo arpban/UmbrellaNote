@@ -4,7 +4,7 @@ html,
 body {
     height: 100%;
     width: 100%;
-    background-color: transparent;
+    background-color: $white;
     margin: 0;
     padding: 0;
     font-family: $sourceSansPro;
@@ -352,7 +352,7 @@ header {
 
         .header{
             font-size: 14px;
-            font-family: consolas, $ubuntu_mono_italic;
+            font-family: consolas,$consolas-mac, $ubuntu_mono_italic;
             background: $umbrella_secondary;
             color: white;
             font-style: italic;
@@ -373,7 +373,7 @@ header {
 
             .main-editor {
                 -webkit-app-region: no-drag;
-                font-family: consolas,$ubuntu_mono_italic, $sourceSansPro;
+                font-family: consolas,$consolas-mac, $ubuntu_mono_italic, $sourceSansPro;
                 font-style: italic;
                 border: none;
                 outline: none;
@@ -453,7 +453,7 @@ header {
             .note {
                 padding: 20px;
                 // font-family: $sourceSansPro;
-                font-family: consolas, $ubuntu_mono_italic;
+                font-family: consolas,$consolas-mac, $ubuntu_mono_italic;
                 font-size: 16px;
                 font-style: italic;
                 position: relative;
@@ -635,7 +635,7 @@ header {
 
         .header{
             font-size: 14px;
-            font-family: consolas, $ubuntu_mono_italic;
+            font-family: consolas,$consolas-mac, $ubuntu_mono_italic;
             background: $umbrella_secondary;
             color: white;
             font-style: italic;
@@ -653,7 +653,7 @@ header {
                 // background-color: $yellow;
                 padding: 20px;
                 // font-family: $sourceSansPro;
-                font-family: consolas, $ubuntu_mono_italic;
+                font-family: consolas,$consolas-mac, $ubuntu_mono_italic;
                 font-size: 18px;
                 font-style: italic;
                 position: relative;

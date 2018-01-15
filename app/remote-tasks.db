@@ -1,0 +1,4 @@
+{"task":"CREATE_NOTEBOOK","priority":2,"title":"Notebook One","summary":"This is the default notebook. All the untagged posts are stored here.","cover":"img/1.jpg","time":"Mon, 15 January 2018","_id":"9jYSE2Y4fYGMhExr"}
+{"$$deleted":true,"_id":"9jYSE2Y4fYGMhExr"}
+{"task":"CREATE_NOTEBOOK","priority":2,"title":"Notebook One","summary":"This is the default notebook. All the untagged posts are stored here.","cover":"img/1.jpg","time":"Mon, 15 January 2018","_id":"CJ07eF4o2z9u7DwV"}
+{"task":"CREATE_NOTE","priority":2,"notebook":"Notebook One","date":"Mon, 15 January 2018","time":"1:08:30 PM","note":"<p>Arpit bansla&nbsp;</p>","localdb_id":"lp1Heb0oCt4UFXv2","_id":"gdbqREoOFK6icUEI"}
