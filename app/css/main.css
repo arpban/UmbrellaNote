@@ -18,179 +18,38 @@
   font-family: 'SourceSansPro-SemiBold';
   src: url("../fonts/Source_Sans_Pro/SourceSansPro-SemiBold.ttf") format("truetype"); }
 
-@font-face {
-  font-family: 'UbuntuMono-Italic';
-  src: url("../fonts/Ubuntu_Mono/UbuntuMono-Italic.ttf") format("truetype"); }
-
+/* OPEN SANS */
 @font-face {
   font-family: 'OpenSans-LightItalic';
   src: url("../fonts/Open_Sans/OpenSans-LightItalic.ttf") format("truetype"); }
 
 @font-face {
-  font-family: 'Consolas-Mac';
-  src: url("../fonts/Consolas.ttf") format("truetype"); }
+  font-family: OpenSans;
+  src: url("../fonts/Open_Sans/OpenSans-Regular.ttf") format("truetype"); }
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  background-color: #FAFAFA;
-  margin: 0;
-  padding: 0;
-  font-family: "SourceSansPro-Regular", sans-serif;
-  -webkit-app-region: drag; }
+@font-face {
+  font-family: OpenSans;
+  src: url("../fonts/Open_Sans/OpenSans-Light.ttf") format("truetype");
+  font-weight: 300; }
 
-h1, h2, h3, h4, p {
-  padding: 0px;
-  margin: 10px 0px;
-  font-weight: normal; }
+@font-face {
+  font-family: OpenSans;
+  src: url("../fonts/Open_Sans/OpenSans-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic; }
 
-h1 {
-  font-family: "SourceSansPro-Light", sans-serif;
-  font-style: normal;
-  line-height: 1.4em;
-  font-size: 45px; }
-
-h2 {
-  font-family: "SourceSansPro-Light", sans-serif;
-  font-style: normal;
-  line-height: 1.4em;
-  font-size: 35px; }
-
-h3 {
-  font-family: "SourceSansPro-Light", sans-serif;
-  font-style: normal;
-  line-height: 1.4em;
-  font-size: 25px; }
-
-p {
-  line-height: 1.5em; }
-
-strong {
-  font-family: "SourceSansPro-SemiBold", sans-serif; }
-
-img {
-  max-width: 100%; }
-
-form.form-group * {
-  margin: 5px 0px; }
-
-form.form-group .form-item {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  font-family: "SourceSansPro-Regular", sans-serif;
-  border: 2px solid #f3eeee;
-  border-radius: 2px;
-  outline: none;
-  background-color: inherit; }
-  form.form-group .form-item:hover, form.form-group .form-item:focus {
-    border-color: #338fff;
-    outline: none; }
-
-.bold-sub-heading {
-  font-size: 35px; }
-
-.btn1 {
-  background: transparent;
-  color: inherit;
-  padding: 12px;
-  border: solid 1px;
-  border-radius: 2px;
-  cursor: pointer; }
-  .btn1:hover {
-    color: #338fff;
-    border-color: #338fff; }
-  .btn1:focus {
-    outline: none; }
-
-.btn2 {
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-  border: none;
-  margin: 10px 0px;
-  text-transform: uppercase;
-  font-weight: 700;
-  padding: 0;
-  font-size: 12px;
-  color: #338fff; }
-  .btn2:hover {
-    color: #338fff; }
-  .btn2:focus {
-    outline: none; }
-
-.btn3 {
-  padding: 12px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  outline: none;
-  display: block;
-  margin: 5px 0px;
-  width: 100%;
-  max-width: 400px;
-  text-align: left;
-  font-size: 15px;
-  text-transform: capitalize; }
-  .btn3.a {
-    color: white;
-    background-color: deepskyblue; }
-  .btn3.b {
-    color: white;
-    background-color: #5ef5bd; }
-  .btn3.c {
-    color: white;
-    background-color: #f5004f; }
-
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; }
-
-*:before,
-*:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; }
-
-.app {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  position: fixed; }
-
-button {
-  outline: none;
-  cursor: pointer; }
-
-.app .wrap {
-  height: 100%; }
-
-.translucent-bg {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  overflow: hidden;
-  display: flex;
-  justify-content: center; }
-  .translucent-bg img {
-    max-width: 100%; }
-  .translucent-bg .wrap {
-    overflow: hidden;
-    filter: blur(20px);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; }
+@font-face {
+  font-family: OpenSans;
+  src: url("../fonts/Open_Sans/OpenSans-Bold.ttf") format("truetype");
+  font-weight: 700; }
 
 header {
   display: flex;
   padding: 5px 10px;
   padding-left: 60px;
   justify-content: space-between;
-  -webkit-app-region: drag; }
+  -webkit-app-region: drag;
+  position: relative; }
   header .name {
     color: #353535;
     font-size: 14px; }
@@ -220,345 +79,6 @@ header {
       stroke-width: 3px;
       right: 3px;
       position: relative; }
-
-#sidebar {
-  -webkit-app-region: no-drag;
-  position: fixed;
-  top: 0px;
-  height: 100%;
-  background: #1c1925;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: 10px; }
-  #sidebar button {
-    display: none;
-    margin-top: 13px;
-    background: none;
-    border: none;
-    color: #FAFAFA; }
-    #sidebar button:hover {
-      color: #338fff; }
-  #sidebar .visible {
-    display: block; }
-  #sidebar .bottom {
-    height: 40%;
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; }
-  #sidebar .top {
-    height: 60%; }
-    #sidebar .top span.color-box {
-      height: 10%;
-      display: block; }
-
-.page {
-  padding-bottom: 30px; }
-
-.wrap {
-  margin-left: 52px; }
-  .wrap #main-icons {
-    -webkit-app-region: no-drag;
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
-    margin: 22px 28px;
-    z-index: 50; }
-    .wrap #main-icons .icon {
-      display: none;
-      border: none;
-      padding: 12px 13px;
-      margin-left: 15px;
-      border-radius: 50%;
-      background: #1c1925;
-      color: #FAFAFA;
-      cursor: pointer;
-      outline: none; }
-      .wrap #main-icons .icon:hover {
-        background-color: #338fff; }
-      .wrap #main-icons .icon svg {
-        position: relative;
-        top: 1px;
-        left: 1px; }
-    .wrap #main-icons .visible {
-      display: block; }
-  .wrap #editPage, .wrap #writePage {
-    -webkit-app-region: no-drag;
-    padding-top: 30px;
-    display: none;
-    height: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden; }
-    .wrap #editPage.open, .wrap #writePage.open {
-      display: block; }
-    .wrap #editPage .header, .wrap #writePage .header {
-      font-size: 14px;
-      font-family: consolas, "Consolas-Mac", "UbuntuMono-Italic", monospace;
-      background: #338fff;
-      color: white;
-      font-style: italic;
-      display: absolute;
-      position: absolute;
-      z-index: 10;
-      padding: 5px 15px;
-      border-bottom-right-radius: 5px;
-      /* border-bottom-left-radius: 4px; */
-      top: 29px; }
-    .wrap #editPage form, .wrap #writePage form {
-      padding: 15px;
-      width: 100%;
-      -webkit-app-region: no-drag; }
-      .wrap #editPage form .main-editor, .wrap #writePage form .main-editor {
-        -webkit-app-region: no-drag;
-        font-family: consolas, "Consolas-Mac", "UbuntuMono-Italic", monospace, "SourceSansPro-Regular", sans-serif;
-        font-style: italic;
-        border: none;
-        outline: none;
-        background: inherit;
-        min-width: 100%;
-        max-width: 100%;
-        font-size: 18px;
-        font-weight: lighter;
-        line-height: 1.3em;
-        color: #353535;
-        padding-right: 20%; }
-        .wrap #editPage form .main-editor h1, .wrap #editPage form .main-editor h2, .wrap #editPage form .main-editor h3, .wrap #editPage form .main-editor h4, .wrap #writePage form .main-editor h1, .wrap #writePage form .main-editor h2, .wrap #writePage form .main-editor h3, .wrap #writePage form .main-editor h4 {
-          font-family: "OpenSans-LightItalic", sans-serif; }
-    .wrap #editPage .save.icon, .wrap #writePage .save.icon {
-      -webkit-app-region: no-drag;
-      position: fixed;
-      bottom: 0px;
-      right: 0px;
-      margin: 21px 27px;
-      border: none;
-      padding: 13px 14px;
-      border-radius: 50%;
-      background: #338fff;
-      color: #FAFAFA;
-      cursor: pointer;
-      outline: none;
-      z-index: 50; }
-      .wrap #editPage .save.icon:hover, .wrap #writePage .save.icon:hover {
-        background-color: #1c1925; }
-      .wrap #editPage .save.icon svg, .wrap #writePage .save.icon svg {
-        position: relative;
-        top: 1px;
-        left: 1px; }
-  .wrap #homePage, .wrap #settingsPage, .wrap #quicknotesPage {
-    -webkit-app-region: no-drag;
-    display: none;
-    padding: 10px;
-    overflow-y: scroll;
-    height: 100%;
-    overflow-x: hidden;
-    padding-bottom: 50px; }
-    .wrap #homePage.open, .wrap #settingsPage.open, .wrap #quicknotesPage.open {
-      display: block; }
-    .wrap #homePage .header, .wrap #settingsPage .header, .wrap #quicknotesPage .header {
-      color: #353535;
-      font-size: 30px;
-      padding: 5px 10px;
-      font-family: "SourceSansPro-Light", sans-serif; }
-  .wrap #homePage, .wrap #quicknotesPage {
-    padding: 0px;
-    padding-bottom: 30px; }
-    .wrap #homePage .header, .wrap #quicknotesPage .header {
-      padding: 5px 20px; }
-    .wrap #homePage .quicknotes, .wrap #quicknotesPage .quicknotes {
-      margin-top: 15px;
-      display: flex;
-      flex-wrap: wrap; }
-      .wrap #homePage .quicknotes .note, .wrap #quicknotesPage .quicknotes .note {
-        padding: 20px;
-        font-family: consolas, "Consolas-Mac", "UbuntuMono-Italic", monospace;
-        font-size: 16px;
-        font-style: italic;
-        position: relative;
-        color: #FAFAFA;
-        width: 25%; }
-        .wrap #homePage .quicknotes .note .expandButton, .wrap #quicknotesPage .quicknotes .note .expandButton {
-          position: absolute;
-          top: 5px;
-          right: 7px;
-          cursor: pointer;
-          color: #FAFAFA; }
-          .wrap #homePage .quicknotes .note .expandButton svg, .wrap #quicknotesPage .quicknotes .note .expandButton svg {
-            stroke-width: 1;
-            width: 20px;
-            height: 20px; }
-        .wrap #homePage .quicknotes .note h1, .wrap #homePage .quicknotes .note h2, .wrap #homePage .quicknotes .note h3, .wrap #homePage .quicknotes .note h4, .wrap #quicknotesPage .quicknotes .note h1, .wrap #quicknotesPage .quicknotes .note h2, .wrap #quicknotesPage .quicknotes .note h3, .wrap #quicknotesPage .quicknotes .note h4 {
-          font-family: "OpenSans-LightItalic", sans-serif;
-          font-style: normal; }
-        .wrap #homePage .quicknotes .note p, .wrap #quicknotesPage .quicknotes .note p {
-          margin: 0; }
-        .wrap #homePage .quicknotes .note .box, .wrap #quicknotesPage .quicknotes .note .box {
-          position: absolute;
-          display: none;
-          background-color: #353535;
-          padding: 5px 0px;
-          border-radius: 4px;
-          top: 8px;
-          right: 31px;
-          min-width: 100px;
-          min-height: 70px;
-          flex-direction: column;
-          justify-content: center; }
-          .wrap #homePage .quicknotes .note .box button, .wrap #quicknotesPage .quicknotes .note .box button {
-            background: none;
-            border: none;
-            display: block;
-            color: #FAFAFA;
-            margin-top: 3px;
-            padding: 2px 0px; }
-            .wrap #homePage .quicknotes .note .box button:hover, .wrap #quicknotesPage .quicknotes .note .box button:hover {
-              background-color: #1f1f1f; }
-          .wrap #homePage .quicknotes .note .box.visible, .wrap #quicknotesPage .quicknotes .note .box.visible {
-            display: flex; }
-    .wrap #homePage .notebooks, .wrap #quicknotesPage .notebooks {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      flex-grow: 1;
-      align-items: flex-start;
-      margin-bottom: 15px;
-      padding: 10px; }
-      .wrap #homePage .notebooks .notebook, .wrap #quicknotesPage .notebooks .notebook {
-        width: 23.4042553%;
-        margin-left: 10px;
-        margin-right: 2px;
-        margin-top: 10px;
-        margin-bottom: 10px; }
-        .wrap #homePage .notebooks .notebook a, .wrap #quicknotesPage .notebooks .notebook a {
-          box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
-          position: relative;
-          display: block;
-          overflow: hidden;
-          transition: 0.18s;
-          border-radius: 6px;
-          cursor: pointer; }
-          .wrap #homePage .notebooks .notebook a:hover, .wrap #quicknotesPage .notebooks .notebook a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 1px 50px rgba(0, 0, 0, 0.2); }
-          .wrap #homePage .notebooks .notebook a .cover, .wrap #quicknotesPage .notebooks .notebook a .cover {
-            position: relative;
-            background-color: #959597;
-            overflow: hidden;
-            height: 195px;
-            width: 100%; }
-            .wrap #homePage .notebooks .notebook a .cover img, .wrap #quicknotesPage .notebooks .notebook a .cover img {
-              object-fit: cover;
-              width: 100%;
-              height: 100%;
-              border-style: none; }
-          .wrap #homePage .notebooks .notebook a .description, .wrap #quicknotesPage .notebooks .notebook a .description {
-            padding: 10px 12px;
-            color: #353535;
-            background-color: #FAFAFA; }
-            .wrap #homePage .notebooks .notebook a .description .title, .wrap #quicknotesPage .notebooks .notebook a .description .title {
-              font-size: 16px; }
-            .wrap #homePage .notebooks .notebook a .description .created, .wrap #quicknotesPage .notebooks .notebook a .description .created {
-              font-size: 14px;
-              font-family: "SourceSansPro-Italic", sans-serif;
-              color: dimgrey;
-              margin-top: 1px; }
-            .wrap #homePage .notebooks .notebook a .description .summary, .wrap #quicknotesPage .notebooks .notebook a .description .summary {
-              height: 50px;
-              font-size: 15px;
-              overflow: hidden;
-              margin-top: 1px; }
-            .wrap #homePage .notebooks .notebook a .description button, .wrap #quicknotesPage .notebooks .notebook a .description button {
-              border: none;
-              margin-top: 10px;
-              text-transform: uppercase;
-              font-weight: 700;
-              padding: 0;
-              font-size: 12px;
-              color: #338fff; }
-  .wrap #settingsPage .signin-buttons {
-    padding: 5px 13px; }
-    .wrap #settingsPage .signin-buttons button {
-      margin-right: 5px; }
-  .wrap #settingsPage .signout-buttons {
-    margin: 10px 0px; }
-  .wrap #settingsPage .username {
-    font-size: 35px; }
-  .wrap #settingsPage .email {
-    font-size: 16px; }
-  .wrap #settingsPage .content {
-    padding: 0px 10px; }
-  .wrap #notebookPage {
-    -webkit-app-region: no-drag;
-    display: none;
-    overflow-y: scroll;
-    height: 100%;
-    overflow-x: hidden; }
-    .wrap #notebookPage.open {
-      display: block; }
-    .wrap #notebookPage .header {
-      font-size: 14px;
-      font-family: consolas, "Consolas-Mac", "UbuntuMono-Italic", monospace;
-      background: #338fff;
-      color: white;
-      font-style: italic;
-      display: absolute;
-      position: absolute;
-      z-index: 10;
-      padding: 5px 15px;
-      border-bottom-right-radius: 5px;
-      /* border-bottom-left-radius: 4px; */ }
-    .wrap #notebookPage .posts .post {
-      padding: 20px;
-      font-family: consolas, "Consolas-Mac", "UbuntuMono-Italic", monospace;
-      font-size: 18px;
-      font-style: italic;
-      position: relative;
-      color: #FAFAFA; }
-      .wrap #notebookPage .posts .post .date {
-        font-size: 14px;
-        margin-top: 3px;
-        margin-bottom: 20px; }
-      .wrap #notebookPage .posts .post .time {
-        font-size: 14px;
-        margin-top: 10px; }
-      .wrap #notebookPage .posts .post h1, .wrap #notebookPage .posts .post h2, .wrap #notebookPage .posts .post h3, .wrap #notebookPage .posts .post h4 {
-        font-family: "OpenSans-LightItalic", sans-serif;
-        font-style: normal; }
-      .wrap #notebookPage .posts .post p {
-        margin: 0; }
-      .wrap #notebookPage .posts .post .expandButton {
-        position: absolute;
-        top: 5px;
-        right: 7px;
-        cursor: pointer;
-        color: #FAFAFA; }
-        .wrap #notebookPage .posts .post .expandButton svg {
-          stroke-width: 1;
-          width: 20px;
-          height: 20px; }
-      .wrap #notebookPage .posts .post .box {
-        position: absolute;
-        display: none;
-        background-color: #353535;
-        padding: 5px 0px;
-        border-radius: 4px;
-        top: 8px;
-        right: 31px;
-        min-width: 100px;
-        min-height: 70px;
-        flex-direction: column;
-        justify-content: center; }
-        .wrap #notebookPage .posts .post .box button {
-          background: none;
-          border: none;
-          display: block;
-          color: #FAFAFA;
-          margin-top: 3px;
-          padding: 2px 0px; }
-          .wrap #notebookPage .posts .post .box button:hover {
-            background-color: #1f1f1f; }
-        .wrap #notebookPage .posts .post .box.visible {
-          display: flex; }
 
 #homePage::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -625,17 +145,6 @@ header {
 
 #editPage::-webkit-scrollbar-thumb {
   background-color: #1c1925; }
-
-.options-menu {
-  position: absolute;
-  background: #FAFAFA;
-  color: #353535;
-  padding: 20px;
-  border-radius: 2px;
-  font-size: 14px; }
-  .options-menu button {
-    background: transparent;
-    border: none; }
 
 .modal {
   display: none;
@@ -784,93 +293,525 @@ header {
     box-shadow: 0 0 3px #333;
     z-index: -1; }
 
-#cloud-save-modal {
-  display: none; }
-  #cloud-save-modal.open {
+#sidebar {
+  -webkit-app-region: no-drag;
+  position: fixed;
+  top: 0px;
+  height: 100%;
+  background: #1c1925;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px; }
+  #sidebar button {
+    display: none;
+    margin-top: 13px;
+    background: none;
+    border: none;
+    color: #FAFAFA; }
+    #sidebar button:hover {
+      color: #338fff; }
+  #sidebar .visible {
+    display: block; }
+  #sidebar .bottom {
+    height: 40%;
+    padding: 8px;
     display: flex;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    top: 0px;
     flex-direction: column;
-    align-items: center;
-    justify-content: center; }
-  #cloud-save-modal h1 {
-    font-size: 25px; }
-  #cloud-save-modal h3 {
-    font-size: 18px; }
-  #cloud-save-modal .body {
-    background: #FAFAFA;
-    width: 400px;
-    height: 500px;
-    min-height: 70%;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 0px 27px rgba(51, 143, 255, 0.5);
-    border-radius: 6px;
-    padding: 25px; }
-    #cloud-save-modal .body .main {
-      display: flex;
-      height: 100%;
-      flex-direction: column; }
-      #cloud-save-modal .body .main h1 {
-        font-size: 45px;
-        margin-top: 80px;
-        line-height: 1.2em; }
-      #cloud-save-modal .body .main .buttons {
-        margin-top: 10px; }
-    #cloud-save-modal .body .close {
+    justify-content: flex-end; }
+  #sidebar .top {
+    height: 60%; }
+    #sidebar .top span.color-box {
+      height: 10%;
+      display: block; }
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #FAFAFA;
+  margin: 0;
+  padding: 0;
+  font-family: "SourceSansPro-Regular", sans-serif;
+  -webkit-app-region: drag; }
+
+h1, h2, h3, h4, p {
+  padding: 0px;
+  margin: 10px 0px;
+  font-weight: normal; }
+
+h1 {
+  font-family: "SourceSansPro-Light", sans-serif;
+  font-style: normal;
+  line-height: 1.4em;
+  font-size: 45px; }
+
+h2 {
+  font-family: "SourceSansPro-Light", sans-serif;
+  font-style: normal;
+  line-height: 1.4em;
+  font-size: 35px; }
+
+h3 {
+  font-family: "SourceSansPro-Light", sans-serif;
+  font-style: normal;
+  line-height: 1.4em;
+  font-size: 25px; }
+
+p {
+  line-height: 1.5em; }
+
+strong {
+  font-family: "SourceSansPro-SemiBold", sans-serif; }
+
+.strong {
+  font-family: "SourceSansPro-SemiBold", sans-serif; }
+
+img {
+  max-width: 100%; }
+
+.svg-background {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden; }
+  .svg-background svg {
+    height: 100%;
+    position: relative;
+    width: 100%; }
+
+form.form-group * {
+  margin: 5px 0px; }
+
+form.form-group .form-item {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-family: "SourceSansPro-Regular", sans-serif;
+  border: 2px solid #f3eeee;
+  border-radius: 2px;
+  outline: none;
+  background-color: inherit; }
+  form.form-group .form-item:hover, form.form-group .form-item:focus {
+    border-color: #338fff;
+    outline: none; }
+
+.bold-sub-heading {
+  font-size: 35px; }
+
+.btn1 {
+  background: transparent;
+  color: inherit;
+  padding: 12px;
+  border: solid 1px;
+  border-radius: 2px;
+  cursor: pointer; }
+  .btn1:hover {
+    color: #338fff;
+    border-color: #338fff; }
+  .btn1:focus {
+    outline: none; }
+
+.btn2 {
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  margin: 10px 0px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0;
+  font-size: 12px;
+  color: #338fff; }
+  .btn2:hover {
+    color: #338fff; }
+  .btn2:focus {
+    outline: none; }
+
+.btn3 {
+  padding: 12px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+  display: block;
+  margin: 5px 0px;
+  width: 100%;
+  max-width: 400px;
+  text-align: left;
+  font-size: 15px;
+  text-transform: capitalize; }
+  .btn3.a {
+    color: white;
+    background-color: deepskyblue; }
+  .btn3.b {
+    color: white;
+    background-color: #5ef5bd; }
+  .btn3.c {
+    color: white;
+    background-color: #f5004f; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.app {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: fixed; }
+
+button {
+  outline: none;
+  cursor: pointer; }
+
+.app .wrap {
+  height: 100%; }
+
+.page {
+  padding-bottom: 30px; }
+
+.wrap {
+  margin-left: 52px;
+  position: relative; }
+
+#main-icons {
+  -webkit-app-region: no-drag;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  margin: 22px 28px;
+  z-index: 50; }
+  #main-icons .icon {
+    display: none;
+    border: none;
+    padding: 12px 13px;
+    margin-left: 15px;
+    border-radius: 50%;
+    background: #1c1925;
+    color: #FAFAFA;
+    cursor: pointer;
+    outline: none; }
+    #main-icons .icon:hover {
+      background-color: #338fff; }
+    #main-icons .icon svg {
       position: relative;
-      float: right;
-      margin-right: -8px;
-      margin-top: -8px; }
-      #cloud-save-modal .body .close button {
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 50%;
-        padding: 9px 11px;
-        outline: none;
-        border: none; }
-        #cloud-save-modal .body .close button svg {
-          position: relative;
-          width: 24px;
-          fill: white;
-          top: 2px; }
-        #cloud-save-modal .body .close button:hover {
-          background: rgba(51, 143, 255, 0.8); }
-  #cloud-save-modal .google-button {
-    height: 40px;
-    border-width: 0;
-    background: white;
-    color: #737373;
-    border-radius: 5px;
-    white-space: nowrap;
-    box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.05);
-    transition-property: background-color, box-shadow;
-    transition-duration: 150ms;
-    transition-timing-function: ease-in-out;
-    padding: 0; }
-    #cloud-save-modal .google-button:focus, #cloud-save-modal .google-button:hover {
-      box-shadow: 1px 4px 5px 1px rgba(0, 0, 0, 0.1); }
-    #cloud-save-modal .google-button:active {
-      background-color: #e5e5e5;
-      box-shadow: none;
-      transition-duration: 10ms; }
-  #cloud-save-modal .google-button__icon {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 8px 0 8px 8px;
-    width: 18px;
-    height: 18px;
-    box-sizing: border-box; }
-  #cloud-save-modal .google-button__icon--plus {
-    width: 27px; }
-  #cloud-save-modal .google-button__text {
-    display: inline-block;
-    vertical-align: middle;
-    padding: 0 24px;
+      top: 1px;
+      left: 1px; }
+  #main-icons .visible {
+    display: block; }
+
+#editPage, #writePage {
+  -webkit-app-region: no-drag;
+  padding-top: 30px;
+  display: none;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden; }
+  #editPage.open, #writePage.open {
+    display: block; }
+  #editPage .header, #writePage .header {
     font-size: 14px;
-    font-weight: bold;
-    font-family: 'Roboto',arial,sans-serif; }
+    font-family: consolas;
+    background: #338fff;
+    color: white;
+    font-style: italic;
+    position: absolute;
+    z-index: 10;
+    padding: 5px 15px;
+    border-bottom-right-radius: 5px;
+    top: 0px; }
+  #editPage form, #writePage form {
+    padding: 25px;
+    width: 100%;
+    -webkit-app-region: no-drag; }
+    #editPage form .main-editor, #writePage form .main-editor {
+      -webkit-app-region: no-drag;
+      font-family: consolas, "SourceSansPro-Regular", sans-serif;
+      font-style: italic;
+      border: none;
+      outline: none;
+      background: inherit;
+      min-width: 100%;
+      max-width: 100%;
+      font-size: 18px;
+      font-weight: lighter;
+      line-height: 1.3em;
+      color: #353535;
+      padding-right: 20%; }
+      #editPage form .main-editor h1, #editPage form .main-editor h2, #editPage form .main-editor h3, #editPage form .main-editor h4, #writePage form .main-editor h1, #writePage form .main-editor h2, #writePage form .main-editor h3, #writePage form .main-editor h4 {
+        font-family: "OpenSans-LightItalic", sans-serif; }
+  #editPage .save.icon, #writePage .save.icon {
+    -webkit-app-region: no-drag;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    margin: 21px 27px;
+    border: none;
+    padding: 13px 14px;
+    border-radius: 50%;
+    background: #338fff;
+    color: #FAFAFA;
+    cursor: pointer;
+    outline: none;
+    z-index: 50; }
+    #editPage .save.icon:hover, #writePage .save.icon:hover {
+      background-color: #1c1925; }
+    #editPage .save.icon svg, #writePage .save.icon svg {
+      position: relative;
+      top: 1px;
+      left: 1px; }
+
+#homePage, #settingsPage, #quicknotesPage {
+  -webkit-app-region: no-drag;
+  display: none;
+  padding: 10px;
+  overflow-y: scroll;
+  height: 100%;
+  overflow-x: hidden;
+  padding-bottom: 50px; }
+  #homePage.open, #settingsPage.open, #quicknotesPage.open {
+    display: block; }
+  #homePage .header, #settingsPage .header, #quicknotesPage .header {
+    color: #353535;
+    font-size: 30px;
+    padding: 5px 10px;
+    font-family: "SourceSansPro-Light", sans-serif; }
+
+#homePage, #quicknotesPage {
+  padding: 0px;
+  padding-bottom: 30px; }
+  #homePage .header, #quicknotesPage .header {
+    padding: 5px 20px; }
+  #homePage .quicknotes, #quicknotesPage .quicknotes {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap; }
+    #homePage .quicknotes .note, #quicknotesPage .quicknotes .note {
+      padding: 20px;
+      font-family: consolas;
+      font-size: 16px;
+      font-style: italic;
+      position: relative;
+      color: #FAFAFA;
+      width: 25%; }
+      #homePage .quicknotes .note .expandButton, #quicknotesPage .quicknotes .note .expandButton {
+        position: absolute;
+        top: 5px;
+        right: 7px;
+        cursor: pointer;
+        color: #FAFAFA; }
+        #homePage .quicknotes .note .expandButton svg, #quicknotesPage .quicknotes .note .expandButton svg {
+          stroke-width: 1;
+          width: 20px;
+          height: 20px; }
+      #homePage .quicknotes .note h1, #homePage .quicknotes .note h2, #homePage .quicknotes .note h3, #homePage .quicknotes .note h4, #quicknotesPage .quicknotes .note h1, #quicknotesPage .quicknotes .note h2, #quicknotesPage .quicknotes .note h3, #quicknotesPage .quicknotes .note h4 {
+        font-family: "OpenSans-LightItalic", sans-serif;
+        font-style: normal; }
+      #homePage .quicknotes .note p, #quicknotesPage .quicknotes .note p {
+        margin: 0; }
+      #homePage .quicknotes .note .box, #quicknotesPage .quicknotes .note .box {
+        position: absolute;
+        display: none;
+        background-color: #353535;
+        padding: 5px 0px;
+        border-radius: 4px;
+        top: 8px;
+        right: 31px;
+        min-width: 100px;
+        min-height: 70px;
+        flex-direction: column;
+        justify-content: center; }
+        #homePage .quicknotes .note .box button, #quicknotesPage .quicknotes .note .box button {
+          background: none;
+          border: none;
+          display: block;
+          color: #FAFAFA;
+          margin-top: 3px;
+          padding: 2px 0px; }
+          #homePage .quicknotes .note .box button:hover, #quicknotesPage .quicknotes .note .box button:hover {
+            background-color: #1f1f1f; }
+        #homePage .quicknotes .note .box.visible, #quicknotesPage .quicknotes .note .box.visible {
+          display: flex; }
+  #homePage .notebooks, #quicknotesPage .notebooks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-grow: 1;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding: 10px; }
+    #homePage .notebooks .notebook, #quicknotesPage .notebooks .notebook {
+      max-width: 310px;
+      min-width: 200px;
+      width: 23.4042553%;
+      margin: 10px 2px 10px 10px; }
+      #homePage .notebooks .notebook a, #quicknotesPage .notebooks .notebook a {
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        display: block;
+        overflow: hidden;
+        transition: 0.18s;
+        border-radius: 6px;
+        cursor: pointer; }
+        #homePage .notebooks .notebook a:hover, #quicknotesPage .notebooks .notebook a:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 1px 50px rgba(0, 0, 0, 0.2); }
+        #homePage .notebooks .notebook a .cover, #quicknotesPage .notebooks .notebook a .cover {
+          position: relative;
+          background-color: #959597;
+          overflow: hidden;
+          height: 195px;
+          width: 100%; }
+          #homePage .notebooks .notebook a .cover img, #quicknotesPage .notebooks .notebook a .cover img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border-style: none; }
+        #homePage .notebooks .notebook a .description, #quicknotesPage .notebooks .notebook a .description {
+          padding: 10px 12px;
+          color: #353535;
+          background-color: #FAFAFA; }
+          #homePage .notebooks .notebook a .description .title, #quicknotesPage .notebooks .notebook a .description .title {
+            font-size: 16px; }
+          #homePage .notebooks .notebook a .description .created, #quicknotesPage .notebooks .notebook a .description .created {
+            font-size: 14px;
+            font-family: "SourceSansPro-Italic", sans-serif;
+            color: dimgrey;
+            margin-top: 1px; }
+          #homePage .notebooks .notebook a .description .summary, #quicknotesPage .notebooks .notebook a .description .summary {
+            height: 50px;
+            font-size: 15px;
+            overflow: hidden;
+            margin-top: 1px; }
+          #homePage .notebooks .notebook a .description button, #quicknotesPage .notebooks .notebook a .description button {
+            border: none;
+            margin-top: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 0;
+            font-size: 12px;
+            color: #338fff; }
+
+#settingsPage .signin-buttons {
+  padding: 5px 13px; }
+  #settingsPage .signin-buttons button {
+    margin-right: 5px; }
+
+#settingsPage .signout-buttons {
+  margin: 10px 0px; }
+
+#settingsPage .username {
+  font-size: 35px; }
+
+#settingsPage .email {
+  font-size: 16px; }
+
+#settingsPage .content {
+  padding: 0px 10px; }
+
+#settingsPage .fonts {
+  margin: 10px 0px; }
+  #settingsPage .fonts select {
+    padding: 7px;
+    border: none;
+    border-bottom: 2px solid #338fff;
+    background: inherit;
+    outline: none;
+    width: 400px;
+    font-size: 16px; }
+
+#notebookPage {
+  -webkit-app-region: no-drag;
+  display: none;
+  overflow-y: scroll;
+  height: 100%;
+  overflow-x: hidden; }
+  #notebookPage.open {
+    display: block; }
+  #notebookPage .header {
+    font-size: 14px;
+    font-family: consolas;
+    background: #338fff;
+    color: white;
+    font-style: italic;
+    display: absolute;
+    position: absolute;
+    z-index: 10;
+    padding: 5px 15px;
+    border-bottom-right-radius: 5px; }
+  #notebookPage .posts .post {
+    padding: 20px;
+    font-family: consolas;
+    font-size: 18px;
+    font-style: italic;
+    position: relative;
+    color: #FAFAFA; }
+    #notebookPage .posts .post .date {
+      font-size: 14px;
+      margin-top: 3px;
+      margin-bottom: 20px; }
+    #notebookPage .posts .post .time {
+      font-size: 14px;
+      margin-top: 10px; }
+    #notebookPage .posts .post h1, #notebookPage .posts .post h2, #notebookPage .posts .post h3, #notebookPage .posts .post h4 {
+      font-family: "OpenSans-LightItalic", sans-serif;
+      font-style: normal; }
+    #notebookPage .posts .post p {
+      margin: 0; }
+    #notebookPage .posts .post .expandButton {
+      position: absolute;
+      top: 5px;
+      right: 7px;
+      cursor: pointer;
+      color: #FAFAFA; }
+      #notebookPage .posts .post .expandButton svg {
+        stroke-width: 1;
+        width: 20px;
+        height: 20px; }
+    #notebookPage .posts .post .box {
+      position: absolute;
+      display: none;
+      background-color: #353535;
+      padding: 5px 0px;
+      border-radius: 4px;
+      top: 8px;
+      right: 31px;
+      min-width: 100px;
+      min-height: 70px;
+      flex-direction: column;
+      justify-content: center; }
+      #notebookPage .posts .post .box button {
+        background: none;
+        border: none;
+        display: block;
+        color: #FAFAFA;
+        margin-top: 3px;
+        padding: 2px 0px; }
+        #notebookPage .posts .post .box button:hover {
+          background-color: #1f1f1f; }
+      #notebookPage .posts .post .box.visible {
+        display: flex; }
+
+.options-menu {
+  position: absolute;
+  background: #FAFAFA;
+  color: #353535;
+  padding: 20px;
+  border-radius: 2px;
+  font-size: 14px; }
+  .options-menu button {
+    background: transparent;
+    border: none; }
 
 .postman, .raven {
   position: fixed;
@@ -1031,3 +972,11 @@ button.update {
   background: transparent;
   border: none;
   color: white; }
+
+@media (max-width: 670px) {
+  .wrap #homePage .notebooks .notebook {
+    width: 45%; } }
+
+@media (max-width: 500px) {
+  .wrap #homePage .notebooks .notebook {
+    width: 100%; } }

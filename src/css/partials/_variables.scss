@@ -8,11 +8,8 @@ $sourceSansProLight: 'SourceSansPro-Light', sans-serif;
 $sourceSansProBold: 'SourceSansPro-Bold', sans-serif;
 $sourceSansProSemiBold: 'SourceSansPro-SemiBold', sans-serif;
 
-$ubuntu_mono_italic: 'UbuntuMono-Italic', monospace;
-
 $open_sans_light_italic: 'OpenSans-LightItalic', sans-serif;
 
-$consolas-mac: 'Consolas-Mac';
 
 //COLORS
 $white: #FAFAFA;
@@ -70,17 +67,29 @@ $umbrella_secondary: #338fff;
     src: url('../fonts/Source_Sans_Pro/SourceSansPro-SemiBold.ttf') format('truetype');
 }
 
-@font-face{
-    font-family: 'UbuntuMono-Italic';
-    src: url('../fonts/Ubuntu_Mono/UbuntuMono-Italic.ttf') format('truetype');
-}
+/* OPEN SANS */
 
 @font-face{
     font-family: 'OpenSans-LightItalic';
     src: url('../fonts/Open_Sans/OpenSans-LightItalic.ttf') format('truetype');
 }
-
-@font-face {
-    font-family: 'Consolas-Mac';
-    src: url('../fonts/Consolas.ttf') format('truetype');
+@font-face{
+    font-family: OpenSans;
+    src: url('../fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+}
+@font-face{
+    font-family: OpenSans;
+    src: url('../fonts/Open_Sans/OpenSans-Light.ttf') format('truetype');
+    font-weight: 300;
+}
+@font-face{
+    font-family: OpenSans;
+    src: url('../fonts/Open_Sans/OpenSans-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face{
+    font-family: OpenSans;
+    src: url('../fonts/Open_Sans/OpenSans-Bold.ttf') format('truetype');
+    font-weight: 700;
 }

@@ -1,0 +1,42 @@
+#sidebar {
+    -webkit-app-region: no-drag;
+    position: fixed;
+    top: 0px;
+    height: 100%;
+    // padding: 8px;
+    background: $umbrella_primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    button {
+        svg {}
+        display: none;
+        margin-top: 13px;
+        background: none;
+        border: none;
+        color: $white;
+
+        &:hover {
+            color: $umbrella_secondary;
+        }
+    }
+
+    .visible {
+        display: block;
+    }
+    .bottom{
+        height: 40%;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    .top{
+        height: 60%;
+        span.color-box{
+            height: 10%;
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+#editPage form .main-editor, #writePage form .main-editor {
+  font-family: "times new roman", OpenSans, sans-serif;
+  font-style: normal;
+  font-size: 18px; }
+  #editPage form .main-editor h1, #editPage form .main-editor h2, #editPage form .main-editor h3, #editPage form .main-editor h4, #writePage form .main-editor h1, #writePage form .main-editor h2, #writePage form .main-editor h3, #writePage form .main-editor h4 {
+    font-family: "times new roman", 'SourceSansPro-Regular', sans-serif; }
+  #editPage form .main-editor strong, #writePage form .main-editor strong {
+    font-family: "times new roman", OpenSans , sans-serif;
+    font-weight: 700; }
+
+#notebookPage .posts .post {
+  padding: 20px;
+  font-family: "times new roman", 'SourceSansPro-Regular', sans-serif;
+  font-size: 18px;
+  font-style: normal; }
+  #notebookPage .posts .post .date {
+    font-size: 14px;
+    margin-top: 3px;
+    margin-bottom: 20px; }
+  #notebookPage .posts .post .time {
+    font-size: 14px;
+    margin-top: 10px; }
+  #notebookPage .posts .post h1, #notebookPage .posts .post h2, #notebookPage .posts .post h3, #notebookPage .posts .post h4 {
+    font-family: "times new roman", 'SourceSansPro-Regular', sans-serif;
+    font-style: normal; }

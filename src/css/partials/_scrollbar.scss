@@ -1,0 +1,83 @@
+#homePage::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+}
+
+#homePage::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+#homePage::-webkit-scrollbar-thumb {
+    background-color: $umbrella_primary;
+}
+
+#quicknotesPage::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+}
+
+#quicknotesPage::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+#quicknotesPage::-webkit-scrollbar-thumb {
+    background-color: $umbrella_primary;
+}
+
+#settingsPage::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+}
+
+#settingsPage::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+#settingsPage::-webkit-scrollbar-thumb {
+    background-color: $umbrella_primary;
+}
+
+#notebookPage::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+}
+
+#notebookPage::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+#notebookPage::-webkit-scrollbar-thumb {
+    background-color: $umbrella_primary;
+}
+
+#writePage::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: $white;
+}
+
+#writePage::-webkit-scrollbar {
+    width: 7px;
+    background-color: $white;
+}
+
+#writePage::-webkit-scrollbar-thumb {
+    background-color: $umbrella_primary;
+}
+
+#editPage::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: $white;
+}
+
+#editPage::-webkit-scrollbar {
+    width: 7px;
+    background-color: $white;
+}
+
+#editPage::-webkit-scrollbar-thumb {
+    background-color: $umbrella_primary;
+}

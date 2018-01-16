@@ -287,7 +287,7 @@ function editNote(event){
             }
         }
     })
-
+    openPage(notebookPage);
     displayNotes();
         
     $('#sidebar .icon').css('color','#FAFAFA')
@@ -304,9 +304,6 @@ function createNotebookModal() {
     $('.create-notebook-modal').toggleClass('open');
 }
 
-function saveToCloudModal(){
-    $('#cloud-save-modal').toggleClass('open')
-}
 
 function openNotebook(notebookTitle,index){
     activeNotebook = notebookTitle
@@ -517,7 +514,7 @@ function initUmbrella(){
         $(this).css("color", "#338fff")
     })
     // $('#sidebar .icon').click(function(){ $('#sidebar .icon').css("color", "white"); $(this).css("color", "#338fff")})
-
+    initFonts()
 }
 
 function changeSignInStatus(){
@@ -978,4 +975,26 @@ ipcRenderer.on('message', function (event, text) {
 function update(){
     console.log('going to update now.')
     ipcRenderer.send('update-now');
+}
+
+
+// FONTS 
+
+function setFont(i){
+    let x = '<link rel="stylesheet" type="text/css" href="css/'+ i +'.css">'
+    $('head').append(x);
+}
+
+function initFonts(){
+    if(localStorage.font == null){
+        localStorage.font = 'open-sans'
+    }
+    setFont(localStorage.font)
+    $('.fonts select').val(localStorage.font)
+}
+
+function changeFont(){
+    var i = $('.fonts select').val()
+    setFont(i)
+    localStorage.font = i
 }

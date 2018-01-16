@@ -1,0 +1,53 @@
+header {
+    display: flex;
+    padding: 5px 10px;
+    padding-left: 60px;
+    justify-content: space-between;
+    -webkit-app-region: drag;
+    position: relative;
+    .name {
+        color: $black;
+        font-size: 14px;
+    }
+
+    .nav {
+        -webkit-app-region: no-drag;
+
+        .nav-item {
+            // background-color: $blue;
+            border: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 2px;
+            outline: none;
+
+            &:hover {
+                color: $black;
+            }
+        }
+
+        .close {
+            background-color: #fb6452;
+            color: #fb6452;
+        }
+
+        .minimize {
+            background-color: #f0d700;
+            color: #f0d700;
+        }
+
+        .maximize {
+            background-color: #32E317;
+            color: #32E317;
+        }
+
+        svg {
+            width: 10px;
+            height: 10px;
+            stroke-width: 3px;
+            right: 3px;
+            position: relative;
+        }
+    }
+}
