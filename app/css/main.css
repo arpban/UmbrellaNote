@@ -51,7 +51,7 @@ header {
   -webkit-app-region: drag;
   position: relative; }
   header .name {
-    color: #353535;
+    color: #2b2b2b;
     font-size: 14px; }
   header .nav {
     -webkit-app-region: no-drag; }
@@ -63,7 +63,7 @@ header {
       margin-right: 2px;
       outline: none; }
       header .nav .nav-item:hover {
-        color: #353535; }
+        color: #2b2b2b; }
     header .nav .close {
       background-color: #fb6452;
       color: #fb6452; }
@@ -163,7 +163,7 @@ header {
     align-items: center;
     justify-content: center; }
   .modal .body {
-    border-radius: 3px; }
+    border-radius: 6px; }
     .modal .body .close {
       position: relative;
       float: right; }
@@ -228,7 +228,8 @@ header {
 
 .modal.create-notebook-modal .body {
   background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-  width: 60%; }
+  width: 50%;
+  max-width: 700px; }
   .modal.create-notebook-modal .body p {
     font-size: 18px; }
   .modal.create-notebook-modal .body .covers h3 {
@@ -329,7 +330,7 @@ html,
 body {
   height: 100%;
   width: 100%;
-  background-color: #FAFAFA;
+  background-color: white;
   margin: 0;
   padding: 0;
   font-family: "SourceSansPro-Regular", sans-serif;
@@ -359,7 +360,7 @@ h3 {
   font-size: 25px; }
 
 p {
-  line-height: 1.5em; }
+  line-height: 1.4em; }
 
 strong {
   font-family: "SourceSansPro-SemiBold", sans-serif; }
@@ -546,7 +547,7 @@ button {
       font-size: 18px;
       font-weight: lighter;
       line-height: 1.3em;
-      color: #353535;
+      color: #2b2b2b;
       padding-right: 20%; }
       #editPage form .main-editor h1, #editPage form .main-editor h2, #editPage form .main-editor h3, #editPage form .main-editor h4, #writePage form .main-editor h1, #writePage form .main-editor h2, #writePage form .main-editor h3, #writePage form .main-editor h4 {
         font-family: "OpenSans-LightItalic", sans-serif; }
@@ -582,7 +583,7 @@ button {
   #homePage.open, #settingsPage.open, #quicknotesPage.open {
     display: block; }
   #homePage .header, #settingsPage .header, #quicknotesPage .header {
-    color: #353535;
+    color: #2b2b2b;
     font-size: 30px;
     padding: 5px 10px;
     font-family: "SourceSansPro-Light", sans-serif; }
@@ -622,7 +623,7 @@ button {
       #homePage .quicknotes .note .box, #quicknotesPage .quicknotes .note .box {
         position: absolute;
         display: none;
-        background-color: #353535;
+        background-color: #2b2b2b;
         padding: 5px 0px;
         border-radius: 4px;
         top: 8px;
@@ -679,7 +680,7 @@ button {
             border-style: none; }
         #homePage .notebooks .notebook a .description, #quicknotesPage .notebooks .notebook a .description {
           padding: 10px 12px;
-          color: #353535;
+          color: #2b2b2b;
           background-color: #FAFAFA; }
           #homePage .notebooks .notebook a .description .title, #quicknotesPage .notebooks .notebook a .description .title {
             font-size: 16px; }
@@ -750,12 +751,13 @@ button {
     padding: 5px 15px;
     border-bottom-right-radius: 5px; }
   #notebookPage .posts .post {
-    padding: 20px;
+    padding: 60px 30px;
+    padding-right: 20%;
     font-family: consolas;
     font-size: 18px;
     font-style: italic;
     position: relative;
-    color: #FAFAFA; }
+    color: #2b2b2b; }
     #notebookPage .posts .post .date {
       font-size: 14px;
       margin-top: 3px;
@@ -766,14 +768,12 @@ button {
     #notebookPage .posts .post h1, #notebookPage .posts .post h2, #notebookPage .posts .post h3, #notebookPage .posts .post h4 {
       font-family: "OpenSans-LightItalic", sans-serif;
       font-style: normal; }
-    #notebookPage .posts .post p {
-      margin: 0; }
     #notebookPage .posts .post .expandButton {
       position: absolute;
       top: 5px;
       right: 7px;
       cursor: pointer;
-      color: #FAFAFA; }
+      color: #717171; }
       #notebookPage .posts .post .expandButton svg {
         stroke-width: 1;
         width: 20px;
@@ -781,7 +781,7 @@ button {
     #notebookPage .posts .post .box {
       position: absolute;
       display: none;
-      background-color: #353535;
+      background-color: #2b2b2b;
       padding: 5px 0px;
       border-radius: 4px;
       top: 8px;
@@ -805,7 +805,7 @@ button {
 .options-menu {
   position: absolute;
   background: #FAFAFA;
-  color: #353535;
+  color: #2b2b2b;
   padding: 20px;
   border-radius: 2px;
   font-size: 14px; }

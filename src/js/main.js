@@ -544,8 +544,10 @@ let color_palette_1 = ['#EFBC69','#F1B56C','#F3A86D', '#F49A6E', '#F58D70', '#F6
 let color_palette_2 = ['#58C2E2', '#5CB3E1', '#60A5DF', '#6596DE', '#6988DC', '#6D79DB']
 let color_palette_3 = ['#171019', '#1E1621', '#251B29', '#2D2031', '#342539', '#3B2B41', '#433049', '#513A59', '#604B68','#705D77']
 let color_palette_4 = ['#8C3A42', '#A3434D', '#BA4D58', '#D15663', '#E8606E', '#FF6978']
+let color_palette_default = ['#FAFAFA', '#ffffff', '#FAFAFA', '#ffffff']
 
-let palettes = [color_palette_1, color_palette_2, color_palette_3, color_palette_4]
+// let palettes = [color_palette_1, color_palette_2, color_palette_3, color_palette_4]
+let palettes = [color_palette_default]
 
 function addColors(n){
     let y = 0
@@ -886,7 +888,7 @@ function editNoteRemote(localdb_id, note){
 function deleteNotebook(event){
     event.preventDefault()
     let title = $('.edit-notebook.modal input[type=hidden]').val()
-    if(localStorage.signedIn == 'false'){
+    if(localStorage.signedIn == 'false' || localStorage.signedIn == null ){
         db.notebooks.remove({title: title},{}, function(err,numRemoved){})
         db.notes.remove({notebook: title},{multi: true})
         db.remoteTasks.remove({task: 'CREATE_NOTEBOOK', title:title }, {})
@@ -987,7 +989,7 @@ function setFont(i){
 
 function initFonts(){
     if(localStorage.font == null){
-        localStorage.font = 'open-sans'
+        localStorage.font = 'times-new-roman'
     }
     setFont(localStorage.font)
     $('.fonts select').val(localStorage.font)

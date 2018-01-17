@@ -7,3 +7,15 @@
   #editPage form .main-editor strong, #writePage form .main-editor strong {
     font-family: OpenSans , sans-serif;
     font-weight: 700; }
+
+#notebookPage .posts .post {
+  font-family: OpenSans, sans-serif;
+  font-size: 16px;
+  font-style: normal; }
+  #notebookPage .posts .post .date {
+    font-size: 14px; }
+  #notebookPage .posts .post .time {
+    font-size: 14px; }
+  #notebookPage .posts .post h1, #notebookPage .posts .post h2, #notebookPage .posts .post h3, #notebookPage .posts .post h4 {
+    font-family: 'SourceSansPro-Regular', sans-serif;
+    font-style: normal; }

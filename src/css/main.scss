@@ -8,7 +8,7 @@ html,
 body {
     height: 100%;
     width: 100%;
-    background-color: $white;
+    background-color: white;
     margin: 0;
     padding: 0;
     font-family: $sourceSansPro;
@@ -43,7 +43,7 @@ h3 {
 }
 
 p {
-    line-height: 1.5em;
+    line-height: 1.4em;
 }
 
 strong {
@@ -554,12 +554,13 @@ button {
 
     .posts {
         .post {
-            padding: 20px;
+            padding: 60px 30px;
+            padding-right: 20%;
             font-family: consolas;
             font-size: 18px;
             font-style: italic;
             position: relative;
-            color: $white;
+            color: $black;
             .date {
                 font-size: 14px;
                 margin-top: 3px;
@@ -576,16 +577,12 @@ button {
                 font-style: normal;
             }
 
-            p{
-                margin: 0;
-            }
-
             .expandButton {
                 position: absolute;
                 top: 5px;
                 right: 7px;
                 cursor: pointer;
-                color: $white;
+                color: $darkgrey;
 
                 svg {
                     stroke-width: 1;

@@ -19,7 +19,7 @@
 
     .body {
         
-        border-radius: 3px;
+        border-radius: 6px;
         
         .close {
             position: relative;
@@ -133,7 +133,8 @@
 .modal.create-notebook-modal {
     .body {
         background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-        width: 60%;
+        width: 50%;
+        max-width: 700px;
         p {
             font-size: 18px;
         }

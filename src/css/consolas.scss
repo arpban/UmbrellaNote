@@ -13,3 +13,24 @@
         }
     }
 }
+#notebookPage {
+    .posts {
+        .post {
+            font-family: consolas, 'SourceSansPro-Regular', sans-serif;
+            font-style: italic;
+            font-size: 18px;
+            h1,h2,h3,h4{
+                font-family: 'OpenSans-LightItalic', sans-serif;
+            }
+            strong{
+                font-family: 'SourceSansPro-Bold', sans-serif;
+            }
+            .date {
+                font-size: 14px;
+            }
+            .time {
+                font-size: 14px;
+            }
+        }
+    }
+}
