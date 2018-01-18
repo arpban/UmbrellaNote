@@ -18,13 +18,12 @@ var _require2 = require('electron'),
 
 var _require3 = require('electron-updater'),
     autoUpdater = _require3.autoUpdater;
-
-var log = require('electron-log');
+// const log = require('electron-log');
 
 // configure logging
-autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = 'info';
-log.info('App starting...');
+// autoUpdater.logger = log;
+// autoUpdater.logger.transports.file.level = 'info';
+// log.info('App starting...');
 
 var mainWindow = void 0;
 
@@ -82,14 +81,14 @@ ipcMain.on('maximize-window', function () {
 });
 
 ipcMain.on('show-signup-in-browser', function () {
-	shell.openExternal('http://localhost:8000/register');
+	shell.openExternal('https://umbrellanote.com');
 });
 
 //-------------------------------------------------------------------
 // Auto updates
 //-------------------------------------------------------------------
 var sendStatusToWindow = function sendStatusToWindow(text) {
-	log.info(text);
+	// log.info(text);
 	if (mainWindow) {
 		mainWindow.webContents.send('message', text);
 	}

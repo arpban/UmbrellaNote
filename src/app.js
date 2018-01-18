@@ -8,12 +8,12 @@ const {shell} = require('electron')
 // let ipcMain = electron.ipcMain
 
 const {autoUpdater} = require('electron-updater');
-const log = require('electron-log');
+// const log = require('electron-log');
 
 // configure logging
-autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = 'info';
-log.info('App starting...');
+// autoUpdater.logger = log;
+// autoUpdater.logger.transports.file.level = 'info';
+// log.info('App starting...');
 
 let mainWindow
 
@@ -74,7 +74,7 @@ ipcMain.on('maximize-window', () => {
 })
 
 ipcMain.on('show-signup-in-browser', ()=>{
-	shell.openExternal('http://localhost:8000/register')
+	shell.openExternal('https://umbrellanote.com')
 })
 
 
@@ -83,7 +83,7 @@ ipcMain.on('show-signup-in-browser', ()=>{
 // Auto updates
 //-------------------------------------------------------------------
 const sendStatusToWindow = (text) => {
-  log.info(text);
+  // log.info(text);
   if (mainWindow) {
     mainWindow.webContents.send('message', text);
   }
