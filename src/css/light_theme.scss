@@ -1,0 +1,119 @@
+// NIGHT MODE
+
+$background: white;
+$background2: #1c1925;
+$background3: #fafafa;
+$bright_color: #338fff;
+$bright_color2: #ff8000;
+$text: #2b2b2b;
+
+$white: #FAFAFA;
+$black: #2b2b2b;
+$black2: #1f1f1f;
+
+html,body {
+    background-color: $background;
+}
+
+#homePage, #quicknotesPage{
+    .notebooks{
+        .notebook{
+            .description{
+                color: $black !important;
+                background-color: $white !important;
+                .created{
+                    color: dimgrey !important;
+                }
+            }
+        }
+    }
+}
+
+#main-icons {
+    .icon {
+        background: $bright_color;
+        color: $white;
+        &:hover {
+            background-color: $bright_color2;
+        }
+    }
+}
+#editPage, #writePage {
+    .header{
+        background: $bright_color;
+        color: white;
+    }
+
+    form {
+        .main-editor {
+            color: $text;
+        }
+    }
+
+    .save.icon {
+        background: $bright_color;
+        color: $white;
+        &:hover {
+            background-color: $bright_color2;
+        }
+    }
+}
+
+
+#homePage, #settingsPage, #quicknotesPage {
+     .header {
+        color: $text;
+    }
+}
+
+#settingsPage{
+	color: $text;
+	.fonts, .themes{
+		select{
+			color: $black;
+			option{
+				color: $black;
+			}
+		}
+	}
+}
+
+#notebookPage {
+    .header{
+        background: $bright_color;
+        color: white;
+    }
+    .posts {
+        .post {
+            color: $text;
+	    	&.color{
+	    		background-color: $background3;
+	    	}
+            
+            .expandButton {
+                color: $text;
+            }
+
+            .box {
+                background-color: $bright_color;
+                button {
+                    background: none;
+                    color: $white;
+                    &:hover {
+                        background-color: $black2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#sidebar {
+    background: $background2;
+}
+
+header {
+    .name {
+        color: $text;
+    }
+}

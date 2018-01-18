@@ -1,10 +1,11 @@
-const electron = require('electron')
-const app = electron.app
-const BrowserWindow = electron.BrowserWindow
+// const electron = require('electron')
+// const app = electron.app
+const {app, BrowserWindow, ipcMain} = require('electron')
+// const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 const {shell} = require('electron')
-let ipcMain = electron.ipcMain
+// let ipcMain = electron.ipcMain
 
 const {autoUpdater} = require('electron-updater');
 const log = require('electron-log');

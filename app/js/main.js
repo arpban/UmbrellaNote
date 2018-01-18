@@ -3,9 +3,14 @@
 var axios = require('axios');
 var fs = require('fs');
 var $ = require('jquery');
-var electron = require('electron');
-var app = electron.app;
-var ipcRenderer = electron.ipcRenderer;
+
+var _require = require('electron'),
+    ipcRenderer = _require.ipcRenderer;
+
+var app = require('electron').remote.app;
+// const app = electron.app
+// let ipcRenderer = electron.ipcRenderer
+
 
 var months = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 var days = new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
@@ -27,9 +32,10 @@ var pages = [homePage, writePage, notebookPage, editorPage, settingsPage];
 
 var Datastore = require('nedb');
 var db = {};
-db.notebooks = new Datastore({ filename: 'app/umbrella-notebooks.db', autoload: true });
-db.notes = new Datastore({ filename: 'app/umbrella-notes.db', autoload: true });
-db.remoteTasks = new Datastore({ filename: 'app/remote-tasks.db', autoload: true });
+var data_path = app.getPath("appData");
+db.notebooks = new Datastore({ filename: data_path + '/umbrella-note-data/umbrella-notebooks.db', autoload: true });
+db.notes = new Datastore({ filename: data_path + '/umbrella-note-data/umbrella-notes.db', autoload: true });
+db.remoteTasks = new Datastore({ filename: data_path + '/umbrella-note-data/remote-tasks.db', autoload: true });
 
 db.notebooks.ensureIndex({ fieldName: 'title', unique: true });
 
@@ -491,6 +497,7 @@ function initUmbrella() {
     });
     // $('#sidebar .icon').click(function(){ $('#sidebar .icon').css("color", "white"); $(this).css("color", "#338fff")})
     initFonts();
+    initThemes();
 }
 
 function changeSignInStatus() {
@@ -525,20 +532,26 @@ var color_palette_default = ['#FAFAFA', '#ffffff', '#FAFAFA', '#ffffff'];
 // let palettes = [color_palette_1, color_palette_2, color_palette_3, color_palette_4]
 var palettes = [color_palette_default];
 
+// function addColors(n){
+//     let y = 0
+//     let z
+//     let color_palette = palettes[getRndInteger(0,palettes.length)]
+//     for(let i=0; i<n; i++){
+//         if(y==0){
+//             z = 1
+//         }
+//         if(y==color_palette.length-1){
+//             z = -1
+//             y = y-2
+//         }
+//         $('.post').eq(i).css("background", color_palette[y])
+//         y = y+z
+//     }
+// }
+
 function addColors(n) {
-    var y = 0;
-    var z = void 0;
-    var color_palette = palettes[getRndInteger(0, palettes.length)];
-    for (var i = 0; i < n; i++) {
-        if (y == 0) {
-            z = 1;
-        }
-        if (y == color_palette.length - 1) {
-            z = -1;
-            y = y - 2;
-        }
-        $('.post').eq(i).css("background", color_palette[y]);
-        y = y + z;
+    for (var i = 0; i < n; i = i + 2) {
+        $('.post').eq(i).addClass('color');
     }
 }
 
@@ -970,4 +983,24 @@ function changeFont() {
     var i = $('.fonts select').val();
     setFont(i);
     localStorage.font = i;
+}
+
+//THEMES
+function setTheme(i) {
+    var x = '<link rel="stylesheet" type="text/css" href="css/' + i + '.css">';
+    $('head').append(x);
+}
+
+function initThemes() {
+    if (localStorage.theme == null) {
+        localStorage.theme = 'light';
+    }
+    setTheme(localStorage.theme);
+    $('.themes select').val(localStorage.theme);
+}
+
+function changeTheme() {
+    var i = $('.themes select').val();
+    setTheme(i);
+    localStorage.theme = i;
 }

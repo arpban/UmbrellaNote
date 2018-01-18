@@ -254,7 +254,7 @@ button {
 
     .header{
         font-size: 14px;
-        font-family: consolas;
+        font-family: consolas, $sourceSansPro;
         background: $umbrella_secondary;
         color: white;
         font-style: italic;
@@ -512,8 +512,8 @@ button {
     .content{
         padding: 0px 10px;
     }
-    .fonts{
-        margin: 10px 0px;
+    .fonts, .themes{
+        margin: 15px 0px;
         select{
             padding: 7px;
             border: none;
@@ -524,8 +524,6 @@ button {
             font-size: 16px;
         }
     }
-
-
 }
 
 #notebookPage {
@@ -541,7 +539,7 @@ button {
 
     .header{
         font-size: 14px;
-        font-family: consolas;
+        font-family: consolas, $sourceSansPro;
         background: $umbrella_secondary;
         color: white;
         font-style: italic;
@@ -561,6 +559,10 @@ button {
             font-style: italic;
             position: relative;
             color: $black;
+            background-color: inherit;
+            &.color{
+                background-color: #FAFAFA;
+            }
             .date {
                 font-size: 14px;
                 margin-top: 3px;

@@ -1,18 +1,23 @@
 'use strict';
 
-var electron = require('electron');
-var app = electron.app;
-var BrowserWindow = electron.BrowserWindow;
+// const electron = require('electron')
+// const app = electron.app
+var _require = require('electron'),
+    app = _require.app,
+    BrowserWindow = _require.BrowserWindow,
+    ipcMain = _require.ipcMain;
+// const BrowserWindow = electron.BrowserWindow
+
+
 var path = require('path');
 var url = require('url');
 
-var _require = require('electron'),
-    shell = _require.shell;
+var _require2 = require('electron'),
+    shell = _require2.shell;
+// let ipcMain = electron.ipcMain
 
-var ipcMain = electron.ipcMain;
-
-var _require2 = require('electron-updater'),
-    autoUpdater = _require2.autoUpdater;
+var _require3 = require('electron-updater'),
+    autoUpdater = _require3.autoUpdater;
 
 var log = require('electron-log');
 

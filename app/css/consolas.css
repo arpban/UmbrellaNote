@@ -1,7 +1,7 @@
 #editPage form .main-editor, #writePage form .main-editor {
   font-family: consolas, 'SourceSansPro-Regular', sans-serif;
   font-style: italic;
-  font-size: 18px; }
+  font-size: 16.5px; }
   #editPage form .main-editor h1, #editPage form .main-editor h2, #editPage form .main-editor h3, #editPage form .main-editor h4, #writePage form .main-editor h1, #writePage form .main-editor h2, #writePage form .main-editor h3, #writePage form .main-editor h4 {
     font-family: 'OpenSans-LightItalic', sans-serif; }
   #editPage form .main-editor strong, #writePage form .main-editor strong {

@@ -1,0 +1,61 @@
+html, body {
+  background-color: white; }
+
+#homePage .notebooks .notebook .description, #quicknotesPage .notebooks .notebook .description {
+  color: #2b2b2b !important;
+  background-color: #FAFAFA !important; }
+  #homePage .notebooks .notebook .description .created, #quicknotesPage .notebooks .notebook .description .created {
+    color: dimgrey !important; }
+
+#main-icons .icon {
+  background: #338fff;
+  color: #FAFAFA; }
+  #main-icons .icon:hover {
+    background-color: #ff8000; }
+
+#editPage .header, #writePage .header {
+  background: #338fff;
+  color: white; }
+
+#editPage form .main-editor, #writePage form .main-editor {
+  color: #2b2b2b; }
+
+#editPage .save.icon, #writePage .save.icon {
+  background: #338fff;
+  color: #FAFAFA; }
+  #editPage .save.icon:hover, #writePage .save.icon:hover {
+    background-color: #ff8000; }
+
+#homePage .header, #settingsPage .header, #quicknotesPage .header {
+  color: #2b2b2b; }
+
+#settingsPage {
+  color: #2b2b2b; }
+  #settingsPage .fonts select, #settingsPage .themes select {
+    color: #2b2b2b; }
+    #settingsPage .fonts select option, #settingsPage .themes select option {
+      color: #2b2b2b; }
+
+#notebookPage .header {
+  background: #338fff;
+  color: white; }
+
+#notebookPage .posts .post {
+  color: #2b2b2b; }
+  #notebookPage .posts .post.color {
+    background-color: #fafafa; }
+  #notebookPage .posts .post .expandButton {
+    color: #2b2b2b; }
+  #notebookPage .posts .post .box {
+    background-color: #338fff; }
+    #notebookPage .posts .post .box button {
+      background: none;
+      color: #FAFAFA; }
+      #notebookPage .posts .post .box button:hover {
+        background-color: #1f1f1f; }
+
+#sidebar {
+  background: #1c1925; }
+
+header .name {
+  color: #2b2b2b; }

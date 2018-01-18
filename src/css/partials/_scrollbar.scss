@@ -1,3 +1,5 @@
+$grey: #ababab;
+
 #homePage::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: transparent;
@@ -9,7 +11,7 @@
 }
 
 #homePage::-webkit-scrollbar-thumb {
-    background-color: $umbrella_primary;
+    background-color: $grey;
 }
 
 #quicknotesPage::-webkit-scrollbar-track {
@@ -23,7 +25,7 @@
 }
 
 #quicknotesPage::-webkit-scrollbar-thumb {
-    background-color: $umbrella_primary;
+    background-color: $grey;
 }
 
 #settingsPage::-webkit-scrollbar-track {
@@ -37,7 +39,7 @@
 }
 
 #settingsPage::-webkit-scrollbar-thumb {
-    background-color: $umbrella_primary;
+    background-color: $grey;
 }
 
 #notebookPage::-webkit-scrollbar-track {
@@ -51,33 +53,33 @@
 }
 
 #notebookPage::-webkit-scrollbar-thumb {
-    background-color: $umbrella_primary;
+    background-color: $grey;
 }
 
 #writePage::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: $white;
+    background-color: transparent;
 }
 
 #writePage::-webkit-scrollbar {
     width: 7px;
-    background-color: $white;
+    background-color: transparent;
 }
 
 #writePage::-webkit-scrollbar-thumb {
-    background-color: $umbrella_primary;
+    background-color: $grey;
 }
 
 #editPage::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: $white;
+    background-color: transparent;
 }
 
 #editPage::-webkit-scrollbar {
     width: 7px;
-    background-color: $white;
+    background-color: transparent;
 }
 
 #editPage::-webkit-scrollbar-thumb {
-    background-color: $umbrella_primary;
+    background-color: $grey;
 }
