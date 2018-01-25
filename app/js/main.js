@@ -207,8 +207,9 @@ function sendRaven(message) {
 }
 
 function toggleWritePage() {
-    $('#writePage').toggleClass('open');
-    $('#homePage').toggleClass('open');
+    // $('#writePage').toggleClass('open');
+    // $('#homePage').toggleClass('open');
+    openPage(writePage);
     $('#writePage .main-editor').html('<p>Write Here</p>');
 }
 

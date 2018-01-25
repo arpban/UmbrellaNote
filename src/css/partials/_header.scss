@@ -4,7 +4,11 @@ header {
     padding-left: 60px;
     justify-content: space-between;
     -webkit-app-region: drag;
-    position: relative;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    background: inherit;
     .name {
         color: $black;
         font-size: 14px;

@@ -182,8 +182,10 @@ form.form-group {
 .app {
     height: 100%;
     width: 100%;
-    overflow: hidden;
-    position: fixed;
+    position: relative;
+    overflow-y: scroll;
+    // overflow: hidden;
+    // position: fixed;
 }
 
 button {
@@ -203,6 +205,7 @@ button {
 
 .wrap {
     margin-left: 52px;
+    padding-top: 30px;
     position: relative;
 }    
 #main-icons {
@@ -244,8 +247,8 @@ button {
     -webkit-app-region: no-drag;
     padding-top: 30px;
     display: none;
-    height: 100%;
-    overflow-y: scroll;
+    // height: 100%;
+    // overflow-y: scroll;
     overflow-x: hidden;
 
     &.open {
@@ -321,8 +324,8 @@ button {
     -webkit-app-region: no-drag;
     display: none;
     padding: 10px;
-    overflow-y: scroll;
-    height: 100%;
+    // overflow-y: scroll;
+    // height: 100%;
     overflow-x: hidden;
     padding-bottom: 50px;
 
@@ -529,8 +532,8 @@ button {
 #notebookPage {
     -webkit-app-region: no-drag;
     display: none;
-    overflow-y: scroll;
-    height: 100%;
+    // overflow-y: scroll;
+    // height: 100%;
     overflow-x: hidden;
 
     &.open {

@@ -1,6 +1,9 @@
 html, body {
   background-color: #1c1925; }
 
+.app {
+  background-color: #1c1925; }
+
 #homePage .notebooks .notebook .description {
   color: #dadada !important;
   background-color: rgba(250, 250, 250, 0.1) !important; }
