@@ -8,6 +8,7 @@ var _require = require('electron'),
     ipcRenderer = _require.ipcRenderer;
 
 var app = require('electron').remote.app;
+
 // const app = electron.app
 // let ipcRenderer = electron.ipcRenderer
 
@@ -56,12 +57,18 @@ function newNote(event) {
 function createNotebook(event) {
     event.preventDefault();
     var title = $('.create-notebook-modal form input[name=title]').val();
+    console.log(title);
+    // title = addslashes(title)
     // console.log(title);
     var summary = $('.create-notebook-modal form textarea').val();
     var coverImage = $('.cover-checkbox:checked').val();
     var d = new Date();
     var date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
     addNotebook(title, summary, coverImage, date);
+}
+
+function addslashes(string) {
+    return string.replace(/\\/g, '\\\\').replace(/\u0008/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/'/g, '\\\'').replace(/"/g, '\\"');
 }
 
 function getTimestamp() {
@@ -148,7 +155,8 @@ function displayNotebooks() {
             for (var i = 0; i < docs.length; i++) {
                 // console.log(docs[i]);
                 var y = docs[i];
-                var x = '<div class="notebook"><a onclick="openNotebook(\'' + y.title + '\',' + i + ')"><div class="cover"><img src=' + y.cover + '></div><div class="description"><div class="title">' + y.title + '</div><div class="created">' + y.time + '</div><div class="summary">' + y.summary + '</div><button class="btn1">Open</button></div></a></div>';
+                var slashes_title = addslashes(y.title);
+                var x = '<div class="notebook"><a onclick="openNotebook(\'' + slashes_title + '\',' + i + ')"><div class="cover"><img src=' + y.cover + '></div><div class="description"><div class="title">' + y.title + '</div><div class="created">' + y.time + '</div><div class="summary">' + y.summary + '</div><button class="btn1">Open</button></div></a></div>';
                 notebooksView.append(x);
             }
             callAfterDisplayNotes();
@@ -221,7 +229,13 @@ function openPage(page) {
             pages[i].removeClass('open');
         }
     }
-    if (page == homePage) setEditorToNotebook('Notebook One');
+    if (page == homePage) {
+        setEditorToNotebook('Notebook One');
+        $('header .name').addClass('athome');
+        $('header .name').html('Umbrella Note');
+    } else {
+        $('header .name').removeClass('athome');
+    }
     if (page == writePage) $('#writePage .main-editor').html('<p>Write Here</p>');
 
     callAfterDisplayNotes();
@@ -236,7 +250,8 @@ function openPage(page) {
                 if (y.title == 'Notebook One') {
                     continue;
                 }
-                var x = '<button onclick="toggleModal(\'.edit-notebook.modal\'); editNotebookModal(\'' + y.title + '\')" class="btn3 a">' + y.title + ' </button>';
+                var slashed_title = addslashes(y.title);
+                var x = '<button onclick="toggleModal(\'.edit-notebook.modal\'); editNotebookModal(\'' + slashed_title + '\')" class="btn3 a">' + y.title + ' </button>';
                 notebooks_list.append(x);
             }
         });
@@ -296,9 +311,12 @@ function createNotebookModal() {
     $('.create-notebook-modal').toggleClass('open');
 }
 
+var notePointer = null;
+
 function openNotebook(notebookTitle, index) {
     activeNotebook = notebookTitle;
-    $('#notebookPage .header').html(notebookTitle);
+    $('header .name').html(notebookTitle);
+    // $('#notebookPage .header').html(notebookTitle);
     $('#notebookPage .posts').html('');
     openPage(notebookPage);
     setEditorToNotebook(notebookTitle);
@@ -309,7 +327,8 @@ function openNotebook(notebookTitle, index) {
             for (var i = docs.length - 1; i >= 0; i--) {
                 // console.log(docs[i]);
                 var y = docs[i];
-                var x = '<div class="post"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="body">' + y.note + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></div>';
+                // let x = '<div class="post"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="body">' + y.note + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></div>';
+                var x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></a>';
                 $('#notebookPage .posts').append(x);
             }
             addColors(docs.length);
@@ -329,12 +348,19 @@ function displayNotes() {
             for (var i = docs.length - 1; i >= 0; i--) {
                 // console.log(docs[i]);
                 var y = docs[i];
-                var x = '<div class="post"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="body">' + y.note + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></div>';
+                var x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></a>';
                 $('#notebookPage .posts').append(x);
             }
             addColors(docs.length);
             callAfterDisplayNotes();
         }
+    });
+}
+
+function openNote(id) {
+
+    db.notes.findOne({ _id: id }, function (err, doc) {
+        $('#notebookPage .column-2').html(doc.note);
     });
 }
 
@@ -362,6 +388,26 @@ function deleteNote(id) {
 
 function callAfterDisplayNotes() {
     feather.replace();
+    $('#notebookPage .post').click(function () {
+        $('#notebookPage .post').css("border-color", "#efefef");
+        $(this).css("border-color", "#338fff");
+    });
+    notePointer = $('.post').first();
+    notePointer.click();
+    Mousetrap.bind('down', function () {
+        if (notePointer.next()[0] == null) {
+            return;
+        }
+        notePointer = notePointer.next();
+        notePointer.click();
+    });
+    Mousetrap.bind('up', function () {
+        if (notePointer.prev()[0] == null) {
+            return;
+        }
+        notePointer = notePointer.prev();
+        notePointer.click();
+    });
 }
 
 function toggleModal(x) {
@@ -488,7 +534,6 @@ function initUmbrella() {
     if (navigator.onLine && localStorage.signedIn == 'true') {
         setTimeout(syncDatabaseUp, 5000);
     }
-    console.log('umbrella initialized');
 
     $('#sidebar .home').css("color", "#338fff");
 
@@ -499,6 +544,8 @@ function initUmbrella() {
     // $('#sidebar .icon').click(function(){ $('#sidebar .icon').css("color", "white"); $(this).css("color", "#338fff")})
     initFonts();
     initThemes();
+
+    console.log('umbrella initialized');
 }
 
 function changeSignInStatus() {

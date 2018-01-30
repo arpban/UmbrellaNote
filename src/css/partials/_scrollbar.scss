@@ -14,6 +14,20 @@ $grey: #ababab;
     background-color: $grey;
 }
 
+html::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+}
+
+html::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: $grey;
+}
+
 
 // #homePage::-webkit-scrollbar-track {
 //     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -57,19 +71,19 @@ $grey: #ababab;
 //     background-color: $grey;
 // }
 
-// #notebookPage::-webkit-scrollbar-track {
-//     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-//     background-color: transparent;
-// }
+#notebookPage::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+}
 
-// #notebookPage::-webkit-scrollbar {
-//     width: 7px;
-//     background-color: transparent;
-// }
+#notebookPage::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
 
-// #notebookPage::-webkit-scrollbar-thumb {
-//     background-color: $grey;
-// }
+#notebookPage::-webkit-scrollbar-thumb {
+    background-color: $grey;
+}
 
 // #writePage::-webkit-scrollbar-track {
 //     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);

@@ -1,7 +1,7 @@
 header {
     display: flex;
-    padding: 5px 10px;
-    padding-left: 60px;
+    // padding: 5px 10px;
+    padding-left: 52px;
     justify-content: space-between;
     -webkit-app-region: drag;
     position: fixed;
@@ -10,13 +10,21 @@ header {
     z-index: 100;
     background: inherit;
     .name {
-        color: $black;
+        // color: $black;
         font-size: 14px;
+        background: #338fff;
+        color: white;
+        padding: 5px;
+        width: 293px;
+        &.athome{
+            background: inherit;
+            color: $black;
+        }
     }
 
     .nav {
         -webkit-app-region: no-drag;
-
+        padding: 5px;
         .nav-item {
             // background-color: $blue;
             border: none;

@@ -10,7 +10,7 @@
 <body>
 	<div class="app">
 		<header>
-			<div class="name">Umbrella Note</div>
+			<div class="name athome">Umbrella Note</div>
 			<div class="nav">
 				<button class="nav-item close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
 				<button class="nav-item minimize">
@@ -73,9 +73,18 @@
 				<div class="header">Your Journals</div>
 				<div class="notebooks"></div>
 			</div>
-			<div id="notebookPage" class="page">
+<!-- 			<div id="notebookPage" class="page">
 				<div class="header">Notebook Name</div>
 				<div class="posts"></div>
+			</div> -->
+			<div id="notebookPage" class="page">
+				<div class="column-1">
+					<!-- <div class="header">Notebook Name</div> -->
+					<div class="posts"></div>
+				</div>
+				<div class="column-2">
+					
+				</div>
 			</div>
 			<div id="settingsPage" class="page">
 				<!-- <div class="header">Settings</div> -->
@@ -209,8 +218,9 @@
 		});
 	</script>
 	<script src="js/env.js"></script>
+	<script async src="js/mousetrap.min.js"></script>
 	<script src="js/main.js"></script>
-	
+		
 
 </body>
 
