@@ -45,16 +45,26 @@
 
 header {
   display: flex;
-  padding: 5px 10px;
-  padding-left: 60px;
+  padding-left: 52px;
   justify-content: space-between;
   -webkit-app-region: drag;
-  position: relative; }
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  background: inherit; }
   header .name {
-    color: #2b2b2b;
-    font-size: 14px; }
+    font-size: 14px;
+    background: #338fff;
+    color: white;
+    padding: 5px;
+    width: 293px; }
+    header .name.athome {
+      background: inherit;
+      color: #2b2b2b; }
   header .nav {
-    -webkit-app-region: no-drag; }
+    -webkit-app-region: no-drag;
+    padding: 5px; }
     header .nav .nav-item {
       border: none;
       width: 15px;
@@ -80,37 +90,26 @@ header {
       right: 3px;
       position: relative; }
 
-#homePage::-webkit-scrollbar-track {
+.app::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: transparent; }
 
-#homePage::-webkit-scrollbar {
+.app::-webkit-scrollbar {
   width: 7px;
   background-color: transparent; }
 
-#homePage::-webkit-scrollbar-thumb {
+.app::-webkit-scrollbar-thumb {
   background-color: #ababab; }
 
-#quicknotesPage::-webkit-scrollbar-track {
+html::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: transparent; }
 
-#quicknotesPage::-webkit-scrollbar {
+html::-webkit-scrollbar {
   width: 7px;
   background-color: transparent; }
 
-#quicknotesPage::-webkit-scrollbar-thumb {
-  background-color: #ababab; }
-
-#settingsPage::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: transparent; }
-
-#settingsPage::-webkit-scrollbar {
-  width: 7px;
-  background-color: transparent; }
-
-#settingsPage::-webkit-scrollbar-thumb {
+html::-webkit-scrollbar-thumb {
   background-color: #ababab; }
 
 #notebookPage::-webkit-scrollbar-track {
@@ -122,28 +121,6 @@ header {
   background-color: transparent; }
 
 #notebookPage::-webkit-scrollbar-thumb {
-  background-color: #ababab; }
-
-#writePage::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: transparent; }
-
-#writePage::-webkit-scrollbar {
-  width: 7px;
-  background-color: transparent; }
-
-#writePage::-webkit-scrollbar-thumb {
-  background-color: #ababab; }
-
-#editPage::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: transparent; }
-
-#editPage::-webkit-scrollbar {
-  width: 7px;
-  background-color: transparent; }
-
-#editPage::-webkit-scrollbar-thumb {
   background-color: #ababab; }
 
 .modal {
@@ -299,6 +276,7 @@ header {
   position: fixed;
   top: 0px;
   height: 100%;
+  z-index: 200;
   background: #1c1925;
   display: flex;
   flex-direction: column;
@@ -468,8 +446,7 @@ form.form-group .form-item {
 .app {
   height: 100%;
   width: 100%;
-  overflow: hidden;
-  position: fixed; }
+  position: relative; }
 
 button {
   outline: none;
@@ -478,11 +455,9 @@ button {
 .app .wrap {
   height: 100%; }
 
-.page {
-  padding-bottom: 30px; }
-
 .wrap {
   margin-left: 52px;
+  padding-top: 30px;
   position: relative; }
 
 #main-icons {
@@ -515,8 +490,6 @@ button {
   -webkit-app-region: no-drag;
   padding-top: 30px;
   display: none;
-  height: 100%;
-  overflow-y: scroll;
   overflow-x: hidden; }
   #editPage.open, #writePage.open {
     display: block; }
@@ -576,8 +549,6 @@ button {
   -webkit-app-region: no-drag;
   display: none;
   padding: 10px;
-  overflow-y: scroll;
-  height: 100%;
   overflow-x: hidden;
   padding-bottom: 50px; }
   #homePage.open, #settingsPage.open, #quicknotesPage.open {
@@ -734,40 +705,58 @@ button {
 #notebookPage {
   -webkit-app-region: no-drag;
   display: none;
-  overflow-y: scroll;
   height: 100%;
   overflow-x: hidden; }
   #notebookPage.open {
-    display: block; }
+    display: flex;
+    flex-direction: row; }
+  #notebookPage .column-1 {
+    width: 300px;
+    position: fixed;
+    height: 100%;
+    overflow-y: scroll;
+    background: #fbfbfb; }
+  #notebookPage .column-1::-webkit-scrollbar {
+    width: 7px;
+    background-color: white; }
+  #notebookPage .column-1::-webkit-scrollbar-thumb {
+    background-color: #e8e8e8; }
+  #notebookPage .column-2 {
+    position: relative;
+    margin-left: 300px;
+    width: 100%;
+    padding: 10px 30px;
+    cursor: text; }
   #notebookPage .header {
     font-size: 14px;
     font-family: consolas, "SourceSansPro-Regular", sans-serif;
     background: #338fff;
     color: white;
     font-style: italic;
-    display: absolute;
-    position: absolute;
     z-index: 10;
     padding: 5px 15px;
-    border-bottom-right-radius: 5px; }
+    width: 100%; }
   #notebookPage .posts .post {
-    padding: 60px 30px;
-    padding-right: 20%;
-    font-family: consolas;
-    font-size: 18px;
-    font-style: italic;
+    display: block;
+    padding: 15px;
+    font-size: 14px;
     position: relative;
     color: #2b2b2b;
-    background-color: inherit; }
+    background-color: inherit;
+    border-bottom: 1px solid #efefef;
+    cursor: pointer; }
+    #notebookPage .posts .post:hover {
+      border-color: #338fff !important; }
     #notebookPage .posts .post.color {
       background-color: #FAFAFA; }
     #notebookPage .posts .post .date {
-      font-size: 14px;
-      margin-top: 3px;
-      margin-bottom: 20px; }
+      font-size: 12px; }
     #notebookPage .posts .post .time {
-      font-size: 14px;
-      margin-top: 10px; }
+      font-size: 12px; }
+    #notebookPage .posts .post .title {
+      font-size: 13px;
+      padding: 5px 0px 0px;
+      font-style: italic; }
     #notebookPage .posts .post h1, #notebookPage .posts .post h2, #notebookPage .posts .post h3, #notebookPage .posts .post h4 {
       font-family: "OpenSans-LightItalic", sans-serif;
       font-style: normal; }

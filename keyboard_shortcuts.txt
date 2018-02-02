@@ -1,0 +1,24 @@
+KEYBOARD SHORTCUTS
+--------------------------------------------------------------------------------
+
+# NOTEBOOK PAGE
+
+up, down  //To change the notes. up -> previous note. down -> next note.
+
+f, j // to open the editor. 
+
+esc // to return to home page.
+
+
+#HOME PAGE
+
+f, j //to open the editor.
+
+
+#EDITOR PAGE
+
+esc //to return to notebook page
+
+ctrl+s //to save the note
+
+

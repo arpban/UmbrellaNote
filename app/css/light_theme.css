@@ -1,6 +1,9 @@
 html, body {
   background-color: white; }
 
+.app {
+  background-color: white; }
+
 #homePage .notebooks .notebook .description, #quicknotesPage .notebooks .notebook .description {
   color: #2b2b2b !important;
   background-color: #FAFAFA !important; }
@@ -56,6 +59,3 @@ html, body {
 
 #sidebar {
   background: #1c1925; }
-
-header .name {
-  color: #2b2b2b; }

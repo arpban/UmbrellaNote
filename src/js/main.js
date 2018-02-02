@@ -3,6 +3,7 @@ var fs = require('fs');
 let $ = require('jquery')
 const {ipcRenderer} = require('electron')
 const {app} = require('electron').remote
+
 // const app = electron.app
 // let ipcRenderer = electron.ipcRenderer
 
@@ -58,12 +59,25 @@ function newNote(event) {
 function createNotebook(event){
     event.preventDefault();
     let title = $('.create-notebook-modal form input[name=title]').val();
+    console.log(title);
+    // title = addslashes(title)
     // console.log(title);
     let summary = $('.create-notebook-modal form textarea').val();
     let coverImage = $('.cover-checkbox:checked').val();
     var d = new Date();
     let date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
     addNotebook(title, summary, coverImage, date);
+}
+
+function addslashes(string) {
+    return string.replace(/\\/g, '\\\\').
+        replace(/\u0008/g, '\\b').
+        replace(/\t/g, '\\t').
+        replace(/\n/g, '\\n').
+        replace(/\f/g, '\\f').
+        replace(/\r/g, '\\r').
+        replace(/'/g, '\\\'').
+        replace(/"/g, '\\"');
 }
 
 function getTimestamp(){
@@ -155,7 +169,8 @@ function displayNotebooks(){
             for(let i=0; i<docs.length; i++){
                 // console.log(docs[i]);
                 let y = docs[i];
-                let x = '<div class="notebook"><a onclick="openNotebook(\'' + y.title + '\','+i+')"><div class="cover"><img src=' + y.cover + '></div><div class="description"><div class="title">' + y.title + '</div><div class="created">'+ y.time + '</div><div class="summary">' + y.summary + '</div><button class="btn1">Open</button></div></a></div>';
+                let slashes_title = addslashes(y.title)
+                let x = '<div class="notebook"><a onclick="openNotebook(\'' + slashes_title + '\','+i+')"><div class="cover"><img src=' + y.cover + '></div><div class="description"><div class="title">' + y.title + '</div><div class="created">'+ y.time + '</div><div class="summary">' + y.summary + '</div><button class="btn1">Open</button></div></a></div>';
                 notebooksView.append(x);
             }
             callAfterDisplayNotes()
@@ -213,11 +228,6 @@ function sendRaven(message) {
     // }, 300000);
 }
 
-function toggleWritePage() {
-    $('#writePage').toggleClass('open');
-    $('#homePage').toggleClass('open');
-    $('#writePage .main-editor').html('<p>Write Here</p>')
-}
 
 
 function openPage(page){
@@ -228,12 +238,18 @@ function openPage(page){
             pages[i].removeClass('open');
         }
     }
-    if(page == homePage)
-        setEditorToNotebook('Notebook One');
-    if(page == writePage)
+    if(page == homePage){
+        // setEditorToNotebook('Notebook One');
+        $('header .name').addClass('athome')
+        $('header .name').html('Umbrella Note')
+        closeNotebook()
+    }else{
+        $('header .name').removeClass('athome')
+    }
+    if(page == writePage){
         $('#writePage .main-editor').html('<p>Write Here</p>')
-    
-    callAfterDisplayNotes()
+        $('header .name').html(activeNotebook)
+    }
 
     if(page == settingsPage){
         let notebooks_list = $('#settingsPage .notebooks-list')
@@ -245,11 +261,28 @@ function openPage(page){
                 if(y.title == 'Notebook One'){
                     continue
                 }
-                let x = '<button onclick="toggleModal(\'.edit-notebook.modal\'); editNotebookModal(\''+y.title+'\')" class="btn3 a">' + y.title + ' </button>'
+                let slashed_title = addslashes(y.title)
+                let x = '<button onclick="toggleModal(\'.edit-notebook.modal\'); editNotebookModal(\''+slashed_title+'\')" class="btn3 a">' + y.title + ' </button>'
                 notebooks_list.append(x);
             }
         })
     }
+
+
+    switch(page){
+        case writePage:
+            setUpKeyboardShortcuts('writePage')
+            break
+        case editorPage: 
+            setUpKeyboardShortcuts('editorPage')
+            break
+        case homePage: 
+            setUpKeyboardShortcuts('homePage') 
+            break
+        case notebookPage: 
+            setUpKeyboardShortcuts('notebookPage')
+    }
+
 
 }
 
@@ -259,6 +292,7 @@ function editNotebookModal(title){
 }
 
 function openEditorPage(id){
+    $('#notebookPage').removeClass('open')
     editorPage.addClass('open')
     $('#editPage input.noteId').val(id)
     db.notes.findOne({_id: id}, function(err,doc){
@@ -307,9 +341,13 @@ function createNotebookModal() {
 }
 
 
+let notePointer = null //it points to jquery object of a note
+let pointer_id_current_note = null //it points to id of the current note that notePointer is pointing to. 
+
 function openNotebook(notebookTitle,index){
     activeNotebook = notebookTitle
-    $('#notebookPage .header').html(notebookTitle);
+    $('header .name').html(notebookTitle)
+    // $('#notebookPage .header').html(notebookTitle);
     $('#notebookPage .posts').html('');
     openPage(notebookPage);
     setEditorToNotebook(notebookTitle);
@@ -321,14 +359,20 @@ function openNotebook(notebookTitle,index){
             for(let i=docs.length-1; i>=0; i--){
                 // console.log(docs[i]);
                 let y = docs[i];
-                let x = '<div class="post"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="body">' + y.note + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></div>';                
+                // let x = '<div class="post"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="body">' + y.note + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></div>';
+                let x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></a>';                
                 $('#notebookPage .posts').append(x);
             }
             addColors(docs.length)
-            callAfterDisplayNotes()
+            callAfterDisplayNotes()        
         }
     });
-    $('#sidebar .icon').css("color","#FAFAFA")        
+    $('#sidebar .icon').css("color","#FAFAFA")
+}
+
+function closeNotebook(){
+    $('#notebookPage .column-2').html(' ')
+    activeNotebook = 'Notebook One'
 }
 
 function displayNotes() {
@@ -342,7 +386,7 @@ function displayNotes() {
             for(let i=docs.length-1; i>=0; i--){
                 // console.log(docs[i]);
                 let y = docs[i];
-                let x = '<div class="post"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="body">' + y.note + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></div>';                
+                let x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></a>';                
                 $('#notebookPage .posts').append(x);
                 
             }
@@ -350,6 +394,15 @@ function displayNotes() {
             callAfterDisplayNotes()
         }
     });
+}
+
+function openNote(id){ //this function displays the note in the column2 of the notebookPage
+    
+    db.notes.findOne({_id: id}, function(err,doc){
+        $('#notebookPage .column-2').html(doc.note)
+    })
+    pointer_id_current_note = id
+
 }
 
 function setEditorToNotebook(i){
@@ -377,6 +430,27 @@ function deleteNote(id){
 
 function callAfterDisplayNotes(){
     feather.replace()
+    $('#notebookPage .post').click(function(){
+        $('#notebookPage .post').css("border-color", "#efefef")
+        $(this).css("border-color", "#338fff")
+    })
+    notePointer = $('.post').first()
+    notePointer.click()
+    // whenever user opens a notebook, keyboard keys up and down are binded with a function to change notes.
+    Mousetrap.bind('down', ()=>{
+        if(notePointer.next()[0] == null){
+            return 
+        }
+        notePointer = notePointer.next()
+        notePointer.click()
+    })
+    Mousetrap.bind('up', ()=>{
+        if(notePointer.prev()[0] == null){
+            return 
+        }
+        notePointer = notePointer.prev()
+        notePointer.click()
+    })
 }
 
 function toggleModal(x) {
@@ -389,6 +463,43 @@ function toggleSpinner(){
 
 function showSignup(){
     ipcRenderer.send('show-signup-in-browser');
+}
+
+function setUpKeyboardShortcuts(page){
+
+    switch(page){
+        case 'homePage':
+            Mousetrap.bind('f', ()=>{
+                console.log('f is pressed at homePage')
+                openPage(writePage)
+            })
+            Mousetrap.bind('j', ()=>{
+                console.log('j is pressed at homePage')
+                openPage(writePage)
+            })
+            Mousetrap.unbind('up', 'down', 'esc')
+            break
+        case 'writePage': 
+            Mousetrap.unbind('f', 'j')
+            Mousetrap.bind('esc', ()=>{
+                openPage(notebookPage)
+                console.log('esc is pressed at writePage')
+            })
+            break
+        case 'editorPage':
+            Mousetrap.unbind('f', 'j')
+            Mousetrap.bind('esc', ()=>{
+                openPage(notebookPage)
+                console.log('esc is pressed at editorpage')
+            })
+            break
+        case 'notebookPage': 
+            Mousetrap.bind('esc', ()=>{
+                openPage(homePage)
+                console.log('esc is pressed at notebookPage')
+            })
+    }
+
 }
 
 
@@ -507,7 +618,6 @@ function initUmbrella(){
     if(navigator.onLine && (localStorage.signedIn=='true')){
         setTimeout(syncDatabaseUp,5000)
     }
-    console.log('umbrella initialized')
 
     $('#sidebar .home').css("color", "#338fff")
 
@@ -518,6 +628,12 @@ function initUmbrella(){
     // $('#sidebar .icon').click(function(){ $('#sidebar .icon').css("color", "white"); $(this).css("color", "#338fff")})
     initFonts()
     initThemes()
+
+    $('#notebookPage .column-2').click(()=>{
+        openEditorPage(pointer_id_current_note)        
+    })
+
+    console.log('umbrella initialized')
 }
 
 function changeSignInStatus(){

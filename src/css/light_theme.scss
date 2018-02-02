@@ -15,6 +15,10 @@ html,body {
     background-color: $background;
 }
 
+.app{
+    background-color: $background;
+}
+
 #homePage, #quicknotesPage{
     .notebooks{
         .notebook{
@@ -110,10 +114,4 @@ html,body {
 
 #sidebar {
     background: $background2;
-}
-
-header {
-    .name {
-        color: $text;
-    }
 }

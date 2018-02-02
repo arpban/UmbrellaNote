@@ -182,8 +182,10 @@ form.form-group {
 .app {
     height: 100%;
     width: 100%;
-    overflow: hidden;
-    position: fixed;
+    position: relative;
+    // overflow-y: scroll;
+    // overflow: hidden;
+    // position: fixed;
 }
 
 button {
@@ -197,12 +199,9 @@ button {
     }
 }
 
-.page{
-    padding-bottom: 30px;
-}
-
 .wrap {
     margin-left: 52px;
+    padding-top: 30px;
     position: relative;
 }    
 #main-icons {
@@ -244,8 +243,8 @@ button {
     -webkit-app-region: no-drag;
     padding-top: 30px;
     display: none;
-    height: 100%;
-    overflow-y: scroll;
+    // height: 100%;
+    // overflow-y: scroll;
     overflow-x: hidden;
 
     &.open {
@@ -321,8 +320,8 @@ button {
     -webkit-app-region: no-drag;
     display: none;
     padding: 10px;
-    overflow-y: scroll;
-    height: 100%;
+    // overflow-y: scroll;
+    // height: 100%;
     overflow-x: hidden;
     padding-bottom: 50px;
 
@@ -529,12 +528,41 @@ button {
 #notebookPage {
     -webkit-app-region: no-drag;
     display: none;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     height: 100%;
     overflow-x: hidden;
-
     &.open {
-        display: block;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .column-1{
+        width: 300px;
+        position: fixed;
+        height: 100%;
+        overflow-y: scroll;
+        background: $lightgrey2;
+    }
+
+    .column-1::-webkit-scrollbar-track {
+        
+    }
+
+    .column-1::-webkit-scrollbar {
+        width: 7px;
+        background-color: white;
+    }
+
+    .column-1::-webkit-scrollbar-thumb {
+        background-color: #e8e8e8;
+    }
+
+    .column-2{
+        position: relative;
+        margin-left: 300px;
+        width: 100%;
+        padding: 10px 30px;
+        cursor :text;
     }
 
     .header{
@@ -543,35 +571,45 @@ button {
         background: $umbrella_secondary;
         color: white;
         font-style: italic;
-        display: absolute;
-        position: absolute;
+        // display: absolute;
+        // position: absolute;
         z-index: 10;
         padding: 5px 15px;
-        border-bottom-right-radius: 5px;
+        // border-bottom-right-radius: 5px;
+        width: 100%;
+
     }
 
     .posts {
         .post {
-            padding: 60px 30px;
-            padding-right: 20%;
-            font-family: consolas;
-            font-size: 18px;
-            font-style: italic;
+            display: block;
+            padding: 15px;
+            font-size: 14px;
             position: relative;
             color: $black;
             background-color: inherit;
+            border-bottom: 1px solid #efefef;
+            cursor: pointer;
+            &:hover{
+                border-color: $blue !important;
+            }
             &.color{
                 background-color: #FAFAFA;
             }
             .date {
-                font-size: 14px;
-                margin-top: 3px;
-                margin-bottom: 20px;
+                font-size: 12px;
+                // margin-top: 3px;
+                // margin-bottom: 20px;
             }
 
             .time {
-                font-size: 14px;
-                margin-top: 10px;
+                font-size: 12px;
+                // margin-top: 10px;
+            }
+            .title{
+                font-size: 13px;
+                padding: 5px 0px 0px;
+                font-style: italic;
             }
 
             h1, h2, h3, h4 {
