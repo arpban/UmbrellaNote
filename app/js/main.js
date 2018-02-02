@@ -214,13 +214,6 @@ function sendRaven(message) {
     // }, 300000);
 }
 
-function toggleWritePage() {
-    // $('#writePage').toggleClass('open');
-    // $('#homePage').toggleClass('open');
-    openPage(writePage);
-    $('#writePage .main-editor').html('<p>Write Here</p>');
-}
-
 function openPage(page) {
     for (var i = 0; i < pages.length; i++) {
         if (pages[i] == page) {
@@ -230,15 +223,17 @@ function openPage(page) {
         }
     }
     if (page == homePage) {
-        setEditorToNotebook('Notebook One');
+        // setEditorToNotebook('Notebook One');
         $('header .name').addClass('athome');
         $('header .name').html('Umbrella Note');
+        closeNotebook();
     } else {
         $('header .name').removeClass('athome');
     }
-    if (page == writePage) $('#writePage .main-editor').html('<p>Write Here</p>');
-
-    callAfterDisplayNotes();
+    if (page == writePage) {
+        $('#writePage .main-editor').html('<p>Write Here</p>');
+        $('header .name').html(activeNotebook);
+    }
 
     if (page == settingsPage) {
         var notebooks_list = $('#settingsPage .notebooks-list');
@@ -256,6 +251,20 @@ function openPage(page) {
             }
         });
     }
+
+    switch (page) {
+        case writePage:
+            setUpKeyboardShortcuts('writePage');
+            break;
+        case editorPage:
+            setUpKeyboardShortcuts('editorPage');
+            break;
+        case homePage:
+            setUpKeyboardShortcuts('homePage');
+            break;
+        case notebookPage:
+            setUpKeyboardShortcuts('notebookPage');
+    }
 }
 
 function editNotebookModal(title) {
@@ -264,6 +273,7 @@ function editNotebookModal(title) {
 }
 
 function openEditorPage(id) {
+    $('#notebookPage').removeClass('open');
     editorPage.addClass('open');
     $('#editPage input.noteId').val(id);
     db.notes.findOne({ _id: id }, function (err, doc) {
@@ -311,7 +321,8 @@ function createNotebookModal() {
     $('.create-notebook-modal').toggleClass('open');
 }
 
-var notePointer = null;
+var notePointer = null; //it points to jquery object of a note
+var pointer_id_current_note = null; //it points to id of the current note that notePointer is pointing to. 
 
 function openNotebook(notebookTitle, index) {
     activeNotebook = notebookTitle;
@@ -338,6 +349,11 @@ function openNotebook(notebookTitle, index) {
     $('#sidebar .icon').css("color", "#FAFAFA");
 }
 
+function closeNotebook() {
+    $('#notebookPage .column-2').html(' ');
+    activeNotebook = 'Notebook One';
+}
+
 function displayNotes() {
 
     $('#notebookPage .posts').html('');
@@ -358,10 +374,12 @@ function displayNotes() {
 }
 
 function openNote(id) {
+    //this function displays the note in the column2 of the notebookPage
 
     db.notes.findOne({ _id: id }, function (err, doc) {
         $('#notebookPage .column-2').html(doc.note);
     });
+    pointer_id_current_note = id;
 }
 
 function setEditorToNotebook(i) {
@@ -394,6 +412,7 @@ function callAfterDisplayNotes() {
     });
     notePointer = $('.post').first();
     notePointer.click();
+    // whenever user opens a notebook, keyboard keys up and down are binded with a function to change notes.
     Mousetrap.bind('down', function () {
         if (notePointer.next()[0] == null) {
             return;
@@ -420,6 +439,42 @@ function toggleSpinner() {
 
 function showSignup() {
     ipcRenderer.send('show-signup-in-browser');
+}
+
+function setUpKeyboardShortcuts(page) {
+
+    switch (page) {
+        case 'homePage':
+            Mousetrap.bind('f', function () {
+                console.log('f is pressed at homePage');
+                openPage(writePage);
+            });
+            Mousetrap.bind('j', function () {
+                console.log('j is pressed at homePage');
+                openPage(writePage);
+            });
+            Mousetrap.unbind('up', 'down', 'esc');
+            break;
+        case 'writePage':
+            Mousetrap.unbind('f', 'j');
+            Mousetrap.bind('esc', function () {
+                openPage(notebookPage);
+                console.log('esc is pressed at writePage');
+            });
+            break;
+        case 'editorPage':
+            Mousetrap.unbind('f', 'j');
+            Mousetrap.bind('esc', function () {
+                openPage(notebookPage);
+                console.log('esc is pressed at editorpage');
+            });
+            break;
+        case 'notebookPage':
+            Mousetrap.bind('esc', function () {
+                openPage(homePage);
+                console.log('esc is pressed at notebookPage');
+            });
+    }
 }
 
 //AUTHENTICATION - USER LOGIN/SIGNUP
@@ -544,6 +599,10 @@ function initUmbrella() {
     // $('#sidebar .icon').click(function(){ $('#sidebar .icon').css("color", "white"); $(this).css("color", "#338fff")})
     initFonts();
     initThemes();
+
+    $('#notebookPage .column-2').click(function () {
+        openEditorPage(pointer_id_current_note);
+    });
 
     console.log('umbrella initialized');
 }

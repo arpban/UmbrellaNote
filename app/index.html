@@ -43,7 +43,7 @@
 		</div>
 		<div class="wrap">
 			<div id="main-icons">
-				<button onclick="toggleWritePage()" class="write icon visible">
+				<button onclick="openPage(writePage)" class="write icon visible">
 						<i data-feather="feather"></i>
 				</button>
 			</div>
@@ -218,8 +218,8 @@
 		});
 	</script>
 	<script src="js/env.js"></script>
-	<script async src="js/mousetrap.min.js"></script>
 	<script src="js/main.js"></script>
+	<script async src="js/mousetrap.min.js" onload="setUpKeyboardShortcuts('homePage')"></script>
 		
 
 </body>
