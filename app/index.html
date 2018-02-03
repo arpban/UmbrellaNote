@@ -8,6 +8,18 @@
 </head>
 
 <body>
+	<div class="simply-straight visible" id="loader">
+		<div class="spinner">
+			<div class="points">
+				<label>	&#8226;</label>
+				<label>	&#8226;</label>
+				<label>	&#8226;</label>
+				<label>	&#8226;</label>
+				<label>	&#8226;</label>
+				<label>	&#8226;</label>
+			</div>
+		</div>
+	</div>
 	<div class="app">
 		<header>
 			<div class="name athome">Umbrella Note</div>
@@ -69,7 +81,7 @@
 					</button>
 				</form>
 			</div>
-			<div id="homePage" class="open" class="page">
+			<div id="homePage" class="page open">
 				<div class="header">Your Journals</div>
 				<div class="notebooks"></div>
 			</div>
@@ -188,19 +200,6 @@
 
 	</div>
 
-	<div class="simply-straight visible" id="loader">
-		<div class="spinner">
-			<div class="points">
-				<label>	&#8226;</label>
-				<label>	&#8226;</label>
-				<label>	&#8226;</label>
-				<label>	&#8226;</label>
-				<label>	&#8226;</label>
-				<label>	&#8226;</label>
-			</div>
-		</div>
-	</div>
-
 	<script src="../node_modules/feather-icons/dist/feather.min.js"></script>
 	<script>
 		feather.replace();
@@ -218,8 +217,13 @@
 		});
 	</script>
 	<script src="js/env.js"></script>
+	<script src="js/umbrella-auth.js"></script>
+	<script src="js/fonts.js"></script>
+	<script src="js/themes.js"></script>
+	<script src="js/notebooks.js"></script>
 	<script src="js/main.js"></script>
 	<script async src="js/mousetrap.min.js" onload="setUpKeyboardShortcuts('homePage')"></script>
+	<script src="js/colors.js"></script>
 		
 
 </body>

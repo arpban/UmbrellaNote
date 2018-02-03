@@ -9,6 +9,10 @@ f, j // to open the editor.
 
 esc // to return to home page.
 
+ctrl+del // to delete a note
+command+del //to delete a note on mac
+
+e //to edit a note
 
 #HOME PAGE
 

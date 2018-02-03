@@ -9,18 +9,11 @@ var _require = require('electron'),
 
 var app = require('electron').remote.app;
 
-// const app = electron.app
-// let ipcRenderer = electron.ipcRenderer
-
-
 var months = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 var days = new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
 var covers = ["img/1.jpg", "img/2.jpeg", "img/3.jpg", "img/4.png", "img/13.jpeg", "img/14.jpeg"];
 var isModalUsedBefore = false;
 var notebooksView = $('#homePage .notebooks');
-var quicknotesView = $('#quicknotesPage .quicknotes');
-
-var activeNotebook = 'Notebook One';
 
 //PAGES
 var homePage = $('#homePage');
@@ -28,8 +21,12 @@ var writePage = $('#writePage');
 var notebookPage = $('#notebookPage');
 var editorPage = $('#editPage');
 var settingsPage = $('#settingsPage');
-var quicknotesPage = $('#quicknotesPage');
 var pages = [homePage, writePage, notebookPage, editorPage, settingsPage];
+
+var notePointer = null; //it points to jquery object of a note
+var pointer_id_current_note = null; //it points to id of the current note that notePointer is pointing to. 
+var notebook_pointer = 'Notebook One'; //it points to name of currently active notebook
+var page_pointer = homePage; //it points to jquery object of current page
 
 var Datastore = require('nedb');
 var db = {};
@@ -41,6 +38,10 @@ db.remoteTasks = new Datastore({ filename: data_path + '/umbrella-note-data/remo
 db.notebooks.ensureIndex({ fieldName: 'title', unique: true });
 
 setTimeout(toggleSpinner, 2000);
+
+function updateNotebookPointer(s) {
+    notebook_pointer = s;
+}
 
 function newNote(event) {
     event.preventDefault();
@@ -103,67 +104,6 @@ async function addNote(notebookTitle, noteDate, noteTime, noteBody) {
     });
 }
 
-function addNotebook(notebookTitle, notebookSummary, coverUrl, createdOn) {
-    var obj = {
-        title: notebookTitle,
-        summary: notebookSummary,
-        cover: coverUrl,
-        time: createdOn
-    };
-
-    db.notebooks.insert(obj, function (err, newDoc) {
-        if (err) {
-            showMessage('<img src="img/emojis/sad.svg"><div class="emoji-text">Error</div>');
-        } else {
-            // console.log("Insertion in DB successful");
-            createNotebookModal();
-            displayNotebooks();
-            showMessage('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
-
-            if (navigator.onLine && localStorage.signedIn == 'true') {
-                createNotebookRemote(notebookTitle, notebookSummary, coverUrl, createdOn);
-            } else {
-                doThisLater('CREATE_NOTEBOOK', notebookTitle, notebookSummary, coverUrl, createdOn);
-            }
-        }
-    });
-}
-
-function displayQuickNotes() {
-    quicknotesView.html('');
-    db.notes.find({ notebook: 'Notebook One' }).sort({ timestamp: 1 }).exec(function (err, docs) {
-        if (err) {
-            console.log(err);
-        } else {
-            for (var i = docs.length - 1; i >= 0; i--) {
-                var y = docs[i];
-                var x = '<div class="note"><div class="body">' + y.note + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></div>';
-                quicknotesView.append(x);
-            }
-            addColorsToQuicknotes(docs.length);
-            callAfterDisplayNotes();
-        }
-    });
-}
-
-function displayNotebooks() {
-    notebooksView.html('');
-    db.notebooks.find({}, function (err, docs) {
-        if (err) {
-            console.log(err);
-        } else {
-            for (var i = 0; i < docs.length; i++) {
-                // console.log(docs[i]);
-                var y = docs[i];
-                var slashes_title = addslashes(y.title);
-                var x = '<div class="notebook"><a onclick="openNotebook(\'' + slashes_title + '\',' + i + ')"><div class="cover"><img src=' + y.cover + '></div><div class="description"><div class="title">' + y.title + '</div><div class="created">' + y.time + '</div><div class="summary">' + y.summary + '</div><button class="btn1">Open</button></div></a></div>';
-                notebooksView.append(x);
-            }
-            callAfterDisplayNotes();
-        }
-    });
-}
-
 function quicknotesInit() {
     db.notebooks.find({ title: 'Notebook One' }, function (err, docs) {
         if (err) {
@@ -215,6 +155,7 @@ function sendRaven(message) {
 }
 
 function openPage(page) {
+    //page is a jquery object
     for (var i = 0; i < pages.length; i++) {
         if (pages[i] == page) {
             pages[i].addClass('open');
@@ -222,48 +163,64 @@ function openPage(page) {
             pages[i].removeClass('open');
         }
     }
-    if (page == homePage) {
-        // setEditorToNotebook('Notebook One');
-        $('header .name').addClass('athome');
-        $('header .name').html('Umbrella Note');
-        closeNotebook();
-    } else {
-        $('header .name').removeClass('athome');
-    }
-    if (page == writePage) {
-        $('#writePage .main-editor').html('<p>Write Here</p>');
-        $('header .name').html(activeNotebook);
-    }
-
-    if (page == settingsPage) {
-        var notebooks_list = $('#settingsPage .notebooks-list');
-        notebooks_list.html('');
-        db.notebooks.find({}, function (err, docs) {
-            for (var _i = 0; _i < docs.length; _i++) {
-                // console.log(docs[i]);
-                var y = docs[_i];
-                if (y.title == 'Notebook One') {
-                    continue;
-                }
-                var slashed_title = addslashes(y.title);
-                var x = '<button onclick="toggleModal(\'.edit-notebook.modal\'); editNotebookModal(\'' + slashed_title + '\')" class="btn3 a">' + y.title + ' </button>';
-                notebooks_list.append(x);
-            }
-        });
-    }
-
+    page_pointer = page;
     switch (page) {
         case writePage:
+            // $('#writePage .main-editor').html('<p>Write Here</p>')
+            $('header .name').html(notebook_pointer);
             setUpKeyboardShortcuts('writePage');
+            $('header .name').removeClass('athome');
+            tinyMCE.activeEditor.focus();
             break;
         case editorPage:
             setUpKeyboardShortcuts('editorPage');
+            $('header .name').removeClass('athome');
             break;
         case homePage:
+            $('header .name').addClass('athome');
+            $('header .name').html('Umbrella Note');
+            closeNotebook();
             setUpKeyboardShortcuts('homePage');
             break;
         case notebookPage:
+            $('header .name').html(notebook_pointer);
+            $('#notebookPage .posts').html('');
+            setEditorToNotebook(notebook_pointer);
+            db.notes.find({ notebook: notebook_pointer }).sort({ timestamp: 1 }).exec(function (err, docs) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    for (var _i = docs.length - 1; _i >= 0; _i--) {
+                        // console.log(docs[i]);
+                        var y = docs[_i];
+                        // let x = '<div class="post"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="body">' + y.note + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></div>';
+                        var x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div></a>';
+                        $('#notebookPage .posts').append(x);
+                    }
+                    addColors(docs.length);
+                    callAfterDisplayNotes();
+                }
+            });
+            $('#sidebar .icon').css("color", "#FAFAFA");
             setUpKeyboardShortcuts('notebookPage');
+            $('header .name').removeClass('athome');
+            break;
+        case settingsPage:
+            var notebooks_list = $('#settingsPage .notebooks-list');
+            notebooks_list.html('');
+            db.notebooks.find({}, function (err, docs) {
+                for (var _i2 = 0; _i2 < docs.length; _i2++) {
+                    // console.log(docs[i]);
+                    var y = docs[_i2];
+                    if (y.title == 'Notebook One') {
+                        continue;
+                    }
+                    var slashed_title = addslashes(y.title);
+                    var x = '<button onclick="toggleModal(\'.edit-notebook.modal\'); editNotebookModal(\'' + slashed_title + '\')" class="btn3 a">' + y.title + ' </button>';
+                    notebooks_list.append(x);
+                }
+            });
+            break;
     }
 }
 
@@ -321,50 +278,17 @@ function createNotebookModal() {
     $('.create-notebook-modal').toggleClass('open');
 }
 
-var notePointer = null; //it points to jquery object of a note
-var pointer_id_current_note = null; //it points to id of the current note that notePointer is pointing to. 
-
-function openNotebook(notebookTitle, index) {
-    activeNotebook = notebookTitle;
-    $('header .name').html(notebookTitle);
-    // $('#notebookPage .header').html(notebookTitle);
-    $('#notebookPage .posts').html('');
-    openPage(notebookPage);
-    setEditorToNotebook(notebookTitle);
-    db.notes.find({ notebook: notebookTitle }).sort({ timestamp: 1 }).exec(function (err, docs) {
-        if (err) {
-            console.log(err);
-        } else {
-            for (var i = docs.length - 1; i >= 0; i--) {
-                // console.log(docs[i]);
-                var y = docs[i];
-                // let x = '<div class="post"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="body">' + y.note + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></div>';
-                var x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></a>';
-                $('#notebookPage .posts').append(x);
-            }
-            addColors(docs.length);
-            callAfterDisplayNotes();
-        }
-    });
-    $('#sidebar .icon').css("color", "#FAFAFA");
-}
-
-function closeNotebook() {
-    $('#notebookPage .column-2').html(' ');
-    activeNotebook = 'Notebook One';
-}
-
 function displayNotes() {
 
     $('#notebookPage .posts').html('');
-    db.notes.find({ notebook: activeNotebook }).sort({ timestamp: 1 }).exec(function (err, docs) {
+    db.notes.find({ notebook: notebook_pointer }).sort({ timestamp: 1 }).exec(function (err, docs) {
         if (err) {
             console.log(err);
         } else {
             for (var i = docs.length - 1; i >= 0; i--) {
                 // console.log(docs[i]);
                 var y = docs[i];
-                var x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></a>';
+                var x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div></a>';
                 $('#notebookPage .posts').append(x);
             }
             addColors(docs.length);
@@ -380,11 +304,6 @@ function openNote(id) {
         $('#notebookPage .column-2').html(doc.note);
     });
     pointer_id_current_note = id;
-}
-
-function setEditorToNotebook(i) {
-    $('#writePage form input.notebookTitle').val(i);
-    $('#writePage .header').html(i);
 }
 
 function deleteNote(id) {
@@ -414,6 +333,7 @@ function callAfterDisplayNotes() {
     notePointer.click();
     // whenever user opens a notebook, keyboard keys up and down are binded with a function to change notes.
     Mousetrap.bind('down', function () {
+        console.log('down is pressed');
         if (notePointer.next()[0] == null) {
             return;
         }
@@ -421,6 +341,7 @@ function callAfterDisplayNotes() {
         notePointer.click();
     });
     Mousetrap.bind('up', function () {
+        console.log('up is pressed');
         if (notePointer.prev()[0] == null) {
             return;
         }
@@ -441,10 +362,13 @@ function showSignup() {
     ipcRenderer.send('show-signup-in-browser');
 }
 
+var save_button = $('#writePage .save');
+
 function setUpKeyboardShortcuts(page) {
 
     switch (page) {
         case 'homePage':
+            Mousetrap.reset();
             Mousetrap.bind('f', function () {
                 console.log('f is pressed at homePage');
                 openPage(writePage);
@@ -453,111 +377,51 @@ function setUpKeyboardShortcuts(page) {
                 console.log('j is pressed at homePage');
                 openPage(writePage);
             });
-            Mousetrap.unbind('up', 'down', 'esc');
             break;
         case 'writePage':
-            Mousetrap.unbind('f', 'j');
+            Mousetrap.reset();
             Mousetrap.bind('esc', function () {
                 openPage(notebookPage);
                 console.log('esc is pressed at writePage');
             });
+            var umbrella_editor = document.getElementsByClassName('main-editor');
+            var writer_mousetrap = new Mousetrap(umbrella_editor[0]);
+            writer_mousetrap.bind(['ctrl+s', 'command+s'], function () {
+                $('#writePage form').submit();
+            });
+            writer_mousetrap.bind('esc', function () {
+                openPage(notebookPage);
+            });
             break;
         case 'editorPage':
-            Mousetrap.unbind('f', 'j');
+            Mousetrap.reset();
             Mousetrap.bind('esc', function () {
                 openPage(notebookPage);
                 console.log('esc is pressed at editorpage');
             });
             break;
         case 'notebookPage':
+            // Mousetrap.reset()
+            Mousetrap.bind('f', function () {
+                console.log('f is pressed at homePage');
+                openPage(writePage);
+            });
+            Mousetrap.bind('j', function () {
+                console.log('j is pressed at homePage');
+                openPage(writePage);
+            });
+            Mousetrap.bind('e', function () {
+                openEditorPage(pointer_id_current_note);
+            });
             Mousetrap.bind('esc', function () {
                 openPage(homePage);
                 console.log('esc is pressed at notebookPage');
             });
+            Mousetrap.bind(['ctrl+del', 'command+del'], function () {
+                console.log('delete');
+                deleteNote(pointer_id_current_note);
+            });
     }
-}
-
-//AUTHENTICATION - USER LOGIN/SIGNUP
-
-function signInUser(event) {
-    toggleSpinner();
-    event.preventDefault();
-    var email = $('.signin.modal input.email').val();
-    var password = $('.signin.modal input.password').val();
-    console.log(email, password);
-    axios({
-        method: 'post',
-        url: pikachu + '/oauth/token',
-        data: {
-            grant_type: 'password',
-            client_id: client_id,
-            client_secret: client_secret,
-            username: email,
-            password: password,
-            scope: ''
-        }
-    }).then(function (response) {
-        if (response.status == 200) {
-            localStorage.access_token = response.data.access_token;
-            console.log(response.data.access_token);
-            showMessage('<img src="img/emojis/happy.svg"><div class="emoji-text">Login Successful!</div>');
-            toggleModal('.signin.modal');
-            localStorage.signedIn = 'true';
-            getUser();
-            changeSignInStatus();
-            createLocalDbFromRemoteDb();
-        }
-        toggleSpinner();
-    }).catch(function (error) {
-        showMessage('<img src="img/emojis/sad.svg"><div class="emoji-text">Unable to login</div>');
-        toggleSpinner();
-    });
-}
-
-function logoutUser() {
-
-    toggleSpinner();
-    axios({
-        method: 'post',
-        url: pikachu + '/api/logout',
-        headers: {
-            'Accept': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.access_token
-        },
-        data: {
-            client_id: client_id
-        }
-    }).then(function (response) {
-        console.log(response.data);
-        localStorage.signedIn = 'false';
-        localStorage.access_token = ' ';
-        showMessage('Logged Out');
-        changeSignInStatus();
-        updateUserDetailsView();
-
-        db.remoteTasks.remove({}, { multi: true }, function (err, numRemoved) {});
-        db.notebooks.remove({}, { multi: true }, function (err, numRemoved) {
-            displayNotebooks();
-        });
-        db.notes.remove({}, { multi: true }, function (err, numRemoved) {
-            displayQuickNotes();
-        });
-
-        var d = new Date();
-        var date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
-
-        var obj = {
-            title: 'Notebook One',
-            summary: 'This is the default notebook. All the untagged posts are stored here.',
-            cover: 'img/1.jpg',
-            time: date
-        };
-
-        db.notebooks.insert(obj, function (err, newDoc) {
-            doThisLater('CREATE_NOTEBOOK', 'Notebook One', 'This is the default notebook. All the untagged posts are stored here.', 'img/1.jpg', date);
-        });
-        toggleSpinner();
-    });
 }
 
 //GETTING USER INFORMATION
@@ -628,61 +492,6 @@ function updateUserDetailsView() {
 }
 
 initUmbrella();
-
-//COLORS
-var color_palette_1 = ['#EFBC69', '#F1B56C', '#F3A86D', '#F49A6E', '#F58D70', '#F67F71', '#F77272', '#F67F71'];
-var color_palette_2 = ['#58C2E2', '#5CB3E1', '#60A5DF', '#6596DE', '#6988DC', '#6D79DB'];
-var color_palette_3 = ['#171019', '#1E1621', '#251B29', '#2D2031', '#342539', '#3B2B41', '#433049', '#513A59', '#604B68', '#705D77'];
-var color_palette_4 = ['#8C3A42', '#A3434D', '#BA4D58', '#D15663', '#E8606E', '#FF6978'];
-var color_palette_default = ['#FAFAFA', '#ffffff', '#FAFAFA', '#ffffff'];
-
-// let palettes = [color_palette_1, color_palette_2, color_palette_3, color_palette_4]
-var palettes = [color_palette_default];
-
-// function addColors(n){
-//     let y = 0
-//     let z
-//     let color_palette = palettes[getRndInteger(0,palettes.length)]
-//     for(let i=0; i<n; i++){
-//         if(y==0){
-//             z = 1
-//         }
-//         if(y==color_palette.length-1){
-//             z = -1
-//             y = y-2
-//         }
-//         $('.post').eq(i).css("background", color_palette[y])
-//         y = y+z
-//     }
-// }
-
-function addColors(n) {
-    for (var i = 0; i < n; i = i + 2) {
-        $('.post').eq(i).addClass('color');
-    }
-}
-
-function getRndInteger(min, max) {
-    //min included, max excluded
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
-function addColorsToQuicknotes(n) {
-    var y = 0;
-    var z = void 0;
-    var color_palette = color_palette_1;
-    for (var i = 0; i < n; i++) {
-        if (y == 0) {
-            z = 1;
-        }
-        if (y == color_palette.length - 1) {
-            z = -1;
-            y = y - 2;
-        }
-        $('.note').eq(i).css("background", color_palette[y]);
-        y = y + z;
-    }
-}
 
 //REMOTE FUNCTIONS 
 
@@ -811,8 +620,8 @@ async function createLocalDbFromRemoteDb() {
 
     var notes = await getNotesRemote();
 
-    for (var _i2 = 0; _i2 < notes.length; _i2++) {
-        var note = notes[_i2];
+    for (var _i3 = 0; _i3 < notes.length; _i3++) {
+        var note = notes[_i3];
         var obj = {
             _id: note.localdb_id,
             notebook: note.notebook,
@@ -1069,45 +878,4 @@ ipcRenderer.on('message', function (event, text) {
 function update() {
     console.log('going to update now.');
     ipcRenderer.send('update-now');
-}
-
-// FONTS 
-
-function setFont(i) {
-    var x = '<link rel="stylesheet" type="text/css" href="css/' + i + '.css">';
-    $('head').append(x);
-}
-
-function initFonts() {
-    if (localStorage.font == null) {
-        localStorage.font = 'times-new-roman';
-    }
-    setFont(localStorage.font);
-    $('.fonts select').val(localStorage.font);
-}
-
-function changeFont() {
-    var i = $('.fonts select').val();
-    setFont(i);
-    localStorage.font = i;
-}
-
-//THEMES
-function setTheme(i) {
-    var x = '<link rel="stylesheet" type="text/css" href="css/' + i + '.css">';
-    $('head').append(x);
-}
-
-function initThemes() {
-    if (localStorage.theme == null) {
-        localStorage.theme = 'light_theme';
-    }
-    setTheme(localStorage.theme);
-    $('.themes select').val(localStorage.theme);
-}
-
-function changeTheme() {
-    var i = $('.themes select').val();
-    setTheme(i);
-    localStorage.theme = i;
 }

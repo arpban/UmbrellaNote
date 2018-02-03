@@ -112,6 +112,39 @@ html::-webkit-scrollbar {
 html::-webkit-scrollbar-thumb {
   background-color: #ababab; }
 
+#homePage::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: transparent; }
+
+#homePage::-webkit-scrollbar {
+  width: 7px;
+  background-color: transparent; }
+
+#homePage::-webkit-scrollbar-thumb {
+  background-color: #ababab; }
+
+#quicknotesPage::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: transparent; }
+
+#quicknotesPage::-webkit-scrollbar {
+  width: 7px;
+  background-color: transparent; }
+
+#quicknotesPage::-webkit-scrollbar-thumb {
+  background-color: #ababab; }
+
+#settingsPage::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: transparent; }
+
+#settingsPage::-webkit-scrollbar {
+  width: 7px;
+  background-color: transparent; }
+
+#settingsPage::-webkit-scrollbar-thumb {
+  background-color: #ababab; }
+
 #notebookPage::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: transparent; }
@@ -121,6 +154,28 @@ html::-webkit-scrollbar-thumb {
   background-color: transparent; }
 
 #notebookPage::-webkit-scrollbar-thumb {
+  background-color: #ababab; }
+
+#writePage::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: transparent; }
+
+#writePage::-webkit-scrollbar {
+  width: 7px;
+  background-color: transparent; }
+
+#writePage::-webkit-scrollbar-thumb {
+  background-color: #ababab; }
+
+#editPage::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: transparent; }
+
+#editPage::-webkit-scrollbar {
+  width: 7px;
+  background-color: transparent; }
+
+#editPage::-webkit-scrollbar-thumb {
   background-color: #ababab; }
 
 .modal {
@@ -490,6 +545,8 @@ button {
   -webkit-app-region: no-drag;
   padding-top: 30px;
   display: none;
+  height: 100%;
+  overflow-y: scroll;
   overflow-x: hidden; }
   #editPage.open, #writePage.open {
     display: block; }
@@ -549,6 +606,8 @@ button {
   -webkit-app-region: no-drag;
   display: none;
   padding: 10px;
+  overflow-y: scroll;
+  height: 100%;
   overflow-x: hidden;
   padding-bottom: 50px; }
   #homePage.open, #settingsPage.open, #quicknotesPage.open {
@@ -705,6 +764,7 @@ button {
 #notebookPage {
   -webkit-app-region: no-drag;
   display: none;
+  overflow-y: scroll;
   height: 100%;
   overflow-x: hidden; }
   #notebookPage.open {
@@ -887,7 +947,8 @@ button {
     display: block; }
 
 .simply-straight .spinner {
-  position: absolute;
+  position: fixed;
+  z-index: 100;
   width: 100%;
   height: 100%;
   background-color: white;
