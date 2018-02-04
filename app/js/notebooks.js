@@ -2,6 +2,19 @@
 
 //NOTEBOOK FUNCTIONS
 
+function createNotebook(event) {
+    event.preventDefault();
+    var title = $('.create-notebook-modal form input[name=title]').val();
+    console.log(title);
+    // title = addslashes(title)
+    // console.log(title);
+    var summary = $('.create-notebook-modal form textarea').val();
+    var coverImage = $('.cover-checkbox:checked').val();
+    var d = new Date();
+    var date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
+    addNotebook(title, summary, coverImage, date);
+}
+
 function addNotebook(notebookTitle, notebookSummary, coverUrl, createdOn) {
     var obj = {
         title: notebookTitle,
@@ -16,7 +29,8 @@ function addNotebook(notebookTitle, notebookSummary, coverUrl, createdOn) {
         } else {
             // console.log("Insertion in DB successful");
             createNotebookModal();
-            displayNotebooks();
+            // displayNotebooks();
+            openPage(homePage);
             showMessage('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
 
             if (navigator.onLine && localStorage.signedIn == 'true') {

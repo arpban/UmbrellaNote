@@ -30,6 +30,8 @@ let pointer_id_current_note = null //it points to id of the current note that no
 let notebook_pointer = 'Notebook One' //it points to name of currently active notebook
 let page_pointer = homePage //it points to jquery object of current page
 
+let umbrella_editor = null
+
 var Datastore = require('nedb')
 let db = {};
 let data_path = app.getPath("appData")
@@ -39,35 +41,10 @@ db.remoteTasks = new Datastore({ filename: data_path+'/umbrella-note-data/remote
 
 db.notebooks.ensureIndex({ fieldName: 'title', unique: true });
 
-setTimeout(toggleSpinner, 2000)
+setTimeout(toggleSpinner, 1000)
 
 function updateNotebookPointer(s){
     notebook_pointer = s
-}
-
-function newNote(event) {
-    event.preventDefault();
-    var d = new Date();
-    let notebook = $('#writePage form input.notebookTitle').val();
-    let date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
-    let time = d.toLocaleTimeString();
-    let note = tinymce.activeEditor.getContent();
-    // console.log(note);
-    addNote(notebook, date, time, note);
-    displayNotes();
-}
-
-function createNotebook(event){
-    event.preventDefault();
-    let title = $('.create-notebook-modal form input[name=title]').val();
-    console.log(title);
-    // title = addslashes(title)
-    // console.log(title);
-    let summary = $('.create-notebook-modal form textarea').val();
-    let coverImage = $('.cover-checkbox:checked').val();
-    var d = new Date();
-    let date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
-    addNotebook(title, summary, coverImage, date);
 }
 
 function addslashes(string) {
@@ -85,35 +62,6 @@ function getTimestamp(){
     let t = new Date()
     return t.getTime()
 }
-
-async function addNote(notebookTitle, noteDate, noteTime, noteBody) {
-    
-    let timestamp = getTimestamp()
-
-    var obj = {
-        notebook: notebookTitle,
-        date: noteDate,
-        time: noteTime,
-        note: noteBody,
-        timestamp: timestamp //this is the position of the note for the purpose of sorting
-    };
-
-    db.notes.insert(obj, function(err,newDoc){
-        if(err){
-            showMessage('<img src="img/emojis/sad.svg"><div class="emoji-text">Error</div>');
-        }
-        else{
-            showMessage('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
-            openPage(homePage);
-            if(navigator.onLine && (localStorage.signedIn=='true')){
-                createNoteRemote(notebookTitle, noteDate, noteTime, noteBody, newDoc._id, timestamp)
-            }else{
-                doThisLater('CREATE_NOTE', notebookTitle, noteDate, noteTime, noteBody, newDoc._id, timestamp)
-            }
-        }
-    });
-}
-
 
 function quicknotesInit(){
     db.notebooks.find({ title: 'Notebook One' }, function(err,docs){
@@ -185,12 +133,15 @@ function openPage(page){ //page is a jquery object
         case editorPage: 
             setUpKeyboardShortcuts('editorPage')
             $('header .name').removeClass('athome')
+            tinyMCE.activeEditor.focus()
             break
         case homePage: 
             $('header .name').addClass('athome')
             $('header .name').html('Umbrella Note')
+            displayNotebooks()
             closeNotebook()
-            setUpKeyboardShortcuts('homePage') 
+            setUpKeyboardShortcuts('homePage')
+            console.log('opened home page')
             break
         case notebookPage:
             $('header .name').html(notebook_pointer)
@@ -241,8 +192,9 @@ function editNotebookModal(title){
 }
 
 function openEditorPage(id){
-    $('#notebookPage').removeClass('open')
-    editorPage.addClass('open')
+    // $('#notebookPage').removeClass('open')
+    // editorPage.addClass('open')
+    openPage(editorPage)
     $('#editPage input.noteId').val(id)
     db.notes.findOne({_id: id}, function(err,doc){
         if(err){
@@ -255,28 +207,6 @@ function openEditorPage(id){
     })
 }
 
-function editNote(event){
-    event.preventDefault()
-    let id = $('#editPage input.noteId').val()
-    let note = tinymce.activeEditor.getContent()
-    let notebook = $('#editPage input.notebookTitle').val()
-    db.notes.update({ _id: id }, { $set: {note: note} }, function(err, numReplaced){
-        if(err){
-            console.log(err)
-        }else{
-            showMessage('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
-            if(navigator.onLine && (localStorage.signedIn=='true')){
-                editNoteRemote(id, note)
-            }else{
-                doThisLater('EDIT_NOTE', id, note)
-            }
-        }
-    })
-    openPage(notebookPage);
-    displayNotes();
-        
-    $('#sidebar .icon').css('color','#FAFAFA')
-}
 
 function createNotebookModal() {
     if (!isModalUsedBefore) {
@@ -291,82 +221,6 @@ function createNotebookModal() {
 
 
 
-function displayNotes() {
-    
-    $('#notebookPage .posts').html('');
-    db.notes.find({ notebook : notebook_pointer }).sort({timestamp: 1}).exec((err,docs)=>{
-        if(err){
-            console.log(err);
-        }
-        else{
-            for(let i=docs.length-1; i>=0; i--){
-                // console.log(docs[i]);
-                let y = docs[i];
-                let x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div></a>';                
-                $('#notebookPage .posts').append(x);
-                
-            }
-            addColors(docs.length)
-            callAfterDisplayNotes()
-        }
-    });
-}
-
-function openNote(id){ //this function displays the note in the column2 of the notebookPage
-    
-    db.notes.findOne({_id: id}, function(err,doc){
-        $('#notebookPage .column-2').html(doc.note)
-    })
-    pointer_id_current_note = id
-
-}
-
-
-
-function deleteNote(id){
-    db.notes.remove({ _id: id }, {}, function(err,numRemoved){
-        if(err){
-            console.log(err)
-        }else{
-            // console.log(numRemoved)
-            if(navigator.onLine && (localStorage.signedIn=='true')){
-                deleteNoteRemote(id)
-            }else{
-                doThisLater('DELETE_NOTE', id)
-            }
-        }
-    })
-    
-    displayNotes()
-
-}
-
-function callAfterDisplayNotes(){
-    feather.replace()
-    $('#notebookPage .post').click(function(){
-        $('#notebookPage .post').css("border-color", "#efefef")
-        $(this).css("border-color", "#338fff")
-    })
-    notePointer = $('.post').first()
-    notePointer.click()
-    // whenever user opens a notebook, keyboard keys up and down are binded with a function to change notes.
-    Mousetrap.bind('down', ()=>{
-        console.log('down is pressed')
-        if(notePointer.next()[0] == null){
-            return 
-        }
-        notePointer = notePointer.next()
-        notePointer.click()
-    })
-    Mousetrap.bind('up', ()=>{
-        console.log('up is pressed')
-        if(notePointer.prev()[0] == null){
-            return 
-        }
-        notePointer = notePointer.prev()
-        notePointer.click()
-    })
-}
 
 function toggleModal(x) {
     $(x).toggleClass('open');
@@ -379,8 +233,6 @@ function toggleSpinner(){
 function showSignup(){
     ipcRenderer.send('show-signup-in-browser');
 }
-
-let save_button = $('#writePage .save')
 
 function setUpKeyboardShortcuts(page){
 
@@ -402,10 +254,11 @@ function setUpKeyboardShortcuts(page){
                 openPage(notebookPage)
                 console.log('esc is pressed at writePage')
             })
-            let umbrella_editor = document.getElementsByClassName('main-editor')
+            umbrella_editor = document.getElementsByClassName('main-editor')
             var writer_mousetrap = new Mousetrap(umbrella_editor[0]);
             writer_mousetrap.bind(['ctrl+s', 'command+s'], ()=>{
                 $('#writePage form').submit()
+                writer_mousetrap.unbind(['ctrl+s','command+s'])
             });
             writer_mousetrap.bind('esc', ()=>{
                 openPage(notebookPage)
@@ -417,6 +270,16 @@ function setUpKeyboardShortcuts(page){
                 openPage(notebookPage)
                 console.log('esc is pressed at editorpage')
             })
+            umbrella_editor = document.getElementsByClassName('main-editor')
+            var editor_mousetrap = new Mousetrap(umbrella_editor[1]);
+            editor_mousetrap.bind(['ctrl+s', 'command+s'], ()=>{
+                $('#editPage form').submit()
+                editor_mousetrap.unbind(['ctrl+s','command+s'])
+            });
+            editor_mousetrap.bind('esc', ()=>{
+                openPage(notebookPage)
+            });
+            console.log('editor page is opened')
             break
         case 'notebookPage': 
             // Mousetrap.reset()
@@ -439,6 +302,7 @@ function setUpKeyboardShortcuts(page){
                 console.log('delete')
                 deleteNote(pointer_id_current_note)                
             })
+            break
     }
 
 }

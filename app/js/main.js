@@ -28,6 +28,8 @@ var pointer_id_current_note = null; //it points to id of the current note that n
 var notebook_pointer = 'Notebook One'; //it points to name of currently active notebook
 var page_pointer = homePage; //it points to jquery object of current page
 
+var umbrella_editor = null;
+
 var Datastore = require('nedb');
 var db = {};
 var data_path = app.getPath("appData");
@@ -37,35 +39,10 @@ db.remoteTasks = new Datastore({ filename: data_path + '/umbrella-note-data/remo
 
 db.notebooks.ensureIndex({ fieldName: 'title', unique: true });
 
-setTimeout(toggleSpinner, 2000);
+setTimeout(toggleSpinner, 1000);
 
 function updateNotebookPointer(s) {
     notebook_pointer = s;
-}
-
-function newNote(event) {
-    event.preventDefault();
-    var d = new Date();
-    var notebook = $('#writePage form input.notebookTitle').val();
-    var date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
-    var time = d.toLocaleTimeString();
-    var note = tinymce.activeEditor.getContent();
-    // console.log(note);
-    addNote(notebook, date, time, note);
-    displayNotes();
-}
-
-function createNotebook(event) {
-    event.preventDefault();
-    var title = $('.create-notebook-modal form input[name=title]').val();
-    console.log(title);
-    // title = addslashes(title)
-    // console.log(title);
-    var summary = $('.create-notebook-modal form textarea').val();
-    var coverImage = $('.cover-checkbox:checked').val();
-    var d = new Date();
-    var date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
-    addNotebook(title, summary, coverImage, date);
 }
 
 function addslashes(string) {
@@ -75,33 +52,6 @@ function addslashes(string) {
 function getTimestamp() {
     var t = new Date();
     return t.getTime();
-}
-
-async function addNote(notebookTitle, noteDate, noteTime, noteBody) {
-
-    var timestamp = getTimestamp();
-
-    var obj = {
-        notebook: notebookTitle,
-        date: noteDate,
-        time: noteTime,
-        note: noteBody,
-        timestamp: timestamp //this is the position of the note for the purpose of sorting
-    };
-
-    db.notes.insert(obj, function (err, newDoc) {
-        if (err) {
-            showMessage('<img src="img/emojis/sad.svg"><div class="emoji-text">Error</div>');
-        } else {
-            showMessage('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
-            openPage(homePage);
-            if (navigator.onLine && localStorage.signedIn == 'true') {
-                createNoteRemote(notebookTitle, noteDate, noteTime, noteBody, newDoc._id, timestamp);
-            } else {
-                doThisLater('CREATE_NOTE', notebookTitle, noteDate, noteTime, noteBody, newDoc._id, timestamp);
-            }
-        }
-    });
 }
 
 function quicknotesInit() {
@@ -175,12 +125,15 @@ function openPage(page) {
         case editorPage:
             setUpKeyboardShortcuts('editorPage');
             $('header .name').removeClass('athome');
+            tinyMCE.activeEditor.focus();
             break;
         case homePage:
             $('header .name').addClass('athome');
             $('header .name').html('Umbrella Note');
+            displayNotebooks();
             closeNotebook();
             setUpKeyboardShortcuts('homePage');
+            console.log('opened home page');
             break;
         case notebookPage:
             $('header .name').html(notebook_pointer);
@@ -230,8 +183,9 @@ function editNotebookModal(title) {
 }
 
 function openEditorPage(id) {
-    $('#notebookPage').removeClass('open');
-    editorPage.addClass('open');
+    // $('#notebookPage').removeClass('open')
+    // editorPage.addClass('open')
+    openPage(editorPage);
     $('#editPage input.noteId').val(id);
     db.notes.findOne({ _id: id }, function (err, doc) {
         if (err) {
@@ -242,29 +196,6 @@ function openEditorPage(id) {
             $('#editPage .header').html(doc.notebook);
         }
     });
-}
-
-function editNote(event) {
-    event.preventDefault();
-    var id = $('#editPage input.noteId').val();
-    var note = tinymce.activeEditor.getContent();
-    var notebook = $('#editPage input.notebookTitle').val();
-    db.notes.update({ _id: id }, { $set: { note: note } }, function (err, numReplaced) {
-        if (err) {
-            console.log(err);
-        } else {
-            showMessage('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
-            if (navigator.onLine && localStorage.signedIn == 'true') {
-                editNoteRemote(id, note);
-            } else {
-                doThisLater('EDIT_NOTE', id, note);
-            }
-        }
-    });
-    openPage(notebookPage);
-    displayNotes();
-
-    $('#sidebar .icon').css('color', '#FAFAFA');
 }
 
 function createNotebookModal() {
@@ -278,78 +209,6 @@ function createNotebookModal() {
     $('.create-notebook-modal').toggleClass('open');
 }
 
-function displayNotes() {
-
-    $('#notebookPage .posts').html('');
-    db.notes.find({ notebook: notebook_pointer }).sort({ timestamp: 1 }).exec(function (err, docs) {
-        if (err) {
-            console.log(err);
-        } else {
-            for (var i = docs.length - 1; i >= 0; i--) {
-                // console.log(docs[i]);
-                var y = docs[i];
-                var x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div></a>';
-                $('#notebookPage .posts').append(x);
-            }
-            addColors(docs.length);
-            callAfterDisplayNotes();
-        }
-    });
-}
-
-function openNote(id) {
-    //this function displays the note in the column2 of the notebookPage
-
-    db.notes.findOne({ _id: id }, function (err, doc) {
-        $('#notebookPage .column-2').html(doc.note);
-    });
-    pointer_id_current_note = id;
-}
-
-function deleteNote(id) {
-    db.notes.remove({ _id: id }, {}, function (err, numRemoved) {
-        if (err) {
-            console.log(err);
-        } else {
-            // console.log(numRemoved)
-            if (navigator.onLine && localStorage.signedIn == 'true') {
-                deleteNoteRemote(id);
-            } else {
-                doThisLater('DELETE_NOTE', id);
-            }
-        }
-    });
-
-    displayNotes();
-}
-
-function callAfterDisplayNotes() {
-    feather.replace();
-    $('#notebookPage .post').click(function () {
-        $('#notebookPage .post').css("border-color", "#efefef");
-        $(this).css("border-color", "#338fff");
-    });
-    notePointer = $('.post').first();
-    notePointer.click();
-    // whenever user opens a notebook, keyboard keys up and down are binded with a function to change notes.
-    Mousetrap.bind('down', function () {
-        console.log('down is pressed');
-        if (notePointer.next()[0] == null) {
-            return;
-        }
-        notePointer = notePointer.next();
-        notePointer.click();
-    });
-    Mousetrap.bind('up', function () {
-        console.log('up is pressed');
-        if (notePointer.prev()[0] == null) {
-            return;
-        }
-        notePointer = notePointer.prev();
-        notePointer.click();
-    });
-}
-
 function toggleModal(x) {
     $(x).toggleClass('open');
 }
@@ -361,8 +220,6 @@ function toggleSpinner() {
 function showSignup() {
     ipcRenderer.send('show-signup-in-browser');
 }
-
-var save_button = $('#writePage .save');
 
 function setUpKeyboardShortcuts(page) {
 
@@ -384,10 +241,11 @@ function setUpKeyboardShortcuts(page) {
                 openPage(notebookPage);
                 console.log('esc is pressed at writePage');
             });
-            var umbrella_editor = document.getElementsByClassName('main-editor');
+            umbrella_editor = document.getElementsByClassName('main-editor');
             var writer_mousetrap = new Mousetrap(umbrella_editor[0]);
             writer_mousetrap.bind(['ctrl+s', 'command+s'], function () {
                 $('#writePage form').submit();
+                writer_mousetrap.unbind(['ctrl+s', 'command+s']);
             });
             writer_mousetrap.bind('esc', function () {
                 openPage(notebookPage);
@@ -399,6 +257,16 @@ function setUpKeyboardShortcuts(page) {
                 openPage(notebookPage);
                 console.log('esc is pressed at editorpage');
             });
+            umbrella_editor = document.getElementsByClassName('main-editor');
+            var editor_mousetrap = new Mousetrap(umbrella_editor[1]);
+            editor_mousetrap.bind(['ctrl+s', 'command+s'], function () {
+                $('#editPage form').submit();
+                editor_mousetrap.unbind(['ctrl+s', 'command+s']);
+            });
+            editor_mousetrap.bind('esc', function () {
+                openPage(notebookPage);
+            });
+            console.log('editor page is opened');
             break;
         case 'notebookPage':
             // Mousetrap.reset()
@@ -421,6 +289,7 @@ function setUpKeyboardShortcuts(page) {
                 console.log('delete');
                 deleteNote(pointer_id_current_note);
             });
+            break;
     }
 }
 
