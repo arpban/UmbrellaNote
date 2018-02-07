@@ -7,7 +7,7 @@ function setFont(i){
 
 function initFonts(){
     if(localStorage.font == null){
-        localStorage.font = 'times-new-roman'
+        localStorage.font = 'default-font'
     }
     setFont(localStorage.font)
     $('.fonts select').val(localStorage.font)

@@ -156,14 +156,16 @@ function openPage(page){ //page is a jquery object
                         // console.log(docs[i]);
                         let y = docs[i];
                         // let x = '<div class="post"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="body">' + y.note + '</div><div class="expandButton" onclick="$(this).siblings().toggleClass(\'visible\');"><i data-feather="menu"></i></div><div class="box"><button onclick="openEditorPage(\'' + y._id + '\')" >Edit</button><button onclick="deleteNote(\'' + y._id + '\')">Delete</button></div></div>';
-                        let x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div></a>';                
+                        // let x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div></a>';
+                        let excerpt = html2text(y.note).slice(0,100)
+                        let x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="excerpt">'+excerpt+'</div></a>';                
                         $('#notebookPage .posts').append(x);
                     }
                     addColors(docs.length)
                     callAfterDisplayNotes()        
                 }
             });
-            $('#sidebar .icon').css("color","#FAFAFA") 
+            // $('#sidebar .icon').css("color","#FAFAFA") 
             setUpKeyboardShortcuts('notebookPage')
             $('header .name').removeClass('athome')
             break
@@ -240,35 +242,41 @@ function setUpKeyboardShortcuts(page){
         case 'homePage':
             Mousetrap.reset()
             Mousetrap.bind('f', ()=>{
-                console.log('f is pressed at homePage')
+                // console.log('f is pressed at homePage')
                 openPage(writePage)
             })
             Mousetrap.bind('j', ()=>{
-                console.log('j is pressed at homePage')
+                // console.log('j is pressed at homePage')
                 openPage(writePage)
             })
             break
         case 'writePage': 
             Mousetrap.reset()
             Mousetrap.bind('esc', ()=>{
+                // console.log('esc is pressed at writePage')
+                $('#notebookPage .posts').html('');
                 openPage(notebookPage)
-                console.log('esc is pressed at writePage')
             })
             umbrella_editor = document.getElementsByClassName('main-editor')
             var writer_mousetrap = new Mousetrap(umbrella_editor[0]);
             writer_mousetrap.bind(['ctrl+s', 'command+s'], ()=>{
+                // console.log('inside writepage section of setUpKeyboardShortcuts')
                 $('#writePage form').submit()
                 writer_mousetrap.unbind(['ctrl+s','command+s'])
             });
             writer_mousetrap.bind('esc', ()=>{
+                // console.log('esc is pressed at writePage inside tinymce')
+                $('#notebookPage .posts').html('');
                 openPage(notebookPage)
+                writer_mousetrap.unbind('esc')
             });
             break
         case 'editorPage':
             Mousetrap.reset()
             Mousetrap.bind('esc', ()=>{
+                // console.log('esc is pressed at editorpage')
+                $('#notebookPage .posts').html('');
                 openPage(notebookPage)
-                console.log('esc is pressed at editorpage')
             })
             umbrella_editor = document.getElementsByClassName('main-editor')
             var editor_mousetrap = new Mousetrap(umbrella_editor[1]);
@@ -277,18 +285,21 @@ function setUpKeyboardShortcuts(page){
                 editor_mousetrap.unbind(['ctrl+s','command+s'])
             });
             editor_mousetrap.bind('esc', ()=>{
+                // console.log('esc pressed at editorpage in tinymce')
+                $('#notebookPage .posts').html('');
                 openPage(notebookPage)
+                editor_mousetrap.unbind('esc')
             });
-            console.log('editor page is opened')
+            // console.log('editor page is opened')
             break
         case 'notebookPage': 
             // Mousetrap.reset()
             Mousetrap.bind('f', ()=>{
-                console.log('f is pressed at homePage')
+                // console.log('f is pressed at homePage')
                 openPage(writePage)
             })
             Mousetrap.bind('j', ()=>{
-                console.log('j is pressed at homePage')
+                // console.log('j is pressed at homePage')
                 openPage(writePage)
             })
             Mousetrap.bind('e', ()=>{
@@ -296,7 +307,7 @@ function setUpKeyboardShortcuts(page){
             })
             Mousetrap.bind('esc', ()=>{
                 openPage(homePage)
-                console.log('esc is pressed at notebookPage')
+                // console.log('esc is pressed at notebookPage')
             })
             Mousetrap.bind(['ctrl+del', 'command+del'], ()=>{
                 console.log('delete')
@@ -338,12 +349,12 @@ function initUmbrella(){
         setTimeout(syncDatabaseUp,5000)
     }
 
-    $('#sidebar .home').css("color", "#338fff")
+    // $('#sidebar .home').css("color", "#338fff")
 
-    $('#sidebar .icon').click(function(){
-        $('#sidebar .icon').css("color", "#FAFAFA");
-        $(this).css("color", "#338fff")
-    })
+    // $('#sidebar .icon').click(function(){
+    //     $('#sidebar .icon').css("color", "#FAFAFA");
+    //     $(this).css("color", "#338fff")
+    // })
     // $('#sidebar .icon').click(function(){ $('#sidebar .icon').css("color", "white"); $(this).css("color", "#338fff")})
     initFonts()
     initThemes()

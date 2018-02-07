@@ -332,7 +332,6 @@ html::-webkit-scrollbar-thumb {
   top: 0px;
   height: 100%;
   z-index: 200;
-  background: #1c1925;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -341,10 +340,7 @@ html::-webkit-scrollbar-thumb {
     display: none;
     margin-top: 13px;
     background: none;
-    border: none;
-    color: #FAFAFA; }
-    #sidebar button:hover {
-      color: #338fff; }
+    border: none; }
   #sidebar .visible {
     display: block; }
   #sidebar .bottom {
@@ -359,11 +355,92 @@ html::-webkit-scrollbar-thumb {
       height: 10%;
       display: block; }
 
+html, body {
+  background-color: #ffffff; }
+
+header {
+  background: #ffffff; }
+  header .name {
+    background: #777777;
+    color: #fafafa; }
+    header .name.athome {
+      background: #ffffff;
+      color: #2b2b2b; }
+
+#main-icons .icon {
+  background: #338fff;
+  color: #ffffff; }
+  #main-icons .icon:hover {
+    background: #aca9a3; }
+
+#sidebar {
+  background: #aca9a3; }
+  #sidebar button {
+    color: #ffffff; }
+    #sidebar button:hover {
+      color: #777777; }
+
+#notebookPage .column-1 {
+  background: #dadada; }
+
+#notebookPage .column-1::-webkit-scrollbar {
+  background-color: #ffffff; }
+
+#notebookPage .column-1::-webkit-scrollbar-thumb {
+  background-color: #f5f5f5; }
+
+#notebookPage .posts .post {
+  color: #4a4a4a;
+  background-color: inherit;
+  cursor: pointer; }
+  #notebookPage .posts .post.color {
+    background-color: #e8e8e8; }
+  #notebookPage .posts .post.active {
+    background-color: #bfbfbf !important; }
+  #notebookPage .posts .post:hover {
+    background-color: #f1f0f0 !important; }
+  #notebookPage .posts .post .excerpt {
+    color: #2b2b2b; }
+
+#notebookPage .column-2 {
+  background: #ffffff; }
+
+#editPage form .main-editor, #writePage form .main-editor {
+  color: #2b2b2b; }
+
+#editPage .save.icon, #writePage .save.icon {
+  background: #338fff;
+  color: #ffffff; }
+  #editPage .save.icon:hover, #writePage .save.icon:hover {
+    background: #aca9a3; }
+
+#homePage .header, #settingsPage .header {
+  color: #2b2b2b; }
+
+#homePage .notebooks .notebook a .cover {
+  background-color: #959597; }
+
+#homePage .notebooks .notebook a .description {
+  color: #2b2b2b;
+  background-color: #fafafa; }
+  #homePage .notebooks .notebook a .description .created {
+    color: dimgrey; }
+  #homePage .notebooks .notebook a .description button {
+    color: #338fff; }
+
+#settingsPage .fonts select, #settingsPage .themes select {
+  border-bottom: 2px solid #338fff; }
+
+.simply-straight .spinner {
+  background-color: #ffffff; }
+
+.simply-straight .spinner .points {
+  color: #338fff; }
+
 html,
 body {
   height: 100%;
   width: 100%;
-  background-color: white;
   margin: 0;
   padding: 0;
   font-family: "SourceSansPro-Regular", sans-serif;
@@ -528,8 +605,6 @@ button {
     padding: 12px 13px;
     margin-left: 15px;
     border-radius: 50%;
-    background: #1c1925;
-    color: #FAFAFA;
     cursor: pointer;
     outline: none; }
     #main-icons .icon:hover {
@@ -543,7 +618,6 @@ button {
 
 #editPage, #writePage {
   -webkit-app-region: no-drag;
-  padding-top: 30px;
   display: none;
   height: 100%;
   overflow-y: scroll;
@@ -552,10 +626,9 @@ button {
     display: block; }
   #editPage .header, #writePage .header {
     font-size: 14px;
-    font-family: consolas, "SourceSansPro-Regular", sans-serif;
+    font-family: "SourceSansPro-Regular", sans-serif;
     background: #338fff;
     color: white;
-    font-style: italic;
     position: absolute;
     z-index: 10;
     padding: 5px 15px;
@@ -567,20 +640,15 @@ button {
     -webkit-app-region: no-drag; }
     #editPage form .main-editor, #writePage form .main-editor {
       -webkit-app-region: no-drag;
-      font-family: consolas, "SourceSansPro-Regular", sans-serif;
-      font-style: italic;
+      font-family: "SourceSansPro-Regular", sans-serif;
       border: none;
       outline: none;
       background: inherit;
       min-width: 100%;
       max-width: 100%;
       font-size: 18px;
-      font-weight: lighter;
       line-height: 1.3em;
-      color: #2b2b2b;
       padding-right: 20%; }
-      #editPage form .main-editor h1, #editPage form .main-editor h2, #editPage form .main-editor h3, #editPage form .main-editor h4, #writePage form .main-editor h1, #writePage form .main-editor h2, #writePage form .main-editor h3, #writePage form .main-editor h4 {
-        font-family: "OpenSans-LightItalic", sans-serif; }
   #editPage .save.icon, #writePage .save.icon {
     -webkit-app-region: no-drag;
     position: fixed;
@@ -590,19 +658,15 @@ button {
     border: none;
     padding: 13px 14px;
     border-radius: 50%;
-    background: #338fff;
-    color: #FAFAFA;
     cursor: pointer;
     outline: none;
     z-index: 50; }
-    #editPage .save.icon:hover, #writePage .save.icon:hover {
-      background-color: #1c1925; }
     #editPage .save.icon svg, #writePage .save.icon svg {
       position: relative;
       top: 1px;
       left: 1px; }
 
-#homePage, #settingsPage, #quicknotesPage {
+#homePage, #settingsPage {
   -webkit-app-region: no-drag;
   display: none;
   padding: 10px;
@@ -610,70 +674,19 @@ button {
   height: 100%;
   overflow-x: hidden;
   padding-bottom: 50px; }
-  #homePage.open, #settingsPage.open, #quicknotesPage.open {
+  #homePage.open, #settingsPage.open {
     display: block; }
-  #homePage .header, #settingsPage .header, #quicknotesPage .header {
-    color: #2b2b2b;
+  #homePage .header, #settingsPage .header {
     font-size: 30px;
     padding: 5px 10px;
     font-family: "SourceSansPro-Light", sans-serif; }
 
-#homePage, #quicknotesPage {
+#homePage {
   padding: 0px;
   padding-bottom: 30px; }
-  #homePage .header, #quicknotesPage .header {
+  #homePage .header {
     padding: 5px 20px; }
-  #homePage .quicknotes, #quicknotesPage .quicknotes {
-    margin-top: 15px;
-    display: flex;
-    flex-wrap: wrap; }
-    #homePage .quicknotes .note, #quicknotesPage .quicknotes .note {
-      padding: 20px;
-      font-family: consolas;
-      font-size: 16px;
-      font-style: italic;
-      position: relative;
-      color: #FAFAFA;
-      width: 25%; }
-      #homePage .quicknotes .note .expandButton, #quicknotesPage .quicknotes .note .expandButton {
-        position: absolute;
-        top: 5px;
-        right: 7px;
-        cursor: pointer;
-        color: #FAFAFA; }
-        #homePage .quicknotes .note .expandButton svg, #quicknotesPage .quicknotes .note .expandButton svg {
-          stroke-width: 1;
-          width: 20px;
-          height: 20px; }
-      #homePage .quicknotes .note h1, #homePage .quicknotes .note h2, #homePage .quicknotes .note h3, #homePage .quicknotes .note h4, #quicknotesPage .quicknotes .note h1, #quicknotesPage .quicknotes .note h2, #quicknotesPage .quicknotes .note h3, #quicknotesPage .quicknotes .note h4 {
-        font-family: "OpenSans-LightItalic", sans-serif;
-        font-style: normal; }
-      #homePage .quicknotes .note p, #quicknotesPage .quicknotes .note p {
-        margin: 0; }
-      #homePage .quicknotes .note .box, #quicknotesPage .quicknotes .note .box {
-        position: absolute;
-        display: none;
-        background-color: #2b2b2b;
-        padding: 5px 0px;
-        border-radius: 4px;
-        top: 8px;
-        right: 31px;
-        min-width: 100px;
-        min-height: 70px;
-        flex-direction: column;
-        justify-content: center; }
-        #homePage .quicknotes .note .box button, #quicknotesPage .quicknotes .note .box button {
-          background: none;
-          border: none;
-          display: block;
-          color: #FAFAFA;
-          margin-top: 3px;
-          padding: 2px 0px; }
-          #homePage .quicknotes .note .box button:hover, #quicknotesPage .quicknotes .note .box button:hover {
-            background-color: #1f1f1f; }
-        #homePage .quicknotes .note .box.visible, #quicknotesPage .quicknotes .note .box.visible {
-          display: flex; }
-  #homePage .notebooks, #quicknotesPage .notebooks {
+  #homePage .notebooks {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -681,12 +694,12 @@ button {
     align-items: flex-start;
     margin-bottom: 15px;
     padding: 10px; }
-    #homePage .notebooks .notebook, #quicknotesPage .notebooks .notebook {
+    #homePage .notebooks .notebook {
       max-width: 310px;
       min-width: 200px;
       width: 23.4042553%;
       margin: 10px 2px 10px 10px; }
-      #homePage .notebooks .notebook a, #quicknotesPage .notebooks .notebook a {
+      #homePage .notebooks .notebook a {
         box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
         position: relative;
         display: block;
@@ -694,37 +707,37 @@ button {
         transition: 0.18s;
         border-radius: 6px;
         cursor: pointer; }
-        #homePage .notebooks .notebook a:hover, #quicknotesPage .notebooks .notebook a:hover {
+        #homePage .notebooks .notebook a:hover {
           transform: translateY(-2px);
           box-shadow: 0 1px 50px rgba(0, 0, 0, 0.2); }
-        #homePage .notebooks .notebook a .cover, #quicknotesPage .notebooks .notebook a .cover {
+        #homePage .notebooks .notebook a .cover {
           position: relative;
           background-color: #959597;
           overflow: hidden;
           height: 195px;
           width: 100%; }
-          #homePage .notebooks .notebook a .cover img, #quicknotesPage .notebooks .notebook a .cover img {
+          #homePage .notebooks .notebook a .cover img {
             object-fit: cover;
             width: 100%;
             height: 100%;
             border-style: none; }
-        #homePage .notebooks .notebook a .description, #quicknotesPage .notebooks .notebook a .description {
+        #homePage .notebooks .notebook a .description {
           padding: 10px 12px;
           color: #2b2b2b;
           background-color: #FAFAFA; }
-          #homePage .notebooks .notebook a .description .title, #quicknotesPage .notebooks .notebook a .description .title {
+          #homePage .notebooks .notebook a .description .title {
             font-size: 16px; }
-          #homePage .notebooks .notebook a .description .created, #quicknotesPage .notebooks .notebook a .description .created {
+          #homePage .notebooks .notebook a .description .created {
             font-size: 14px;
             font-family: "SourceSansPro-Italic", sans-serif;
             color: dimgrey;
             margin-top: 1px; }
-          #homePage .notebooks .notebook a .description .summary, #quicknotesPage .notebooks .notebook a .description .summary {
+          #homePage .notebooks .notebook a .description .summary {
             height: 50px;
             font-size: 15px;
             overflow: hidden;
             margin-top: 1px; }
-          #homePage .notebooks .notebook a .description button, #quicknotesPage .notebooks .notebook a .description button {
+          #homePage .notebooks .notebook a .description button {
             border: none;
             margin-top: 10px;
             text-transform: uppercase;
@@ -775,12 +788,9 @@ button {
     position: fixed;
     height: 100%;
     overflow-y: scroll;
-    background: #fbfbfb; }
+    padding-bottom: 50px; }
   #notebookPage .column-1::-webkit-scrollbar {
-    width: 7px;
-    background-color: white; }
-  #notebookPage .column-1::-webkit-scrollbar-thumb {
-    background-color: #e8e8e8; }
+    width: 7px; }
   #notebookPage .column-2 {
     position: relative;
     margin-left: 300px;
@@ -789,10 +799,9 @@ button {
     cursor: text; }
   #notebookPage .header {
     font-size: 14px;
-    font-family: consolas, "SourceSansPro-Regular", sans-serif;
+    font-family: "SourceSansPro-Regular", sans-serif;
     background: #338fff;
     color: white;
-    font-style: italic;
     z-index: 10;
     padding: 5px 15px;
     width: 100%; }
@@ -801,25 +810,15 @@ button {
     padding: 15px;
     font-size: 14px;
     position: relative;
-    color: #2b2b2b;
-    background-color: inherit;
-    border-bottom: 1px solid #efefef;
     cursor: pointer; }
-    #notebookPage .posts .post:hover {
-      border-color: #338fff !important; }
-    #notebookPage .posts .post.color {
-      background-color: #FAFAFA; }
     #notebookPage .posts .post .date {
-      font-size: 12px; }
+      font-size: 13px; }
     #notebookPage .posts .post .time {
-      font-size: 12px; }
-    #notebookPage .posts .post .title {
-      font-size: 13px;
-      padding: 5px 0px 0px;
-      font-style: italic; }
-    #notebookPage .posts .post h1, #notebookPage .posts .post h2, #notebookPage .posts .post h3, #notebookPage .posts .post h4 {
-      font-family: "OpenSans-LightItalic", sans-serif;
-      font-style: normal; }
+      font-size: 13px; }
+    #notebookPage .posts .post .excerpt {
+      font-size: 14.5px;
+      margin-top: 5px;
+      font-family: "SourceSansPro-Italic", sans-serif; }
     #notebookPage .posts .post .expandButton {
       position: absolute;
       top: 5px;

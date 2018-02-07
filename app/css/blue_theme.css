@@ -1,0 +1,82 @@
+html, body {
+  background-color: #ffffff;
+  color: #2b2b2b; }
+
+header {
+  background: #ffffff; }
+  header .name {
+    background: #338fff;
+    color: #fafafa; }
+    header .name.athome {
+      background: #ffffff;
+      color: #2b2b2b; }
+
+#main-icons .icon {
+  background: #338fff;
+  color: #ffffff; }
+  #main-icons .icon:hover {
+    background: #1c1925; }
+
+#sidebar {
+  background: #1c1925; }
+  #sidebar button {
+    color: #ffffff; }
+    #sidebar button:hover {
+      color: #338fff; }
+
+#notebookPage .column-1 {
+  background: #2193dc; }
+
+#notebookPage .column-1::-webkit-scrollbar {
+  background-color: #ffffff; }
+
+#notebookPage .column-1::-webkit-scrollbar-thumb {
+  background-color: #f5f5f5; }
+
+#notebookPage .posts .post {
+  color: #ffffff;
+  background-color: inherit;
+  cursor: pointer; }
+  #notebookPage .posts .post.color {
+    background-color: #2193dc; }
+  #notebookPage .posts .post.active {
+    background-color: #4ab7fd !important; }
+  #notebookPage .posts .post:hover {
+    background-color: #4ab7fd !important; }
+  #notebookPage .posts .post .excerpt {
+    color: #ffffff; }
+
+#notebookPage .column-2 {
+  background: #ffffff; }
+
+#editPage form .main-editor, #writePage form .main-editor {
+  color: #2b2b2b; }
+
+#editPage .save.icon, #writePage .save.icon {
+  background: #338fff;
+  color: #ffffff; }
+  #editPage .save.icon:hover, #writePage .save.icon:hover {
+    background: #1c1925; }
+
+#homePage .header, #settingsPage .header {
+  color: #2b2b2b; }
+
+#homePage .notebooks .notebook a .cover {
+  background-color: #959597; }
+
+#homePage .notebooks .notebook a .description {
+  color: #2b2b2b;
+  background-color: #fafafa; }
+  #homePage .notebooks .notebook a .description .created {
+    color: dimgrey; }
+  #homePage .notebooks .notebook a .description button {
+    color: #338fff; }
+
+#settingsPage .fonts select, #settingsPage .themes select {
+  border-bottom: 2px solid #338fff; }
+
+.simply-straight .spinner {
+  background-color: #ffffff; }
+
+.simply-straight .spinner .points {
+  color: #338fff; }

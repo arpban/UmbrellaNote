@@ -3,12 +3,13 @@
 @import "partials/scrollbar";
 @import "partials/modals";
 @import "partials/sidebar";
+@import "grey_theme.scss";
 
 html,
 body {
     height: 100%;
     width: 100%;
-    background-color: white;
+    // background-color: white;
     margin: 0;
     padding: 0;
     font-family: $sourceSansPro;
@@ -218,8 +219,8 @@ button {
         padding: 12px 13px;
         margin-left: 15px;
         border-radius: 50%;
-        background: $umbrella_primary;
-        color: $white;
+        // background: $umbrella_primary;
+        // color: $white;
         cursor: pointer;
         outline: none;
 
@@ -241,7 +242,7 @@ button {
 
 #editPage, #writePage {
     -webkit-app-region: no-drag;
-    padding-top: 30px;
+    // padding-top: 30px;
     display: none;
     height: 100%;
     overflow-y: scroll;
@@ -253,10 +254,9 @@ button {
 
     .header{
         font-size: 14px;
-        font-family: consolas, $sourceSansPro;
+        font-family: $sourceSansPro;
         background: $umbrella_secondary;
         color: white;
-        font-style: italic;
         position: absolute;
         z-index: 10;
         padding: 5px 15px;
@@ -271,21 +271,16 @@ button {
 
         .main-editor {
             -webkit-app-region: no-drag;
-            font-family: consolas, $sourceSansPro;
-            font-style: italic;
+            font-family: $sourceSansPro;
             border: none;
             outline: none;
             background: inherit;
             min-width: 100%;
             max-width: 100%;
             font-size: 18px;
-            font-weight: lighter;
             line-height: 1.3em;
-            color: $black;
+            // color: $black;
             padding-right: 20%;
-            h1,h2,h3,h4{
-                font-family: $open_sans_light_italic;
-            }
         }
     }
 
@@ -298,15 +293,15 @@ button {
         border: none;
         padding: 13px 14px;
         border-radius: 50%;
-        background: $umbrella_secondary;
-        color: $white;
+        // background: $umbrella_secondary;
+        // color: $white;
         cursor: pointer;
         outline: none;
         z-index: 50;
         
-        &:hover {
-            background-color: $umbrella_primary;
-        }
+        // &:hover {
+        //     background-color: $umbrella_primary;
+        // }
 
         svg {
             position: relative;
@@ -316,7 +311,7 @@ button {
     }
 }
 
-#homePage, #settingsPage, #quicknotesPage {
+#homePage, #settingsPage{
     -webkit-app-region: no-drag;
     display: none;
     padding: 10px;
@@ -330,88 +325,19 @@ button {
     }
 
     .header {
-        color: $black;
+        // color: $black;
         font-size: 30px;
         padding: 5px 10px;
         font-family: $sourceSansProLight;
     }
 }
 
-#homePage, #quicknotesPage {
+#homePage{
     padding: 0px;
     padding-bottom: 30px;
     .header{
         padding: 5px 20px;
     }
-    .quicknotes {
-        margin-top: 15px;
-        display: flex;
-        flex-wrap: wrap;
-
-        .note {
-            padding: 20px;
-            // font-family: $sourceSansPro;
-            font-family: consolas;
-            font-size: 16px;
-            font-style: italic;
-            position: relative;
-            color: $white;
-            width: 25%;
-            .expandButton {
-                position: absolute;
-                top: 5px;
-                right: 7px;
-                cursor: pointer;
-                color: $white;
-
-                svg {
-                    stroke-width: 1;
-                    width: 20px;
-                    height: 20px;
-                }
-            }
-            h1, h2, h3, h4 {
-                font-family: $open_sans_light_italic;
-                font-style: normal;
-            }
-
-            p{
-                margin: 0;
-            }
-
-            .box {
-                position: absolute;
-                display: none;
-                background-color: $black;
-                padding: 5px 0px;
-                border-radius: 4px;
-                top: 8px;
-                right: 31px;
-                min-width: 100px;
-                min-height: 70px;
-                flex-direction: column;
-                justify-content: center;
-
-                button {
-                    background: none;
-                    border: none;
-                    display: block;
-                    color: $white;
-                    margin-top: 3px;
-                    padding: 2px 0px;
-
-                    &:hover {
-                        background-color: $black2;
-                    }
-                }
-
-                &.visible {
-                    display: flex;
-                }
-            }
-        }
-    }
-
     .notebooks {
         display: flex;
         flex-wrap: wrap;
@@ -541,7 +467,8 @@ button {
         position: fixed;
         height: 100%;
         overflow-y: scroll;
-        background: $lightgrey2;
+        padding-bottom: 50px;
+        // background: $lightgrey2;
     }
 
     .column-1::-webkit-scrollbar-track {
@@ -550,12 +477,12 @@ button {
 
     .column-1::-webkit-scrollbar {
         width: 7px;
-        background-color: white;
+        // background-color: white;
     }
 
-    .column-1::-webkit-scrollbar-thumb {
-        background-color: #e8e8e8;
-    }
+    // .column-1::-webkit-scrollbar-thumb {
+    //     background-color: #e8e8e8;
+    // }
 
     .column-2{
         position: relative;
@@ -567,12 +494,9 @@ button {
 
     .header{
         font-size: 14px;
-        font-family: consolas, $sourceSansPro;
+        font-family: $sourceSansPro;
         background: $umbrella_secondary;
         color: white;
-        font-style: italic;
-        // display: absolute;
-        // position: absolute;
         z-index: 10;
         padding: 5px 15px;
         // border-bottom-right-radius: 5px;
@@ -586,35 +510,30 @@ button {
             padding: 15px;
             font-size: 14px;
             position: relative;
-            color: $black;
-            background-color: inherit;
-            border-bottom: 1px solid #efefef;
+            // color: $black;
+            // background-color: inherit;
+            // border-bottom: 1px solid #efefef;
             cursor: pointer;
-            &:hover{
-                border-color: $blue !important;
-            }
-            &.color{
-                background-color: #FAFAFA;
-            }
+            // &:hover{
+            //     border-color: $blue !important;
+            // }
+            // &.color{
+            //     background-color: #FAFAFA;
+            // }
             .date {
-                font-size: 12px;
+                font-size: 13px;
                 // margin-top: 3px;
                 // margin-bottom: 20px;
             }
 
             .time {
-                font-size: 12px;
+                font-size: 13px;
                 // margin-top: 10px;
             }
-            .title{
-                font-size: 13px;
-                padding: 5px 0px 0px;
-                font-style: italic;
-            }
-
-            h1, h2, h3, h4 {
-                font-family: $open_sans_light_italic;
-                font-style: normal;
+            .excerpt{
+                font-size: 14.5px;
+                margin-top: 5px;
+                font-family: $sourceSansProItalic;
             }
 
             .expandButton {

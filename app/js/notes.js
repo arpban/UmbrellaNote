@@ -72,13 +72,20 @@ function displayNotes() {
             for (var i = docs.length - 1; i >= 0; i--) {
                 // console.log(docs[i]);
                 var y = docs[i];
-                var x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div></a>';
+                var excerpt = html2text(y.note).slice(0, 100);
+                var x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="excerpt">' + excerpt + '</div></a>';
                 $('#notebookPage .posts').append(x);
             }
             addColors(docs.length);
             callAfterDisplayNotes();
         }
     });
+}
+
+function html2text(html) {
+    var d = document.createElement('div');
+    d.innerHTML = html;
+    return d.textContent;
 }
 
 function openNote(id) {
@@ -110,8 +117,10 @@ function deleteNote(id) {
 function callAfterDisplayNotes() {
     feather.replace();
     $('#notebookPage .post').click(function () {
-        $('#notebookPage .post').css("border-color", "#efefef");
-        $(this).css("border-color", "#338fff");
+        // $('#notebookPage .post').css("border-color", "#efefef")
+        $('#notebookPage .post').removeClass('active');
+        // $(this).css("border-color", "#338fff")
+        $(this).addClass('active');
     });
     notePointer = $('.post').first();
     notePointer.click();

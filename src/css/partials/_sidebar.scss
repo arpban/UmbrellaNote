@@ -4,22 +4,21 @@
     top: 0px;
     height: 100%;
     z-index: 200;
-    background: $umbrella_primary;
+    // background: $umbrella_primary;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 10px;
     button {
-        svg {}
         display: none;
         margin-top: 13px;
         background: none;
         border: none;
-        color: $white;
+        // color: $white;
 
-        &:hover {
-            color: $umbrella_secondary;
-        }
+        // &:hover {
+        //     color: $umbrella_secondary;
+        // }
     }
 
     .visible {

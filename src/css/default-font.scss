@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700');
+
+$font: 'Lato', sans-serif;
+
+#editPage, #writePage {
+    form {
+        .main-editor {
+            font-family: $font;
+            font-size: 16px;
+            h1,h2,h3,h4,p{
+                font-family: $font;
+            }
+            h1{
+                font-weight: 400;
+                margin: 20px 0px;
+                font-size: 27px;
+            }
+            h2{
+                font-weight: 400;
+                margin: 18px 0px;
+                font-size: 20px;
+            }
+            h3{
+                font-weight: 400;
+                margin: 18px 0px;
+                font-size: 18px;
+            }
+            p{
+                font-weight: 400;
+                margin: 15px 0px;
+                line-height: 25px;
+                font-style: normal;
+            }
+            strong {
+                font-family: $font;
+                font-weight: 700;
+            }
+            blockquote {
+                margin: 30px 0;
+                color: #9B9B9B;
+                font-style: oblique;
+                border-left: 3px solid #9B9B9B;
+                padding-left: 17px;
+                font-size: 16px;
+            }
+        }
+    }
+}
+#notebookPage{
+    .column-2{
+        font-family: $font;
+        font-size: 16px;
+        h1,h2,h3,h4,p{
+            font-family: $font;
+        }
+        h1{
+            font-weight: 400;
+            margin: 20px 0px;
+            font-size: 27px;
+        }
+        h2{
+            font-weight: 400;
+            margin: 18px 0px;
+            font-size: 20px;
+        }
+        h3{
+            font-weight: 400;
+            margin: 18px 0px;
+            font-size: 18px;
+        }
+        p{
+            font-weight: 400;
+            margin: 15px 0px;
+            line-height: 25px;
+            font-style: normal;
+        }
+        strong {
+            font-family: $font;
+            font-weight: 700;
+        }
+        blockquote {
+            margin: 30px 0;
+            color: #9B9B9B;
+            font-style: oblique;
+            border-left: 3px solid #9B9B9B;
+            padding-left: 17px;
+            font-size: 16px;
+        }
+    }
+}

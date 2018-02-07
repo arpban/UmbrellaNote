@@ -72,7 +72,8 @@ function displayNotes() {
             for(let i=docs.length-1; i>=0; i--){
                 // console.log(docs[i]);
                 let y = docs[i];
-                let x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div></a>';                
+                let excerpt = html2text(y.note).slice(0,100)
+                let x = '<a class="post" onclick="openNote(\'' + y._id + '\')"><div class="time">' + y.time + '</div><div class="date">' + y.date + '</div><div class="excerpt">'+excerpt+'</div></a>';                
                 $('#notebookPage .posts').append(x);
                 
             }
@@ -80,6 +81,12 @@ function displayNotes() {
             callAfterDisplayNotes()
         }
     });
+}
+
+function html2text( html ) {
+    var d = document.createElement( 'div' );
+    d.innerHTML = html;
+    return d.textContent;
 }
 
 function openNote(id){ //this function displays the note in the column2 of the notebookPage
@@ -114,8 +121,10 @@ function deleteNote(id){
 function callAfterDisplayNotes(){
     feather.replace()
     $('#notebookPage .post').click(function(){
-        $('#notebookPage .post').css("border-color", "#efefef")
-        $(this).css("border-color", "#338fff")
+        // $('#notebookPage .post').css("border-color", "#efefef")
+        $('#notebookPage .post').removeClass('active')
+        // $(this).css("border-color", "#338fff")
+        $(this).addClass('active')
     })
     notePointer = $('.post').first()
     notePointer.click()

@@ -1,0 +1,152 @@
+//GREY THEME
+$app-background: #ffffff;
+$notebook-tile-background: #fafafa;
+$notebook-tile-secondary-color: dimgrey;
+$notebook-tile-primary-color: #2b2b2b;
+$notebook-tile-button: #338fff;
+$color2: #ffffff; //white
+$color1 : #338fff; //light blue
+$color3: #aca9a3; //dark grey - the sidebar color
+$color4: #dadada; //light grey - column-1 color
+$color5: #2b2b2b; //the main text color
+$spinner-background: #ffffff;
+$spinner-color: #338fff;
+$notebook-header-background: #777777;
+$notebook-header-color: #fafafa;
+$column1-color: #4a4a4a;
+$column1-background-color: #dadada;
+$column1-background-color2: #e8e8e8;
+$column1-hover-post: #f1f0f0;
+$column1-active-post: #bfbfbf;
+$column1-scroll-bar: #f5f5f5;
+$sidebar-color: #ffffff;
+$sidebar-color-hover: #777777;
+html,body{
+	background-color: $app-background;
+}
+
+header {
+    background: $app-background;
+    .name {
+        background: $notebook-header-background;
+        color: $notebook-header-color;
+        &.athome{
+            background: $app-background;
+            color: $color5;
+        }
+    }
+}
+
+#main-icons{
+	.icon{
+		background: $color1;
+		color: $color2;
+		&:hover{
+			background: $color3;
+		}
+	}
+}
+#sidebar{
+	background: $color3;
+	button{
+		color: $sidebar-color;
+		&:hover{
+			color: $sidebar-color-hover;
+		}
+	}
+}
+#notebookPage{
+	.column-1{
+		background: $column1-background-color;
+	}
+	.column-1::-webkit-scrollbar {
+        background-color: $app-background;
+    }
+
+    .column-1::-webkit-scrollbar-thumb {
+        background-color: $column1-scroll-bar;
+    }
+    .posts{
+    	.post{
+    		color: $column1-color;
+            background-color: inherit;
+            // border-bottom: 1px solid #efefef;
+            cursor: pointer;
+            &.color{
+            	background-color: $column1-background-color2;
+            	// &:hover{
+            	// 	background-color: #bfbfbf;
+            	// }
+            }
+            &.active{
+                background-color: $column1-active-post !important;
+                // border-bottom: 1px solid $color1;
+            }
+            &:hover{
+                background-color: $column1-hover-post !important;
+                // border-color: $color1 !important;
+            }
+            .excerpt{
+            	color: $color5;
+            }
+    	}
+    }
+    .column-2{
+    	background: $app-background;
+    }
+}
+#editPage, #writePage{
+	form{
+		.main-editor{
+			color: $color5;
+		}
+	}
+	.save.icon{
+		background: $color1;
+		color: $color2;
+		&:hover{
+			background: $color3;
+		} 
+	}
+}
+#homePage, #settingsPage{
+	.header{
+		color: $color5;
+	}
+}
+#homePage{
+    .notebooks {
+        .notebook {
+            a {
+                .cover {
+                    background-color: #959597;
+                }
+                .description {
+                    color: $notebook-tile-primary-color;
+                    background-color: $notebook-tile-background;
+                    .created {
+                        color: $notebook-tile-secondary-color;
+                    }
+                    button {
+                        color: $notebook-tile-button;
+                    }
+                }
+            }
+        }
+    }
+}
+#settingsPage{
+    .fonts, .themes{
+        select{
+            border-bottom: 2px solid $color1;
+        }
+    }
+}
+
+.simply-straight .spinner {
+    background-color: $spinner-background;
+}
+
+.simply-straight .spinner .points {
+    color: $spinner-color;
+}

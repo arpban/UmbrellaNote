@@ -1,0 +1,126 @@
+// @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700');
+
+@font-face{
+    font-family: Lato;
+    src: url('../fonts/Lato/Lato-Regular.ttf') format('truetype');
+}
+@font-face{
+    font-family: Lato;
+    src: url('../fonts/Lato/Lato-Italic.ttf') format('truetype');
+    font-style: italic;
+}
+@font-face{
+    font-family: Lato;
+    src: url('../fonts/Lato/Lato-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+@font-face{
+    font-family: Lato;
+    src: url('../fonts/Lato/Lato-BoldItalic.ttf') format('truetype');
+    font-style: italic;
+    font-weight: 700;
+}
+
+$font: Lato, sans-serif;
+$font2: 'Times New Roman', serif;
+
+#editPage, #writePage {
+    form {
+        .main-editor {
+            font-family: $font;
+            font-size: 16px;
+            h1,h2,h3,h4{
+                font-family: $font2;
+            }
+            p{
+                font-family: $font;
+                line-height: 25px;
+                font-style: normal;
+            }
+            h1{
+                font-weight: 400;
+                margin: 20px 0px;
+                font-size: 30px;
+            }
+            h2{
+                font-weight: 400;
+                margin: 18px 0px;
+                font-size: 20px;
+            }
+            h3{
+                font-weight: 400;
+                margin: 18px 0px;
+                font-size: 18px;
+            }
+            p{
+                font-weight: 400;
+                margin: 15px 0px;
+            }
+            strong {
+                font-family: $font;
+                font-weight: 700;
+            }
+            blockquote {
+                margin: 30px 0;
+                color: #9B9B9B;
+                font-style: oblique;
+                border-left: 3px solid #9B9B9B;
+                padding-left: 17px;
+                font-size: 16px;
+            }
+            em{
+                font-family: $font;
+                font-style: italic;
+            }
+        }
+    }
+}
+#notebookPage{
+    .column-2{
+        font-family: $font;
+        font-size: 16px;
+        h1,h2,h3,h4{
+            font-family: $font2;
+        }
+        p{
+            font-family: $font;
+            line-height: 25px;
+            font-style: normal;
+        }
+        h1{
+            font-weight: 400;
+            margin: 20px 0px;
+            font-size: 30px;
+        }
+        h2{
+            font-weight: 400;
+            margin: 18px 0px;
+            font-size: 20px;
+        }
+        h3{
+            font-weight: 400;
+            margin: 18px 0px;
+            font-size: 18px;
+        }
+        p{
+            font-weight: 400;
+            margin: 15px 0px;
+        }
+        strong {
+            font-family: $font;
+            font-weight: 700;
+        }
+        blockquote {
+            margin: 30px 0;
+            color: #9B9B9B;
+            font-style: oblique;
+            border-left: 3px solid #9B9B9B;
+            padding-left: 17px;
+            font-size: 16px;
+        }
+        em{
+            font-family: $font;
+            font-style: italic;
+        }
+    }
+}
