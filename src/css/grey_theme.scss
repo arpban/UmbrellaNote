@@ -23,6 +23,7 @@ $sidebar-color: #ffffff;
 $sidebar-color-hover: #777777;
 html,body{
 	background-color: $app-background;
+    color: $color5;
 }
 
 header {
@@ -149,4 +150,16 @@ header {
 
 .simply-straight .spinner .points {
     color: $spinner-color;
+}
+
+#settingsPage{
+    color: $color5;
+    .fonts, .themes{
+        select{
+            color: $color5;
+            option{
+                color: black;
+            }
+        }
+    }
 }

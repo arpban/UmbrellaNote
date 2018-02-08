@@ -241,7 +241,7 @@ function setUpKeyboardShortcuts(page) {
             Mousetrap.reset();
             Mousetrap.bind('esc', function () {
                 // console.log('esc is pressed at writePage')
-                $('#notebookPage .posts').html('');
+                // $('#notebookPage .posts').html('');
                 openPage(notebookPage);
             });
             umbrella_editor = document.getElementsByClassName('main-editor');
@@ -253,7 +253,7 @@ function setUpKeyboardShortcuts(page) {
             });
             writer_mousetrap.bind('esc', function () {
                 // console.log('esc is pressed at writePage inside tinymce')
-                $('#notebookPage .posts').html('');
+                // $('#notebookPage .posts').html('');
                 openPage(notebookPage);
                 writer_mousetrap.unbind('esc');
             });
@@ -262,7 +262,7 @@ function setUpKeyboardShortcuts(page) {
             Mousetrap.reset();
             Mousetrap.bind('esc', function () {
                 // console.log('esc is pressed at editorpage')
-                $('#notebookPage .posts').html('');
+                // $('#notebookPage .posts').html('');
                 openPage(notebookPage);
             });
             umbrella_editor = document.getElementsByClassName('main-editor');
@@ -273,7 +273,7 @@ function setUpKeyboardShortcuts(page) {
             });
             editor_mousetrap.bind('esc', function () {
                 // console.log('esc pressed at editorpage in tinymce')
-                $('#notebookPage .posts').html('');
+                // $('#notebookPage .posts').html('');
                 openPage(notebookPage);
                 editor_mousetrap.unbind('esc');
             });

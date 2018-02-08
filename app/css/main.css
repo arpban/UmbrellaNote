@@ -356,7 +356,8 @@ html::-webkit-scrollbar-thumb {
       display: block; }
 
 html, body {
-  background-color: #ffffff; }
+  background-color: #ffffff;
+  color: #2b2b2b; }
 
 header {
   background: #ffffff; }
@@ -436,6 +437,13 @@ header {
 
 .simply-straight .spinner .points {
   color: #338fff; }
+
+#settingsPage {
+  color: #2b2b2b; }
+  #settingsPage .fonts select, #settingsPage .themes select {
+    color: #2b2b2b; }
+    #settingsPage .fonts select option, #settingsPage .themes select option {
+      color: black; }
 
 html,
 body {

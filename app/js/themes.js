@@ -8,7 +8,7 @@ function setTheme(i) {
 
 function initThemes() {
     if (localStorage.theme == null) {
-        localStorage.theme = 'light_theme';
+        localStorage.theme = 'blue_theme';
     }
     setTheme(localStorage.theme);
     $('.themes select').val(localStorage.theme);
