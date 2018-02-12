@@ -406,9 +406,9 @@ function initUmbrella() {
         quicknotesInit();
         openPage(homePage);
         // displayNotebooks();
-        if (navigator.onLine && localStorage.signedIn == 'true') {
-            setTimeout(syncDatabaseUp, 5000);
-        }
+        // if(navigator.onLine && (localStorage.signedIn=='true')){
+        //     setTimeout(syncDatabaseUp,5000)
+        // }
         initFonts();
         initThemes();
 

@@ -26,7 +26,7 @@ function signInUser(event){
             localStorage.signedIn = 'true'
             getUser()
             changeSignInStatus()
-            createLocalDbFromRemoteDb()            
+            // createLocalDbFromRemoteDb()            
         }
         toggleSpinner()
     }).catch((error)=>{
@@ -56,29 +56,29 @@ function logoutUser(){
         changeSignInStatus()
         updateUserDetailsView() 
 
-        db.remoteTasks.remove({}, {multi: true}, function(err,numRemoved){
+        // db.remoteTasks.remove({}, {multi: true}, function(err,numRemoved){
 
-        });
-        db.notebooks.remove({}, {multi: true}, function(err,numRemoved){
-            displayNotebooks()
-        });
-        db.notes.remove({}, {multi: true}, function(err,numRemoved){
-            displayQuickNotes()
-        });
+        // });
+        // db.notebooks.remove({}, {multi: true}, function(err,numRemoved){
+        //     displayNotebooks()
+        // });
+        // db.notes.remove({}, {multi: true}, function(err,numRemoved){
+        //     displayQuickNotes()
+        // });
 
-        var d = new Date();
-        let date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
+        // var d = new Date();
+        // let date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
         
-        var obj = {
-            title: 'Notebook One',
-            summary: 'This is the default notebook. All the untagged posts are stored here.',
-            cover: 'img/1.jpg',
-            time: date
-        };        
+        // var obj = {
+        //     title: 'Notebook One',
+        //     summary: 'This is the default notebook. All the untagged posts are stored here.',
+        //     cover: 'img/1.jpg',
+        //     time: date
+        // };        
 
-        db.notebooks.insert(obj, function(err,newDoc){
-            doThisLater('CREATE_NOTEBOOK', 'Notebook One', 'This is the default notebook. All the untagged posts are stored here.', 'img/1.jpg', date)
-        })
+        // db.notebooks.insert(obj, function(err,newDoc){
+        //     doThisLater('CREATE_NOTEBOOK', 'Notebook One', 'This is the default notebook. All the untagged posts are stored here.', 'img/1.jpg', date)
+        // })
         toggleSpinner()
     })    
 }
