@@ -94,6 +94,9 @@ form.form-group {
 
         background-color: inherit;
     }
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: $lightgrey2;
+    }
 }
 
 .bold-sub-heading{
@@ -419,6 +422,9 @@ button {
 }
 
 #settingsPage{
+    .user{
+        padding: 5px 13px;
+    }
     .signin-buttons{
         padding: 5px 13px;
         button{
@@ -447,6 +453,16 @@ button {
             outline: none;
             width: 400px;
             font-size: 16px;
+        }
+    }
+    .path-wrap{
+        .db-location-tag{
+            display: inline;
+            margin-right: 7px;
+        }
+        button{
+            display: inline;
+            width: auto;
         }
     }
 }

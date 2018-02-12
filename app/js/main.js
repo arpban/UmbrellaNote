@@ -9,6 +9,8 @@ var _require = require('electron'),
 
 var app = require('electron').remote.app;
 
+var dialog = require('electron').remote.dialog;
+
 var months = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 var days = new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
 var covers = ["img/1.jpg", "img/2.jpeg", "img/3.jpg", "img/4.png", "img/13.jpeg", "img/14.jpeg"];
@@ -32,14 +34,22 @@ var umbrella_editor = null;
 
 var Datastore = require('nedb');
 var db = {};
-var data_path = app.getPath("appData");
-db.notebooks = new Datastore({ filename: data_path + '/umbrella-note-data/umbrella-notebooks.db', autoload: true });
-db.notes = new Datastore({ filename: data_path + '/umbrella-note-data/umbrella-notes.db', autoload: true });
-db.remoteTasks = new Datastore({ filename: data_path + '/umbrella-note-data/remote-tasks.db', autoload: true });
-
-db.notebooks.ensureIndex({ fieldName: 'title', unique: true });
+// let data_path = app.getPath("appData")
+var data_path = null;
 
 setTimeout(toggleSpinner, 1000);
+
+initUmbrella();
+
+function setUpDatabases() {
+    data_path = localStorage.db_location;
+    db = {};
+    db.notebooks = new Datastore({ filename: data_path + '/umbrella-note/umbrella-notebooks.db', autoload: true });
+    db.notes = new Datastore({ filename: data_path + '/umbrella-note/umbrella-notes.db', autoload: true });
+    db.remoteTasks = new Datastore({ filename: data_path + '/umbrella-note/remote-tasks.db', autoload: true });
+
+    db.notebooks.ensureIndex({ fieldName: 'title', unique: true });
+}
 
 function updateNotebookPointer(s) {
     notebook_pointer = s;
@@ -161,6 +171,7 @@ function openPage(page) {
             $('header .name').removeClass('athome');
             break;
         case settingsPage:
+            $('.path-wrap .db-location-tag').html(localStorage.db_location);
             var notebooks_list = $('#settingsPage .notebooks-list');
             notebooks_list.html('');
             db.notebooks.find({}, function (err, docs) {
@@ -209,6 +220,28 @@ function createNotebookModal() {
         isModalUsedBefore = true;
     }
     $('.create-notebook-modal').toggleClass('open');
+}
+
+function selectFolder(x) {
+    var path = dialog.showOpenDialog({ properties: ['openDirectory'] });
+    $(x).val(path);
+}
+
+function initializerModal(x) {
+    switch (x) {
+        case 'yes':
+            $('.view1').hide();
+            $('#initializer-yes').show();
+            break;
+        case 'no':
+            $('.view1').hide();
+            $('#initializer-no').show();
+            break;
+        case 'back':
+            $('.view2').hide();
+            $('.view1').show();
+            break;
+    }
 }
 
 function toggleModal(x) {
@@ -304,6 +337,44 @@ function setUpKeyboardShortcuts(page) {
     }
 }
 
+function initNewUser(event) {
+    event.preventDefault();
+    toggleModal('.initializer-modal');
+    var path = $('#initializer-yes input.db-location').val();
+    console.log(path);
+    var user_name = $('#initializer-yes input[name="user_name"]').val();
+    console.log(user_name);
+    localStorage.db_location = path;
+    localStorage.name = user_name;
+    showMessage('Welcome ' + user_name);
+    initUmbrella();
+}
+
+function initOldUser(event) {
+    event.preventDefault();
+    toggleModal('.initializer-modal');
+    var path = $('#initializer-no input.db-location').val();
+    console.log(path);
+    var user_name = $('#initializer-no input[name="user_name"]').val();
+    console.log(user_name);
+    localStorage.db_location = path;
+    localStorage.name = user_name;
+    showMessage('Welcome ' + user_name);
+    initUmbrella();
+}
+function changeDbLocation(event) {
+    event.preventDefault();
+    toggleModal('.change-db-path-modal');
+    var path = $('.change-db-path-modal input.db-location').val();
+    console.log(path);
+    var user_name = $('.change-db-path-modal input[name="user_name"]').val();
+    console.log(user_name);
+    localStorage.db_location = path;
+    localStorage.name = user_name;
+    showMessage('Welcome ' + user_name);
+    initUmbrella();
+}
+
 //GETTING USER INFORMATION
 function getUser() {
     axios({
@@ -326,28 +397,25 @@ function getUser() {
 //INITIALIZE UMBRELLA
 
 function initUmbrella() {
-    changeSignInStatus();
-    updateUserDetailsView();
-    quicknotesInit();
-    displayNotebooks();
-    if (navigator.onLine && localStorage.signedIn == 'true') {
-        setTimeout(syncDatabaseUp, 5000);
+    if (localStorage.db_location == null || localStorage.db_location == '') {
+        toggleModal('.initializer-modal');
+    } else {
+        setUpDatabases();
+        changeSignInStatus();
+        updateUserDetailsView();
+        quicknotesInit();
+        openPage(homePage);
+        // displayNotebooks();
+        // if(navigator.onLine && (localStorage.signedIn=='true')){
+        //     setTimeout(syncDatabaseUp,5000)
+        // }
+        initFonts();
+        initThemes();
+
+        $('#notebookPage .column-2').click(function () {
+            openEditorPage(pointer_id_current_note);
+        });
     }
-
-    // $('#sidebar .home').css("color", "#338fff")
-
-    // $('#sidebar .icon').click(function(){
-    //     $('#sidebar .icon').css("color", "#FAFAFA");
-    //     $(this).css("color", "#338fff")
-    // })
-    // $('#sidebar .icon').click(function(){ $('#sidebar .icon').css("color", "white"); $(this).css("color", "#338fff")})
-    initFonts();
-    initThemes();
-
-    $('#notebookPage .column-2').click(function () {
-        openEditorPage(pointer_id_current_note);
-    });
-
     console.log('umbrella initialized');
 }
 
@@ -370,8 +438,6 @@ function updateUserDetailsView() {
         $('.email').html(localStorage.email);
     }
 }
-
-initUmbrella();
 
 //REMOTE FUNCTIONS 
 

@@ -5,9 +5,7 @@ function newNote(event) {
     let date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
     let time = d.toLocaleTimeString();
     let note = tinymce.activeEditor.getContent();
-    // console.log(note);
     addNote(notebook, date, time, note);
-    // displayNotes();
 }
 
 async function addNote(notebookTitle, noteDate, noteTime, noteBody) {
@@ -29,11 +27,11 @@ async function addNote(notebookTitle, noteDate, noteTime, noteBody) {
         else{
             showMessage('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
             openPage(notebookPage);
-            if(navigator.onLine && (localStorage.signedIn=='true')){
-                createNoteRemote(notebookTitle, noteDate, noteTime, noteBody, newDoc._id, timestamp)
-            }else{
-                doThisLater('CREATE_NOTE', notebookTitle, noteDate, noteTime, noteBody, newDoc._id, timestamp)
-            }
+            // if(navigator.onLine && (localStorage.signedIn=='true')){
+            //     createNoteRemote(notebookTitle, noteDate, noteTime, noteBody, newDoc._id, timestamp)
+            // }else{
+            //     doThisLater('CREATE_NOTE', notebookTitle, noteDate, noteTime, noteBody, newDoc._id, timestamp)
+            // }
         }
     });
 }
@@ -48,16 +46,14 @@ function editNote(event){
             console.log(err)
         }else{
             showMessage('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
-            if(navigator.onLine && (localStorage.signedIn=='true')){
-                editNoteRemote(id, note)
-            }else{
-                doThisLater('EDIT_NOTE', id, note)
-            }
+            // if(navigator.onLine && (localStorage.signedIn=='true')){
+            //     editNoteRemote(id, note)
+            // }else{
+            //     doThisLater('EDIT_NOTE', id, note)
+            // }
         }
     })
     openPage(notebookPage);
-    // displayNotes();
-        
     $('#sidebar .icon').css('color','#FAFAFA')
 }
 
@@ -106,11 +102,11 @@ function deleteNote(id){
             console.log(err)
         }else{
             // console.log(numRemoved)
-            if(navigator.onLine && (localStorage.signedIn=='true')){
-                deleteNoteRemote(id)
-            }else{
-                doThisLater('DELETE_NOTE', id)
-            }
+            // if(navigator.onLine && (localStorage.signedIn=='true')){
+            //     deleteNoteRemote(id)
+            // }else{
+            //     doThisLater('DELETE_NOTE', id)
+            // }
         }
     })
     

@@ -130,6 +130,103 @@
     }
 }
 
+.svg-button{
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0px;
+}
+
+.modal.initializer-modal{
+    .body{
+        // width: 80%;
+        max-width: 700px;
+        background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+        .main{
+            .btn1{
+                margin-right: 3px;
+                padding: 8px 13px;
+                border-radius: 3px;
+            }
+            .view2{
+                display: none;
+                position: relative;
+                svg{
+                    width: 35px;
+                    height: 35px;
+                    stroke-width: 1.2px;
+                }
+                .svg-button{
+                    color: white;
+                }
+                input{
+                    position: relative;
+                    z-index: 1;
+                }
+                .btn3{
+                    width: auto;
+                }
+                .btn1.browse-folder{
+                    position: absolute;
+                    margin-top: -43px;
+                    right: 3px;
+                    font-size: 13px;
+                    padding: 6px;
+                }
+            }
+        }
+    }
+    #initializer-yes, #initializer-no{
+        small{
+            font-size: 14px;
+        }
+    }
+}
+
+.modal.change-db-path-modal{
+    .body{
+        // width: 80%;
+        max-width: 700px;
+        background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+        .main{
+            position: relative;
+            .btn1{
+                margin-right: 3px;
+                padding: 8px 13px;
+                border-radius: 3px;
+            }
+            svg{
+                width: 35px;
+                height: 35px;
+                stroke-width: 1.2px;
+            }
+            .svg-button{
+                color: white;
+            }
+            input{
+                position: relative;
+                z-index: 1;
+            }
+            .btn3{
+                width: auto;
+            }
+            .btn1.browse-folder{
+                position: absolute;
+                margin-top: -43px;
+                right: 3px;
+                font-size: 13px;
+                padding: 6px;
+            }
+            
+        }
+        small{
+            font-size: 14px;
+        }
+    }
+}
+
+
 .modal.create-notebook-modal {
     .body {
         background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
