@@ -11,6 +11,8 @@ function createNotebook(event){
     addNotebook(title, summary, coverImage, date);
 }
 
+
+
 function addNotebook(notebookTitle, notebookSummary, coverUrl, createdOn) {
     var obj = {
         title: notebookTitle,
@@ -19,23 +21,34 @@ function addNotebook(notebookTitle, notebookSummary, coverUrl, createdOn) {
         time: createdOn
     };
 
-    db.notebooks.insert(obj, function(err,newDoc){
+    db.notebooks.findOne({title: notebookTitle}, (err, doc)=>{
         if(err){
-            showMessage('<img src="img/emojis/sad.svg"><div class="emoji-text">Error</div>');
+            showMessage('<img src="img/emojis/sad.svg"><div class="emoji-text">Error. Try again later.</div>');
         }
         else{
-            createNotebookModal();
-            openPage(homePage)
-            showMessage('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
+            if(doc == null)
+                db.notebooks.insert(obj, function(err,newDoc){
+                    if(err){
+                        showMessage('<img src="img/emojis/sad.svg"><div class="emoji-text">Error. Try again later.</div>');
+                    }
+                    else{
+                        createNotebookModal();
+                        openPage(homePage)
+                        showMessage('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
 
-            // if(navigator.onLine && (localStorage.signedIn=='true')){
-            //     createNotebookRemote(notebookTitle, notebookSummary, coverUrl, createdOn)
-            // }else{
-            //     doThisLater('CREATE_NOTEBOOK', notebookTitle, notebookSummary, coverUrl, createdOn)
-            // }
+                        // if(navigator.onLine && (localStorage.signedIn=='true')){
+                        //     createNotebookRemote(notebookTitle, notebookSummary, coverUrl, createdOn)
+                        // }else{
+                        //     doThisLater('CREATE_NOTEBOOK', notebookTitle, notebookSummary, coverUrl, createdOn)
+                        // }
 
+                    }
+                })
+            else
+                showMessage('You cannot make two notebooks with same name')
         }
-    });
+    })
+
 }
 
 function setEditorToNotebook(i){

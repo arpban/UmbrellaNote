@@ -13,7 +13,14 @@ let covers = [
     "img/3.jpg",
     "img/4.png",
     "img/13.jpeg",
-    "img/14.jpeg"
+    "img/14.jpeg",
+    "img/15.jpeg",
+    "img/16.jpeg",
+    "img/17.jpeg",
+    "img/18.jpeg",
+    "img/19.jpeg",
+    "img/20.jpeg",
+    "img/21.jpg",
 ];
 let isModalUsedBefore = false;
 let notebooksView = $('#homePage .notebooks');
@@ -43,13 +50,38 @@ setTimeout(toggleSpinner, 1000)
 initUmbrella()
 
 function setUpDatabases(){
+    console.log('setting up databases')
     data_path = localStorage.db_location
     db = {}
-    db.notebooks = new Datastore({ filename: data_path+'/umbrella-note/umbrella-notebooks.db', autoload: true });
-    db.notes = new Datastore({ filename: data_path+'/umbrella-note/umbrella-notes.db', autoload: true });
-    db.remoteTasks = new Datastore({ filename: data_path+'/umbrella-note/remote-tasks.db', autoload: true });
+    db.notebooks = new Datastore({
+        filename: data_path+'/umbrella-note/umbrella-notebooks.db'
+    });
+    db.notes = new Datastore({ filename: data_path+'/umbrella-note/umbrella-notes.db'});
+    db.remoteTasks = new Datastore({ filename: data_path+'/umbrella-note/remote-tasks.db'});
+    
+    db.notes.loadDatabase((e)=>{
+        if(e){
+            console.log("some error, loading notes db again")
+            setUpDatabases()
+            displayNotebooks()
+        }
+    })
+    db.remoteTasks.loadDatabase((e)=>{
+        if(e){
+            console.log("some error, loading remote db again")
+            setUpDatabases()
+            displayNotebooks()
+        }
+    })
+    db.notebooks.loadDatabase((e)=>{
+        if(e){
+            console.log("some error, loading notebooks db again")
+            setUpDatabases()
+            displayNotebooks()
+        }
+    })
 
-    db.notebooks.ensureIndex({ fieldName: 'title', unique: true });    
+    console.log('databases are set')
 }
 
 function updateNotebookPointer(s){
@@ -78,10 +110,13 @@ function quicknotesInit(){
             console.log('error finding the Notebook One file');
         }else{
             if( docs.length == 0 ){
+
                 console.log('notebook one does not exist, making new one');
                 var d = new Date();
                 let date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
                 addNotebook('Notebook One', 'This is the default notebook. All the untagged posts are stored here.', 'img/1.jpg',date);
+                let intro_note = "<h1>Welcome to the Umbrella Note</h1>\n<p>To create new notebook click the notebook icon on your left. To write in a particular notebook, just open the notebook and click the feather icon at the lower right corner.</p>\n<h2>Keyboard Shortcuts</h2>\n<p><span style=\"background-color: inherit;\"><strong>Up, Down</strong> arrow keys for changing notes.</span></p>\n<p><strong>'f' or 'j'</strong> key for new note.</p>\n<p><strong>'esc'</strong> &nbsp;for returning back.</p>\n<p><strong>'ctrl+del'</strong> to delete a note.&nbsp;</p>\n<p><strong style=\"background-color: inherit;\">'command+del'</strong><span style=\"background-color: inherit;\"> to delete a note on mac</span></p>\n<p><strong>'e'</strong>&nbsp;to edit a note</p>\n<p>'<strong>ctrl+s'</strong>&nbsp; to save the note</p>\n<h2>&nbsp;How to save and sync data with dropbox, google drive or one drive</h2>\n<ol>\n<li>Install dropbox or google drive to your computer.</li>\n<li>Set the umbrella note data folder to the dropbox( or google drive ) folder in the settings.</li>\n</ol>"
+                addNote('Notebook One', date, d.toLocaleTimeString(), intro_note)
             }
         }
     });        
@@ -150,7 +185,7 @@ function openPage(page){ //page is a jquery object
             displayNotebooks()
             closeNotebook()
             setUpKeyboardShortcuts('homePage')
-            console.log('opened home page')
+            console.log('opened home page!')
             break
         case notebookPage:
             $('header .name').html(notebook_pointer)
@@ -412,7 +447,7 @@ function initUmbrella(){
         toggleModal('.initializer-modal')
     }else{
         setUpDatabases()
-        changeSignInStatus()
+        // changeSignInStatus() 
         updateUserDetailsView()
         quicknotesInit();
         openPage(homePage)
@@ -423,9 +458,9 @@ function initUmbrella(){
         initFonts()
         initThemes()
 
-        $('#notebookPage .column-2').click(()=>{
-            openEditorPage(pointer_id_current_note)        
-        })        
+        // $('#notebookPage .column-2').click(()=>{
+        //     openEditorPage(pointer_id_current_note)        
+        // })        
     }
     console.log('umbrella initialized')
 }

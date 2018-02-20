@@ -829,11 +829,13 @@ button {
   padding: 5px 13px; }
 
 #settingsPage .signin-buttons {
-  padding: 5px 13px; }
+  padding: 5px 13px;
+  display: none; }
   #settingsPage .signin-buttons button {
     margin-right: 5px; }
 
 #settingsPage .signout-buttons {
+  display: none;
   margin: 10px 0px; }
 
 #settingsPage .username {
