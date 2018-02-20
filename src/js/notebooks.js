@@ -66,20 +66,56 @@ function displayNotebooks(){
             for(let i=0; i<docs.length; i++){
                 let y = docs[i];
                 let slashes_title = addslashes(y.title)
-                let x = '<div class="notebook"><a onclick="openNotebook(\'' + slashes_title + '\','+i+')"><div class="cover"><img src=' + y.cover + '></div><div class="description"><div class="title">' + y.title + '</div><div class="created">'+ y.time + '</div><div class="summary">' + y.summary + '</div><button class="btn1">Open</button></div></a></div>';
+                let x = '<div class="notebook"><a onclick="openNotebook(\'' + y._id + '\')"><div class="cover"><img src=' + y.cover + '></div><div class="description"><div class="title">' + y.title + '</div><div class="created">'+ y.time + '</div><div class="summary">' + y.summary + '</div><button class="btn1">Open</button></div></a></div>';
                 notebooksView.append(x);
             }
         }
     });
 }
 
-function openNotebook(notebookTitle,index){
-    notebook_pointer = notebookTitle
-    openPage(notebookPage);
+function openNotebook(notebook_id){
+    db.notebooks.findOne({_id: notebook_id}, (err, doc)=>{
+        
+        if(err){
+            showMessage('Cannot open this notebook. Try again later.')
+        }else{
+            notebook_pointer = doc.title
+            openPage(notebookPage);
+        }
+
+    })
 }
 
 function closeNotebook(){
     notebook_pointer = 'Notebook One'
     $('#notebookPage .column-2').html(' ')
     setEditorToNotebook(notebook_pointer)
+}
+
+function deleteNotebook(event){
+    event.preventDefault()
+    let title = $('.edit-notebook.modal input[type=hidden]').val()
+
+    db.notebooks.remove({title: title},{}, function(err,numRemoved){})
+    db.notes.remove({notebook: title},{multi: true})
+    showMessage('Notebook deleted')
+    displayNotebooks()
+    openPage(settingsPage)
+
+    toggleModal('.edit-notebook.modal')
+
+}
+
+function editNotebook(event){
+    event.preventDefault()
+    let old_title = $('.edit-notebook.modal input[type=hidden]').val()
+    let new_title = $('.edit-notebook.modal input[type=text]').val()
+    
+    db.notebooks.update({title: old_title}, {$set: {title: new_title}})
+    db.notes.update({notebook: old_title}, {$set: {notebook: new_title}}, {multi: true})
+    showMessage('Notebook updated')
+    displayNotebooks()
+    openPage(settingsPage)
+
+    toggleModal('.edit-notebook.modal')
 }
