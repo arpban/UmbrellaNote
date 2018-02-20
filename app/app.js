@@ -122,7 +122,10 @@ autoUpdater.on('update-downloaded', function (info) {
 });
 
 app.on('ready', function () {
-	autoUpdater.checkForUpdates();
+
+	setTimeout(function () {
+		autoUpdater.checkForUpdates();
+	}, 60000);
 });
 
 ipcMain.on('update-now', function () {

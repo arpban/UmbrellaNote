@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "productName": "Umbrella Note",
   "description": "A simple, beautiful and elegant place for writing",
-  "author": "Arpit Bansal <arpit3ansal@gmail.com>",
+  "author": "arban.co",
   "copyright": "© 2018, Arpit Bansal",
   "homepage": "https://umbrellanote.com",
   "main": "app/app.js",
