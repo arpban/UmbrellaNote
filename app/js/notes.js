@@ -1,6 +1,7 @@
-"use strict";
+'use strict';
 
 function newNote(event) {
+    console.log('creating new note.');
     event.preventDefault();
     var d = new Date();
     var notebook = $('#writePage form input.notebookTitle').val();
@@ -38,6 +39,7 @@ async function addNote(notebookTitle, noteDate, noteTime, noteBody) {
 }
 
 function editNote(event) {
+    console.log('updating a note');
     event.preventDefault();
     var id = $('#editPage input.noteId').val();
     var note = tinymce.activeEditor.getContent();

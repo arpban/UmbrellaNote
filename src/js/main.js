@@ -115,7 +115,7 @@ function quicknotesInit(){
                 var d = new Date();
                 let date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
                 addNotebook('Notebook One', 'This is the default notebook. All the untagged posts are stored here.', 'img/1.jpg',date);
-                let intro_note = "<h1>Welcome to the Umbrella Note</h1>\n<p>To create new notebook click the notebook icon on your left. To write in a particular notebook, just open the notebook and click the feather icon at the lower right corner.</p>\n<h2>Keyboard Shortcuts</h2>\n<p><span style=\"background-color: inherit;\"><strong>Up, Down</strong> arrow keys for changing notes.</span></p>\n<p><strong>'f' or 'j'</strong> key for new note.</p>\n<p><strong>'esc'</strong> &nbsp;for returning back.</p>\n<p><strong>'ctrl+del'</strong> to delete a note.&nbsp;</p>\n<p><strong style=\"background-color: inherit;\">'command+del'</strong><span style=\"background-color: inherit;\"> to delete a note on mac</span></p>\n<p><strong>'e'</strong>&nbsp;to edit a note</p>\n<p>'<strong>ctrl+s'</strong>&nbsp; to save the note</p>\n<h2>&nbsp;How to save and sync data with dropbox, google drive or one drive</h2>\n<ol>\n<li>Install dropbox or google drive to your computer.</li>\n<li>Set the umbrella note data folder to the dropbox( or google drive ) folder in the settings.</li>\n</ol>"
+                let intro_note = "<h1>Welcome to the Umbrella Note</h1>\n<p>To create new notebook click the notebook icon on your left. To write in a particular notebook, just open the notebook and click the feather icon at the lower right corner.</p>\n<h2>Keyboard Shortcuts</h2>\n<p><span style=\"background-color: inherit;\"><strong>Up, Down</strong> arrow keys for changing notes.</span></p>\n<p><strong>'f' or 'j'</strong> key for new note.</p>\n<p><strong>'esc'</strong> &nbsp;for returning back.</p>\n<p><strong>'ctrl+d'</strong> to delete a note.&nbsp;</p>\n<p><strong style=\"background-color: inherit;\">'command+d'</strong><span style=\"background-color: inherit;\"> to delete a note on mac</span></p>\n<p><strong>'e'</strong>&nbsp;to edit a note</p>\n<p>'<strong>ctrl+s'</strong>&nbsp; to save the note</p>\n<h2>&nbsp;How to save and sync data with dropbox, google drive or one drive</h2>\n<ol>\n<li>Install dropbox or google drive to your computer.</li>\n<li>Set the umbrella note data folder to the dropbox( or google drive ) folder in the settings.</li>\n</ol>"
                 addNote('Notebook One', date, d.toLocaleTimeString(), intro_note)
             }
         }
@@ -294,6 +294,12 @@ function initializerModal(x){
     }
 }
 
+function clearEditors(){
+    for(let i=0; i<tinyMCE.editors.length; i++){
+        tinyMCE.editors[i].setContent('')
+    }
+}
+
 function toggleModal(x) {
     $(x).toggleClass('open');
 }
@@ -326,19 +332,23 @@ function setUpKeyboardShortcuts(page){
                 // console.log('esc is pressed at writePage')
                 // $('#notebookPage .posts').html('');
                 openPage(notebookPage)
+                clearEditors()
             })
             umbrella_editor = document.getElementsByClassName('main-editor')
             var writer_mousetrap = new Mousetrap(umbrella_editor[0]);
             writer_mousetrap.bind(['ctrl+s', 'command+s'], ()=>{
                 // console.log('inside writepage section of setUpKeyboardShortcuts')
+                console.log('submiting the writepage form')
                 $('#writePage form').submit()
                 writer_mousetrap.unbind(['ctrl+s','command+s'])
+                clearEditors()
             });
             writer_mousetrap.bind('esc', ()=>{
                 // console.log('esc is pressed at writePage inside tinymce')
                 // $('#notebookPage .posts').html('');
                 openPage(notebookPage)
-                writer_mousetrap.unbind('esc')
+                writer_mousetrap.unbind(['esc', 'ctrl+s', 'command+s'])
+                clearEditors()
             });
             break
         case 'editorPage':
@@ -347,18 +357,22 @@ function setUpKeyboardShortcuts(page){
                 // console.log('esc is pressed at editorpage')
                 // $('#notebookPage .posts').html('');
                 openPage(notebookPage)
+                clearEditors()
             })
             umbrella_editor = document.getElementsByClassName('main-editor')
             var editor_mousetrap = new Mousetrap(umbrella_editor[1]);
             editor_mousetrap.bind(['ctrl+s', 'command+s'], ()=>{
+                console.log('submiting the edit note form ')
                 $('#editPage form').submit()
                 editor_mousetrap.unbind(['ctrl+s','command+s'])
+                clearEditors()
             });
             editor_mousetrap.bind('esc', ()=>{
                 // console.log('esc pressed at editorpage in tinymce')
                 // $('#notebookPage .posts').html('');
                 openPage(notebookPage)
-                editor_mousetrap.unbind('esc')
+                editor_mousetrap.unbind(['esc', 'ctrl+s', 'command+s'])
+                clearEditors()
             });
             // console.log('editor page is opened')
             break
@@ -379,7 +393,7 @@ function setUpKeyboardShortcuts(page){
                 openPage(homePage)
                 // console.log('esc is pressed at notebookPage')
             })
-            Mousetrap.bind(['ctrl+del', 'command+del'], ()=>{
+            Mousetrap.bind(['ctrl+d', 'command+d'], ()=>{
                 console.log('delete')
                 deleteNote(pointer_id_current_note)                
             })

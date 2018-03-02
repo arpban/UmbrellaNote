@@ -278,6 +278,12 @@ function initializerModal(x) {
     }
 }
 
+function clearEditors() {
+    for (var i = 0; i < tinyMCE.editors.length; i++) {
+        tinyMCE.editors[i].setContent('');
+    }
+}
+
 function toggleModal(x) {
     $(x).toggleClass('open');
 }
@@ -310,19 +316,23 @@ function setUpKeyboardShortcuts(page) {
                 // console.log('esc is pressed at writePage')
                 // $('#notebookPage .posts').html('');
                 openPage(notebookPage);
+                clearEditors();
             });
             umbrella_editor = document.getElementsByClassName('main-editor');
             var writer_mousetrap = new Mousetrap(umbrella_editor[0]);
             writer_mousetrap.bind(['ctrl+s', 'command+s'], function () {
                 // console.log('inside writepage section of setUpKeyboardShortcuts')
+                console.log('submiting the writepage form');
                 $('#writePage form').submit();
                 writer_mousetrap.unbind(['ctrl+s', 'command+s']);
+                clearEditors();
             });
             writer_mousetrap.bind('esc', function () {
                 // console.log('esc is pressed at writePage inside tinymce')
                 // $('#notebookPage .posts').html('');
                 openPage(notebookPage);
-                writer_mousetrap.unbind('esc');
+                writer_mousetrap.unbind(['esc', 'ctrl+s', 'command+s']);
+                clearEditors();
             });
             break;
         case 'editorPage':
@@ -331,18 +341,22 @@ function setUpKeyboardShortcuts(page) {
                 // console.log('esc is pressed at editorpage')
                 // $('#notebookPage .posts').html('');
                 openPage(notebookPage);
+                clearEditors();
             });
             umbrella_editor = document.getElementsByClassName('main-editor');
             var editor_mousetrap = new Mousetrap(umbrella_editor[1]);
             editor_mousetrap.bind(['ctrl+s', 'command+s'], function () {
+                console.log('submiting the edit note form ');
                 $('#editPage form').submit();
                 editor_mousetrap.unbind(['ctrl+s', 'command+s']);
+                clearEditors();
             });
             editor_mousetrap.bind('esc', function () {
                 // console.log('esc pressed at editorpage in tinymce')
                 // $('#notebookPage .posts').html('');
                 openPage(notebookPage);
-                editor_mousetrap.unbind('esc');
+                editor_mousetrap.unbind(['esc', 'ctrl+s', 'command+s']);
+                clearEditors();
             });
             // console.log('editor page is opened')
             break;
