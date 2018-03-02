@@ -100,7 +100,7 @@ function quicknotesInit() {
                 var d = new Date();
                 var date = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getUTCFullYear();
                 addNotebook('Notebook One', 'This is the default notebook. All the untagged posts are stored here.', 'img/1.jpg', date);
-                var intro_note = "<h1>Welcome to the Umbrella Note</h1>\n<p>To create new notebook click the notebook icon on your left. To write in a particular notebook, just open the notebook and click the feather icon at the lower right corner.</p>\n<h2>Keyboard Shortcuts</h2>\n<p><span style=\"background-color: inherit;\"><strong>Up, Down</strong> arrow keys for changing notes.</span></p>\n<p><strong>'f' or 'j'</strong> key for new note.</p>\n<p><strong>'esc'</strong> &nbsp;for returning back.</p>\n<p><strong>'ctrl+del'</strong> to delete a note.&nbsp;</p>\n<p><strong style=\"background-color: inherit;\">'command+del'</strong><span style=\"background-color: inherit;\"> to delete a note on mac</span></p>\n<p><strong>'e'</strong>&nbsp;to edit a note</p>\n<p>'<strong>ctrl+s'</strong>&nbsp; to save the note</p>\n<h2>&nbsp;How to save and sync data with dropbox, google drive or one drive</h2>\n<ol>\n<li>Install dropbox or google drive to your computer.</li>\n<li>Set the umbrella note data folder to the dropbox( or google drive ) folder in the settings.</li>\n</ol>";
+                var intro_note = "<h1>Welcome to the Umbrella Note</h1>\n<p>To create new notebook click the notebook icon on your left. To write in a particular notebook, just open the notebook and click the feather icon at the lower right corner.</p>\n<h2>Keyboard Shortcuts</h2>\n<p><span style=\"background-color: inherit;\"><strong>Up, Down</strong> arrow keys for changing notes.</span></p>\n<p><strong>'f' or 'j'</strong> key for new note.</p>\n<p><strong>'esc'</strong> &nbsp;for returning back.</p>\n<p><strong>'ctrl+d'</strong> to delete a note.&nbsp;</p>\n<p><strong style=\"background-color: inherit;\">'command+d'</strong><span style=\"background-color: inherit;\"> to delete a note on mac</span></p>\n<p><strong>'e'</strong>&nbsp;to edit a note</p>\n<p>'<strong>ctrl+s'</strong>&nbsp; to save the note</p>\n<h2>&nbsp;How to save and sync data with dropbox, google drive or one drive</h2>\n<ol>\n<li>Install dropbox or google drive to your computer.</li>\n<li>Set the umbrella note data folder to the dropbox( or google drive ) folder in the settings.</li>\n</ol>";
                 addNote('Notebook One', date, d.toLocaleTimeString(), intro_note);
             }
         }
@@ -363,7 +363,7 @@ function setUpKeyboardShortcuts(page) {
                 openPage(homePage);
                 // console.log('esc is pressed at notebookPage')
             });
-            Mousetrap.bind(['ctrl+del', 'command+del'], function () {
+            Mousetrap.bind(['ctrl+d', 'command+d'], function () {
                 console.log('delete');
                 deleteNote(pointer_id_current_note);
             });
