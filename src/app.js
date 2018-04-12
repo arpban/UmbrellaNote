@@ -73,11 +73,9 @@ ipcMain.on('maximize-window', () => {
 	mainWindow.maximize();
 })
 
-ipcMain.on('show-signup-in-browser', ()=>{
-	shell.openExternal('https://umbrellanote.com')
+ipcMain.on('visit-website', () => {
+	shell.openExternal("https://umbrellanote.com")
 })
-
-
 
 //-------------------------------------------------------------------
 // Auto updates

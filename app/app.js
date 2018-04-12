@@ -80,8 +80,8 @@ ipcMain.on('maximize-window', function () {
 	mainWindow.maximize();
 });
 
-ipcMain.on('show-signup-in-browser', function () {
-	shell.openExternal('https://umbrellanote.com');
+ipcMain.on('visit-website', function () {
+	shell.openExternal("https://umbrellanote.com");
 });
 
 //-------------------------------------------------------------------

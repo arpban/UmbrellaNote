@@ -759,6 +759,12 @@ button {
     font-size: 30px;
     padding: 5px 10px;
     font-family: "SourceSansPro-Light", sans-serif; }
+  #homePage footer, #settingsPage footer {
+    padding: 20px; }
+    #homePage footer a, #settingsPage footer a {
+      color: blue;
+      text-decoration: none;
+      border-bottom: 1px dashed blue; }
 
 #homePage {
   padding: 0px;

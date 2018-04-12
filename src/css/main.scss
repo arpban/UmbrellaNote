@@ -333,6 +333,15 @@ button {
         padding: 5px 10px;
         font-family: $sourceSansProLight;
     }
+
+    footer{
+        padding: 20px;
+        a{
+            color: blue;
+            text-decoration: none;
+            border-bottom: 1px dashed blue;
+        }
+    }
 }
 
 #homePage{

@@ -296,6 +296,11 @@ function showSignup() {
     ipcRenderer.send('show-signup-in-browser');
 }
 
+function visitWebsite(e) {
+    e.preventDefault();
+    ipcRenderer.send('visit-website');
+}
+
 function setUpKeyboardShortcuts(page) {
 
     switch (page) {
@@ -449,20 +454,11 @@ function initUmbrella() {
         toggleModal('.initializer-modal');
     } else {
         setUpDatabases();
-        // changeSignInStatus() 
         updateUserDetailsView();
         quicknotesInit();
         openPage(homePage);
-        // displayNotebooks();
-        // if(navigator.onLine && (localStorage.signedIn=='true')){
-        //     setTimeout(syncDatabaseUp,5000)
-        // }
         initFonts();
         initThemes();
-
-        // $('#notebookPage .column-2').click(()=>{
-        //     openEditorPage(pointer_id_current_note)        
-        // })        
     }
     console.log('umbrella initialized');
 }

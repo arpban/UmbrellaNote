@@ -137,7 +137,8 @@
 					</div>
 					<p class="strong">Edit/Delete Notebooks</p>
 					<div class="notebooks-list"></div>
-				</div>	
+				</div>
+				<footer>Visit <a onclick="visitWebsite(event)" href="https://umbrellanote.com">Umbrella Note</a></footer>	
 			</div>
 			<div class="options-menu" hidden>
 				<button>Delete</button>
@@ -224,7 +225,7 @@
 							<input class="form-item" type="text" name="user_name">
 							
 							<p style="margin-bottom: 0px">Please enter a location for storing your data.</p>
-							<small>We recommend installing cloud storage services like google drive or onedrive and select them as the location for storing your data.( We are facing some problems with dropbox on windows, so avoid using dropbox as the storage.)</small>
+							<small>We recommend installing cloud storage services like google drive or dropbox and select them as the location for storing your data.</small>
 							<input placeholder="Select Folder" class="db-location form-item" type="text" name="db_location" onclick="selectFolder('.db-location')">
 							<button onclick="selectFolder('.db-location')" class="btn1 browse-folder">Browse</button>
 							<input type="submit" value="Continue" class="btn3 b">
@@ -285,7 +286,6 @@
 		});
 	</script>
 	<script src="js/env.js"></script>
-	<script src="js/umbrella-auth.js"></script>
 	<script src="js/fonts.js"></script>
 	<script src="js/themes.js"></script>
 	<script src="js/notebooks.js"></script>
