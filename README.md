@@ -1,6 +1,6 @@
-#Umbrella Note
+# Umbrella Note
 
-(umbrellanote.com)[https://umbrellanote.com]
+[umbrellanote.com](https://umbrellanote.com)
 
 Installation guide:
 1. gulp
