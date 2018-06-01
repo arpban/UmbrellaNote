@@ -1,0 +1,29 @@
+.App .just-another-div {
+  height: 100%; }
+
+.App #feather-button {
+  -webkit-app-region: no-drag;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  margin: 22px 28px;
+  z-index: 50;
+  border: none;
+  padding: 12px 13px;
+  margin-left: 15px;
+  border-radius: 50%;
+  background: #338fff;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+  transition: 0.2s; }
+  .App #feather-button:hover {
+    background-color: #2b2b2b;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3); }
+  .App #feather-button:focus {
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3); }
+  .App #feather-button svg {
+    position: relative;
+    top: 1px;
+    left: 1px; }

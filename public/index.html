@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="theme-color" content="#000000">
+		<!--
+			manifest.json provides metadata used when your web app is added to the
+			homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+		-->
+		<link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+		<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+		<!--
+			Notice the use of %PUBLIC_URL% in the tags above.
+			It will be replaced with the URL of the `public` folder during the build.
+			Only files inside the `public` folder can be referenced from the HTML.
+
+			Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+			work correctly both with client-side routing and a non-root public URL.
+			Learn how to configure a non-root public URL by running `npm run build`.
+		-->
+
+		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
+
+		<title>React App</title>
+	</head>
+	<body>
+		<noscript>
+			You need to enable JavaScript to run this app.
+		</noscript>
+		
+		<div id="root"></div>
+		<div id="postman" onclick="hidePostman();">
+	        <div class="body"></div>
+	    </div>
+
+
+
+	    <script src="tinymce/tinymce.min.js"></script>
+
+	    <script src="mousetrap.min.js"></script>
+
+		<script type="text/javascript">
+			const Datastore = require('nedb')
+			const $ = require('jquery')
+			var db = {};
+			var data_path = null
+			
+			let notePointer = null //it points to jquery object of a note
+
+			function postman(message){
+				var p = document.getElementById('postman');
+				p.getElementsByClassName('body')[0].innerHTML = message;
+				p.className = 'open';
+				setTimeout(() => {
+				  p.className = ''
+				}, 7000);
+			}
+
+			function hidePostman(){
+				document.getElementById('postman').className = '';
+			}
+
+			function setUpDatabases(){
+			    
+			    console.log('setting up databases')
+			    data_path = localStorage.db_location
+			    db = {}
+			    db.notebooks = new Datastore({
+			        filename: data_path+'/umbrella-note/umbrella-notebooks.db'
+			    });
+			    db.notes = new Datastore({ filename: data_path+'/umbrella-note/umbrella-notes.db'});
+			    db.remoteTasks = new Datastore({ filename: data_path+'/umbrella-note/remote-tasks.db'});
+			    
+			    db.notes.loadDatabase((e)=>{
+			        if(e){
+			            console.log("some error, loading notes db again")
+			            setUpDatabases()
+			        }
+			    })
+			    db.remoteTasks.loadDatabase((e)=>{
+			        if(e){
+			            console.log("some error, loading remote db again")
+			            setUpDatabases()
+			        }
+			    })
+			    db.notebooks.loadDatabase((e)=>{
+			        if(e){
+			            console.log("some error, loading notebooks db again")
+			            setUpDatabases()
+			        }
+			    })
+
+			    console.log('databases are set')
+			}
+
+			function setUpNotebookPage(){
+				
+	    			notePointer = $('.post').first()
+	    			
+	    			if(notePointer[0] !== undefined){
+		    			notePointer[0].click()
+
+					    Mousetrap.bind('down', ()=>{
+					        console.log('down is pressed')
+					        if(notePointer.next()[0] == null){
+					            return 
+					        }
+					        notePointer = notePointer.next()
+					        notePointer[0].click()
+					    })
+					    Mousetrap.bind('up', ()=>{
+					        console.log('up is pressed')
+					        if(notePointer.prev()[0] == null){
+					            return 
+					        }
+					        notePointer = notePointer.prev()
+					        notePointer[0].click()
+					    })
+					    console.log('inside setUpNotebookPage if ')	    				
+	    			}
+
+    				
+    			
+
+    			console.log('ran setUpNotebookPage')
+			}
+
+			function initUmbrella(){
+				$('.notebooks-view .notebook a').click(function(){ setTimeout(setUpNotebookPage, 500) })
+				
+			}
+
+
+
+
+		</script>
+	</body>
+</html>

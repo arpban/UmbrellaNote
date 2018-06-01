@@ -1,0 +1,48 @@
+.title-bar {
+  display: flex;
+  padding-left: 52px;
+  justify-content: space-between;
+  -webkit-app-region: drag;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  background: inherit;
+  background: #FFFFFF; }
+  .title-bar .title {
+    font-size: 14px;
+    padding: 7px 10px;
+    width: 293px;
+    background: #FFFFFF;
+    color: rgba(0, 0, 0, 0.87); }
+    .title-bar .title.color {
+      background: #2193dc;
+      color: #ffffff; }
+  .title-bar .nav {
+    -webkit-app-region: no-drag;
+    padding: 7px; }
+    .title-bar .nav .nav-item {
+      border: none;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      margin-right: 2px;
+      outline: none;
+      margin-left: 1px; }
+      .title-bar .nav .nav-item:hover {
+        color: #2b2b2b; }
+    .title-bar .nav .close {
+      background-color: #fb6452;
+      color: #fb6452; }
+    .title-bar .nav .minimize {
+      background-color: #f0d700;
+      color: #f0d700; }
+    .title-bar .nav .maximize {
+      background-color: #32E317;
+      color: #32E317; }
+    .title-bar .nav svg {
+      width: 10px;
+      height: 10px;
+      stroke-width: 3px;
+      right: 3px;
+      position: relative; }

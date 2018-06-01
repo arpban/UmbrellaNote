@@ -1,0 +1,116 @@
+@import "partials/variables";
+
+#init-page{
+	position: fixed;
+    top: 0;
+    z-index: 500;
+    background: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .wrap{
+    	position: relative;
+	    z-index: 1;
+	    height: 100%;
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    background: rgba(0,0,0,0.3);
+	    color: white;
+	    .view1{
+	    	padding: 30px;
+	    	header{
+	    		margin: 20px 0px;
+	    	}
+	    	p{
+	    		font-size: 16px;
+	    	}
+	    	.btn1{
+	    		padding: 9px 17px;
+	    		margin-right: 6px;
+	    		&:hover{
+	    			background: white;
+	    			color: #444;
+	    			border-color: white;
+	    		}
+	    	}
+	    }
+	    .view-yes, .view-no{
+	    	padding: 30px;
+    		max-width: 600px;
+    		position: relative;
+            svg{
+                width: 45px;
+                height: 45px;
+                stroke-width: 0.8px;
+                transition: 0.4s;
+                &:hover{
+                	transform: scale(1.1);
+                }
+            }
+            .svg-button{
+                color: white;
+                margin-bottom: 10px;
+            }
+            label{
+            	font-size: 16px;
+            	display: block;
+            }
+            small{
+            	font-size: 14px;
+            }
+            input{
+                position: relative;
+                z-index: 1;
+                margin-bottom: 15px;
+                color: white;
+            }
+            .form-item{
+            	&:hover, &:focus{
+            		border-color: #5ef5bd;
+            	}
+            }
+            .btn3{
+                width: auto;
+                background: white;
+                color: #444;
+                font-size: 14px;
+            }
+            button.browse-folder{
+            	background: transparent;
+			    color: inherit;
+			    padding: 12px;
+			    border-radius: 2px;
+			    &:hover {
+			        color: #5ef5bd;
+			        border-color: #5ef5bd;
+			    }
+				position: absolute;
+			    margin-top: -51px;
+			    right: 40px;
+			    font-size: 13px;
+			    padding: 6px;
+			    border: 1.4px solid;
+			    z-index: 2;
+            }
+	    }
+	    footer{
+	    	position: absolute;
+		    bottom: 0;
+		    right: 0;
+		    padding: 20px;
+		    font-size: 14px;
+		    a{
+		        color: white;
+		        text-decoration: none;
+		        border-bottom: 1px dashed white;
+		    }
+	    }
+    }
+    img.background{
+    	position: absolute;
+    	width: 100%;
+    }
+}

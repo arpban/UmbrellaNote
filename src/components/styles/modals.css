@@ -1,0 +1,215 @@
+.modal {
+  display: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+  .modal.open {
+    z-index: 20;
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    top: 0px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+  .modal .body {
+    border-radius: 6px; }
+    .modal .body .close {
+      position: relative;
+      float: right; }
+      .modal .body .close button {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
+        padding: 7px 9px;
+        outline: none;
+        border: none; }
+        .modal .body .close button svg {
+          position: relative;
+          width: 24px;
+          fill: white;
+          top: 2px; }
+        .modal .body .close button:hover {
+          background: rgba(51, 143, 255, 0.8); }
+
+.modal .body {
+  min-width: 40%;
+  min-height: auto;
+  overflow: hidden;
+  padding: 20px;
+  background: #338fff;
+  color: #FAFAFA;
+  box-shadow: 0 1px 25px rgba(0, 0, 0, 0.2); }
+  .modal .body .close button:hover {
+    background: #FAFAFA; }
+    .modal .body .close button:hover svg {
+      fill: #338fff; }
+  .modal .body .header p {
+    font-size: 30px; }
+  .modal .body .form-group {
+    margin-bottom: 10px; }
+  .modal .body .form-item {
+    color: #FAFAFA; }
+    .modal .body .form-item:hover {
+      border-color: #c7fd91; }
+    .modal .body .form-item:focus {
+      border-color: #c7fd91;
+      color: #FAFAFA; }
+    .modal .body .form-item:-webkit-autofill {
+      background-color: #338fff !important;
+      color: #FAFAFA !important; }
+  .modal .body .btn1 {
+    color: #FAFAFA;
+    border-color: #FAFAFA;
+    font-size: 14px;
+    border: 2px solid; }
+    .modal .body .btn1:hover {
+      border-color: #c7fd91;
+      color: #c7fd91; }
+  .modal .body .forgot-password {
+    color: #f3eeee;
+    margin-left: 10px; }
+
+.modal.signin .body, .modal.edit-notebook .body {
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%); }
+  .modal.signin .body p, .modal.edit-notebook .body p {
+    font-size: 18px; }
+
+.modal.signin .btn3, .modal.edit-notebook .btn3 {
+  max-width: 100%; }
+
+.svg-button {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0px; }
+
+.modal.initializer-modal .body {
+  max-width: 700px;
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%); }
+  .modal.initializer-modal .body .main .btn1 {
+    margin-right: 3px;
+    padding: 8px 13px;
+    border-radius: 3px; }
+  .modal.initializer-modal .body .main .view2 {
+    display: none;
+    position: relative; }
+    .modal.initializer-modal .body .main .view2 svg {
+      width: 35px;
+      height: 35px;
+      stroke-width: 1.2px; }
+    .modal.initializer-modal .body .main .view2 .svg-button {
+      color: white; }
+    .modal.initializer-modal .body .main .view2 input {
+      position: relative;
+      z-index: 1; }
+    .modal.initializer-modal .body .main .view2 .btn3 {
+      width: auto; }
+    .modal.initializer-modal .body .main .view2 .btn1.browse-folder {
+      position: absolute;
+      margin-top: -43px;
+      right: 3px;
+      font-size: 13px;
+      padding: 6px; }
+
+.modal.initializer-modal #initializer-yes small, .modal.initializer-modal #initializer-no small {
+  font-size: 14px; }
+
+.modal.change-db-path-modal .body {
+  max-width: 700px;
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%); }
+  .modal.change-db-path-modal .body .main {
+    position: relative; }
+    .modal.change-db-path-modal .body .main .btn1 {
+      margin-right: 3px;
+      padding: 8px 13px;
+      border-radius: 3px; }
+    .modal.change-db-path-modal .body .main svg {
+      width: 35px;
+      height: 35px;
+      stroke-width: 1.2px; }
+    .modal.change-db-path-modal .body .main .svg-button {
+      color: white; }
+    .modal.change-db-path-modal .body .main input {
+      position: relative;
+      z-index: 1; }
+    .modal.change-db-path-modal .body .main .btn3 {
+      width: auto; }
+    .modal.change-db-path-modal .body .main .btn1.browse-folder {
+      position: absolute;
+      margin-top: -43px;
+      right: 3px;
+      font-size: 13px;
+      padding: 6px; }
+  .modal.change-db-path-modal .body small {
+    font-size: 14px; }
+
+.modal.create-notebook-modal .body {
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  width: 80%;
+  max-width: 700px; }
+  .modal.create-notebook-modal .body p {
+    font-size: 18px; }
+  .modal.create-notebook-modal .body .covers h3 {
+    font-size: 16px;
+    font-family: "Lato", sans-serif; }
+  .modal.create-notebook-modal .body .covers ul {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    overflow-x: scroll;
+    height: 180px;
+    flex-wrap: wrap; }
+  .modal.create-notebook-modal .body .covers ul::-webkit-scrollbar-track {
+    background-color: transparent; }
+  .modal.create-notebook-modal .body .covers ul::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    background-color: transparent; }
+  .modal.create-notebook-modal .body .covers ul::-webkit-scrollbar-thumb {
+    background-color: #338fff; }
+  .modal.create-notebook-modal .body .covers li {
+    display: inline-block; }
+  .modal.create-notebook-modal .body .covers input[type="checkbox"][id^="cb"] {
+    display: none; }
+  .modal.create-notebook-modal .body .covers label {
+    padding: 10px;
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    margin: 10px;
+    cursor: pointer; }
+  .modal.create-notebook-modal .body .covers label:before {
+    font-size: 14px;
+    background-color: rgba(16, 65, 99, 0.6);
+    text-align: center;
+    color: white;
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    /*   border: 1px solid grey; */
+    position: absolute;
+    top: 15px;
+    left: 11px;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    transition-duration: 0.4s;
+    transform: scale(0); }
+  .modal.create-notebook-modal .body .covers label img {
+    height: 100px;
+    width: 100px;
+    transition-duration: 0.1s;
+    transform-origin: 50% 50%;
+    border-radius: 50%; }
+  .modal.create-notebook-modal .body .covers :checked + label:before {
+    content: "Selected";
+    transform: scale(1.1); }
+  .modal.create-notebook-modal .body .covers :checked + label img {
+    transform: scale(1.2);
+    box-shadow: 0 0 3px #333;
+    z-index: -1; }

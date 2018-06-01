@@ -1,0 +1,49 @@
+#settings-page {
+  -webkit-app-region: no-drag;
+  min-height: 100%;
+  margin: 31px 0px 0px 52px;
+  overflow-x: hidden;
+  padding-bottom: 50px;
+  overflow-y: scroll;
+  height: 100%; }
+  #settings-page .user {
+    margin: 20px; }
+    #settings-page .user .username {
+      font-size: 16px; }
+    #settings-page .user .email {
+      font-size: 16px; }
+  #settings-page .content {
+    margin: 20px; }
+  #settings-page .fonts, #settings-page .themes {
+    margin: 15px 0px; }
+    #settings-page .fonts select, #settings-page .themes select {
+      padding: 7px;
+      border: none;
+      border-bottom: 2px solid #338fff;
+      background: inherit;
+      outline: none;
+      width: 400px;
+      font-size: 16px; }
+  #settings-page .path-wrap .db-location-tag {
+    display: inline;
+    margin-right: 7px; }
+  #settings-page .path-wrap button {
+    display: inline;
+    width: auto; }
+  #settings-page footer {
+    margin: 20px; }
+    #settings-page footer a {
+      color: blue;
+      text-decoration: none;
+      border-bottom: 1px dashed blue; }
+
+#settings-page::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: transparent; }
+
+#settings-page::-webkit-scrollbar {
+  width: 7px;
+  background-color: transparent; }
+
+#settings-page::-webkit-scrollbar-thumb {
+  background-color: #ababab; }

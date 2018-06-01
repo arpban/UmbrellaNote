@@ -1,0 +1,69 @@
+@import "partials/variables";
+
+#settings-page{
+    -webkit-app-region: no-drag;
+    min-height: 100%;
+    margin: 31px 0px 0px 52px;
+    overflow-x: hidden;
+    padding-bottom: 50px;
+
+    overflow-y: scroll;
+    height: 100%;
+
+    .user{
+        margin: 20px;
+        .username{
+            font-size: 16px;
+        }
+        .email{
+            font-size: 16px;
+        }
+    }
+    .content{
+        margin: 20px;
+    }
+    .fonts, .themes{
+        margin: 15px 0px;
+        select{
+            padding: 7px;
+            border: none;
+            border-bottom: 2px solid $blue;
+            background: inherit;
+            outline: none;
+            width: 400px;
+            font-size: 16px;
+        }
+    }
+    .path-wrap{
+        .db-location-tag{
+            display: inline;
+            margin-right: 7px;
+        }
+        button{
+            display: inline;
+            width: auto;
+        }
+    }
+    footer{
+        margin: 20px;
+        a{
+            color: blue;
+            text-decoration: none;
+            border-bottom: 1px dashed blue;
+        }
+    }
+}
+
+#settings-page::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+}
+
+#settings-page::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+#settings-page::-webkit-scrollbar-thumb {
+    background-color: $grey;
+}

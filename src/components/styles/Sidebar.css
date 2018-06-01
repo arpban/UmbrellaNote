@@ -1,0 +1,26 @@
+#sidebar {
+  -webkit-app-region: no-drag;
+  position: fixed;
+  top: 0px;
+  height: 100%;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  background: #1c1925; }
+  #sidebar .bottom {
+    height: 40%;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; }
+    #sidebar .bottom button {
+      margin-top: 13px;
+      background: none;
+      border: none;
+      color: white; }
+      #sidebar .bottom button:hover {
+        color: #338fff; }
+  #sidebar .top {
+    height: 60%; }

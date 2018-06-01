@@ -1,0 +1,151 @@
+@import "partials/variables";
+
+#HomePage{
+    -webkit-app-region: no-drag;
+    overflow-x: hidden;
+    margin: 31px 0px 0px 52px;
+    min-height: 100%;
+    overflow-y: scroll;
+    height: 100%;
+    padding-bottom: 50px;
+    .header {
+        margin: 0px 20px;
+        font-size: 18px;
+        font-family: $default-font;
+        margin-top: 20px;
+    }
+
+    .notebooks-view {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        flex-grow: 1;
+        align-items: flex-start;
+        margin-bottom: 15px;
+        padding: 10px;
+        .notebook {
+            max-width: 300px;
+            width: 18.8999%;
+            margin: 10px 2px 10px 10px;
+            a {
+                box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+                position: relative;
+                display: block;
+                overflow: hidden;
+                transition: 0.18s;
+                border-radius: 6px;
+                cursor: pointer;
+                // border: 1px solid #e6e6e6;
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 1px 25px rgba(0, 0, 0, 0.2);
+                }
+
+                .cover {
+                    position: relative;
+                    background-color: #959597;
+                    overflow: hidden;
+                    height: 195px;
+                    width: 100%;
+
+                    img {
+                        object-fit: cover;
+                        width: 100%;
+                        height: 100%;
+                        border-style: none;
+                    }
+                }
+
+                .description {
+                    padding: 10px 12px;
+                    color: $default-text;
+                    background-color: #f7f7f7;
+                    font-family: $default-font;
+
+                    .title {
+                        font-size: 14px;
+                    }
+
+                    .created {
+                        font-size: 12px;
+                        color: dimgrey;
+                        margin-top: 2px;
+                    }
+
+                    .summary {
+                        height: 33px;
+                        font-size: 12.5px;
+                        overflow: hidden;
+                        margin-top: 4px;
+                    }
+
+                    button {
+                        border: none;
+                        margin-top: 10px;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        padding: 0;
+                        font-size: 11px;
+                        color: $umbrella_secondary;
+                        background: inherit;
+                    }
+                }
+            }
+        }
+    }
+
+}
+#HomePage::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+}
+
+#HomePage::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+#HomePage::-webkit-scrollbar-thumb {
+    background-color: $grey;
+}
+
+@media(max-width: 1170px){
+    #HomePage{
+        .notebooks-view{
+            .notebook{
+                width: 23.5%;
+            }            
+        }
+    }
+}
+
+@media(max-width: 880px){
+    #HomePage{
+        .notebooks-view{
+            .notebook{
+                width: 31.5%;
+            }            
+        }
+    }
+}
+
+@media(max-width: 733px){
+    #HomePage{
+        .notebooks-view{
+            .notebook{
+                width: 30.5%;
+            }            
+        }
+    }
+}
+
+@media(max-width: 550px){
+    #HomePage{
+        .notebooks-view{
+            .notebook{
+                width: 46.5%;
+            }            
+        }
+    }
+}

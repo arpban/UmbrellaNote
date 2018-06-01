@@ -1,0 +1,34 @@
+@import "partials/variables";
+
+#sidebar {
+    -webkit-app-region: no-drag;
+    position: fixed;
+    top: 0px;
+    height: 100%;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    // background: #f7f7f7;
+    background: #1c1925;
+    .bottom{
+        height: 40%;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        button {
+            margin-top: 13px;
+            background: none;
+            border: none;
+            color: white;
+            &:hover{
+                color: $blue;
+            }
+        }
+    }
+    .top{
+        height: 60%;
+    }
+}
