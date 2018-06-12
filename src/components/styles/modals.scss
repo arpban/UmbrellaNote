@@ -104,7 +104,7 @@
             border-color: $white;
             font-size: 14px;
             border: 2px solid;
-
+            padding: 10px;
             &:hover {
                 border-color: $lightgreen;
                 color: $lightgreen;
@@ -329,6 +329,17 @@
                 box-shadow: 0 0 3px #333;
                 z-index: -1;
             }
+        }
+    }
+}
+
+.modal.signin-modal {
+    .body {
+        background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+        width: 550px;
+        max-width: 700px;
+        p {
+            font-size: 18px;
         }
     }
 }

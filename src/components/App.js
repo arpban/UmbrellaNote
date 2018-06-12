@@ -18,11 +18,12 @@ class App extends Component {
 	  	super(props)
 	  	this.state = {
 	  		views: [true, false, false, false], //[homepage, settingspage, notebookpage, editorview]
-	  		modalsStatus: [false], //[create-notebook-modal,]
+	  		modalsStatus: [false, false], //[create-notebook-modal, signin-modal]
 	  		isAppInitialized: false,
 	  		newNotebookAvailable: false,
 	  		activeNotebook: 'Notebook One',
 	  		editing_note: '', //id of note which needs to be updated
+	  		login_status: false
 	  	}
 	  	this.changeView = this.changeView.bind(this)
 	  	this.activateModal = this.activateModal.bind(this)
@@ -33,6 +34,7 @@ class App extends Component {
 		this.toggleEditor = this.toggleEditor.bind(this)
 		this.doneInitNewNotebook = this.doneInitNewNotebook.bind(this)
 		this.editNote = this.editNote.bind(this)
+		this.changeSigninStatus = this.changeSigninStatus.bind(this)
 	}
 
 	componentWillMount(){
@@ -45,6 +47,12 @@ class App extends Component {
 				isAppInitialized: true
 			})
 		}
+
+		if(localStorage.isLoggedIn === 'true'){
+        	this.setState({
+        		login_status: true
+        	})
+        }
 	}
 
 	componentDidMount(){
@@ -58,6 +66,8 @@ class App extends Component {
             // console.log('j is pressed at homePage')
             this.changeView(3)
         })
+
+        console.log(this.state.login_status)
 	}
 
 	openNotebook(title){
@@ -154,7 +164,7 @@ class App extends Component {
 	}
 
 	activateModal(i){
-		let modalsStatus = [false]
+		let modalsStatus = [false, false]
 		modalsStatus[i] = true
 		this.setState({
 			modalsStatus: modalsStatus
@@ -163,7 +173,7 @@ class App extends Component {
 
 	deactivateModals(){
 		this.setState({
-			modalsStatus: [false]
+			modalsStatus: [false, false]
 		})
 	}
 
@@ -197,6 +207,22 @@ class App extends Component {
 		this.changeView(3)
 	}
 
+
+	changeSigninStatus(s){
+		if(s === false){
+			localStorage.setItem("isLoggedIn", false)
+			localStorage.setItem("access_token", "")
+			this.setState({
+				login_status: false
+			})
+			window.postman("Bye..")
+		}else{
+			this.setState({
+				login_status: true
+			})
+		}
+	}
+
 	render() {
 
 		console.log('going to render App')
@@ -216,7 +242,9 @@ class App extends Component {
 					<TitleBar notebook={this.state.activeNotebook} pages={this.state.views} />
 					<Sidebar activateModal={this.activateModal} changeView={this.changeView} />
 					<HomePage editorState={this.state.isEditorActive} openNotebook={this.openNotebook} newNotebookAvailable={this.state.newNotebookAvailable} active={this.state.views[0]} />
-					<SettingsPage active={this.state.views[1]} />
+					<SettingsPage login_status={this.state.login_status} active={this.state.views[1]} activateModal={this.activateModal} 
+					deactivateModals={this.deactivateModals} 
+					changeSigninStatus={this.changeSigninStatus} signin={this.state.modalsStatus[1]} />
 					<CreateNotebookModal initNewNotebook={this.initNewNotebook} deactivateModals={this.deactivateModals} active={this.state.modalsStatus[0]} />
 					<NotebookPage changeView={this.changeView} notebook={this.state.activeNotebook} editNote={this.editNote} active={this.state.views[2]} />
 					<EditorView changeView={this.changeView} notebook={this.state.activeNotebook} noteId={this.state.editing_note} changeView={this.changeView} active={this.state.views[3]} />

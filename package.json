@@ -109,6 +109,7 @@
     "gulp-sass": "^4.0.1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "electron-updater": "^2.21.10",
     "feather-icons": "^4.7.3",
     "jquery": "^3.3.1",

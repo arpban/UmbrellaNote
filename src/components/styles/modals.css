@@ -63,7 +63,8 @@
     color: #FAFAFA;
     border-color: #FAFAFA;
     font-size: 14px;
-    border: 2px solid; }
+    border: 2px solid;
+    padding: 10px; }
     .modal .body .btn1:hover {
       border-color: #c7fd91;
       color: #c7fd91; }
@@ -213,3 +214,10 @@
     transform: scale(1.2);
     box-shadow: 0 0 3px #333;
     z-index: -1; }
+
+.modal.signin-modal .body {
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  width: 550px;
+  max-width: 700px; }
+  .modal.signin-modal .body p {
+    font-size: 18px; }

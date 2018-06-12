@@ -15,7 +15,7 @@ class EditorView extends Component {
 		this.updateNote = this.updateNote.bind(this)	  	
 	}
 	
-	componentWillMount(){
+	componentDidMount(){
 		window.tinymce.init({
 			selector: 'div.main-editor',
 			theme: 'inlite',
