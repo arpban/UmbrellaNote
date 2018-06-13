@@ -50,7 +50,7 @@ class SigninModal extends Component {
 				window.postman(response.data.msg)
 			}
 
-			//hide the spinner now
+			//hiding the spinner
 			document.getElementById('spinner').className=''
 		}).catch((error) => {
 			//hide the spinner

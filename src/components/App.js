@@ -245,7 +245,9 @@ class App extends Component {
 					<SettingsPage login_status={this.state.login_status} active={this.state.views[1]} activateModal={this.activateModal} 
 					deactivateModals={this.deactivateModals} 
 					changeSigninStatus={this.changeSigninStatus} signin={this.state.modalsStatus[1]} />
-					<CreateNotebookModal initNewNotebook={this.initNewNotebook} deactivateModals={this.deactivateModals} active={this.state.modalsStatus[0]} />
+					<CreateNotebookModal initNewNotebook={this.initNewNotebook} 
+					deactivateModals={this.deactivateModals} active={this.state.modalsStatus[0]}
+					login_status={this.state.login_status} />
 					<NotebookPage changeView={this.changeView} notebook={this.state.activeNotebook} editNote={this.editNote} active={this.state.views[2]} />
 					<EditorView changeView={this.changeView} notebook={this.state.activeNotebook} noteId={this.state.editing_note} changeView={this.changeView} active={this.state.views[3]} />
 					<button onClick={() => {this.changeView(3)}} id="feather-button" class="write icon">

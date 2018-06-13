@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './styles/modals.css';
 import $ from 'jquery'
+import OnOff from './OnOff'
+import axios from 'axios'
+import Config from '../umbrella-config'
 
 class CreateNotebookModal extends Component {
 
@@ -8,19 +11,20 @@ class CreateNotebookModal extends Component {
 	constructor(props) {
 	  	super(props)
 	  	this.state = {
-	
+			publish_nb_online: false, //publish notebook online or not
 	  	}
 
 	  	this.createNotebook = this.createNotebook.bind(this)
+	  	this.handleOnOffSwitch = this.handleOnOffSwitch.bind(this)
 	}
 
 	createNotebook(e){
-		let that = this
+
 		e.preventDefault()
+		let that = this
 		let days = new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
 		let months = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 		let title = $('.create-notebook-modal form input[name=title]').val();
-	    console.log(title);
 	    let summary = $('.create-notebook-modal form textarea').val();
 	    let cover_image = $('.cover-checkbox:checked').val();
 	    var d = new Date();
@@ -33,26 +37,107 @@ class CreateNotebookModal extends Component {
 	        time: date
 	    };
 
-	    window.db.notebooks.findOne({title: title}, (err, doc)=>{
+	    window.db.notebooks.findOne({title: title}, (err, doc) =>{
 	        if(err){
 	            window.postman('<img src="img/emojis/sad.svg"><div class="emoji-text">Error. Try again later.</div>');
 	        }
 	        else{
-	            if(doc == null)
-	                window.db.notebooks.insert(obj, function(err,newDoc){
-	                    if(err){
-	                    	window.postman('<img src="img/emojis/sad.svg"><div class="emoji-text">Error. Try again later.</div>')
-	                    }
-	                    else{
-	                        that.props.deactivateModals()
-	                        window.postman('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
-	                        that.props.initNewNotebook()
-	                    }
-	                })
-	            else
+	            if(doc == null){
+
+					if(that.state.publish_nb_online){
+						
+						//calling the spinner
+						document.getElementById('spinner').className='active'
+						
+						axios({
+				            method: 'post',
+				            url: Config.backend_url + '/api/create-public-notebook',
+				            headers: {
+				                'Accept': 'application/json',
+				                'Authorization': 'Bearer '+ localStorage.access_token
+				            },
+				            data: {
+				            	title : title,
+				            	description: summary,
+				            	posts: []
+				            }
+				        }).then(function(response){
+				            console.log('creating notebook on the server', response.data)
+					        
+					        //hiding the spinner
+							document.getElementById('spinner').className=''
+				            
+				            if(response.data.success === true){
+				            	obj.remote_id = response.data.res[0]._id
+				            	obj.owners_remote_ids = response.data.res[0].owners
+				            	window.db.notebooks.insert(obj, function(err,newDoc){
+				                    if(err){
+				                    	
+				                    	//TODO - send ajax req for deleting the notebook created on the server
+				                    	
+				                    	window.postman('<img src="img/emojis/sad.svg"><div class="emoji-text">Error. Try again later.</div>')
+				                    }
+				                    else{
+				                        that.props.deactivateModals()
+				                        window.postman('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
+				                        that.props.initNewNotebook()
+				                    }
+				                })	
+				            }
+
+				        }, (err)=>{
+				        	
+				        	//hiding the spinner
+							document.getElementById('spinner').className=''
+				            
+				            window.postman('<img src="img/emojis/sad.svg"><div class="emoji-text">Error. Try again later.</div>')
+				        })
+
+
+					}else{
+					
+		                window.db.notebooks.insert(obj, function(err,newDoc){
+		                    if(err){
+		                    	window.postman('<img src="img/emojis/sad.svg"><div class="emoji-text">Error. Try again later.</div>')
+		                    }
+		                    else{
+		                        that.props.deactivateModals()
+		                        window.postman('<img src="img/emojis/happy.svg"><div class="emoji-text">Success!</div>');
+		                        that.props.initNewNotebook()
+		                    }
+		                })
+
+					}
+
+	            }else{
 	                window.postman('Notebook already exists!')
+	            }
+
 	        }
 	    })
+
+
+
+	}
+
+	handleOnOffSwitch(switch_status){
+
+		if(switch_status){
+			if(this.props.login_status){
+				this.setState({
+					publish_nb_online: true
+				})
+			}else{
+				window.postman("To publish a notebook online, you need to login first.")
+				this.setState({
+					publish_nb_online: false
+				})
+			}
+		}else{
+			this.setState({
+				publish_nb_online: false 
+			})			
+		}
 
 	}
 
@@ -100,6 +185,14 @@ class CreateNotebookModal extends Component {
 								<ul>
 									{covers_li}
 								</ul>
+							</div>
+							<div className="publish">
+								<OnOff checked={this.state.publish_nb_online} handleOnOffSwitch={this.handleOnOffSwitch} title="Publish Notebook Online" />		
+								<div className={this.state.publish_nb_online ? "options" : "options hidden"}>
+
+									{/*ADD OPTIONS HERE */}
+								
+								</div>
 							</div>
 							<input type="submit" value="Create" className="btn1" />
 						</form>

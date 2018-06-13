@@ -74,9 +74,9 @@ header{
 }
 
 form.form-group {
-    * {
-        margin: 5px 0px;
-    }
+    // * {
+    //     margin: 5px 0px;
+    // }
 
     .form-item {
         display: block;
@@ -87,7 +87,8 @@ form.form-group {
         border: 2px solid $lightlightgrey;
         border-radius: 2px;
         outline: none;
-
+        margin: 5px 0px;
+        
         &:hover, &:focus {
             border-color: $umbrella_secondary;
             outline: none;

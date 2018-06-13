@@ -59,9 +59,6 @@ header {
   font-family: "Lato", sans-serif;
   font-weight: 400; }
 
-form.form-group * {
-  margin: 5px 0px; }
-
 form.form-group .form-item {
   display: block;
   width: 100%;
@@ -71,6 +68,7 @@ form.form-group .form-item {
   border: 2px solid #f3eeee;
   border-radius: 2px;
   outline: none;
+  margin: 5px 0px;
   background-color: inherit; }
   form.form-group .form-item:hover, form.form-group .form-item:focus {
     border-color: #338fff;
