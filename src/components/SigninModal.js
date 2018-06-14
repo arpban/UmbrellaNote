@@ -44,7 +44,8 @@ class SigninModal extends Component {
 				localStorage.setItem('email', email)
 				localStorage.setItem('access_token', response.data.access_token)
 				localStorage.setItem('isLoggedIn', true)
-				localStorage.setItem('username', response.data.name)
+				localStorage.setItem('name', response.data.name)
+				localStorage.setItem('username', response.data.username)
 				this.props.changeSigninStatus(true)
 			}else{
 				window.postman(response.data.msg)

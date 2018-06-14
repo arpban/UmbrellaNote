@@ -88,8 +88,7 @@
 
             &:focus {
                 border-color: $lightgreen;
-
-                // background-color: $white;
+                background-color: rgba(0, 0, 0, 0.2);
                 color: $white;
             }
 
@@ -330,6 +329,22 @@
                 z-index: -1;
             }
         }
+
+        .options{
+            .nb-url{
+                display: flex;
+                align-items: center;
+                div:nth-child(1){
+                    // margin-right: 10px;
+                    font-size: 16px;
+                    width: 100%;
+                }
+                div:nth-child(2){
+                    margin-left: -17px;
+                }
+            }
+        }
+
     }
 }
 

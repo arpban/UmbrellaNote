@@ -13,7 +13,7 @@ class SettingsPage extends Component {
 	
 	  	this.state = {
 	  		notebooks: [],
-	  		username: ''
+	  		name: ''
 	  	}
 
 	  	this.visitWebsite = this.visitWebsite.bind(this)
@@ -72,7 +72,7 @@ class SettingsPage extends Component {
 
 	    if(nextProps.login_status){
 	    	this.setState({
-	    		username: localStorage.username
+	    		name: localStorage.name
 	    	})
 	    }
 
@@ -102,7 +102,7 @@ class SettingsPage extends Component {
 		<div id="settings-page" className={this.props.active ? '' : 'hidden' } >
 			<header>Settings</header>
 			<div className="user">
-				<div className="username">{this.state.username}</div>
+				<div className="username">{this.state.name}</div>
 				<div className="email"></div>
 			</div>
 

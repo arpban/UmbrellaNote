@@ -48,6 +48,8 @@ class CreateNotebookModal extends Component {
 						
 						//calling the spinner
 						document.getElementById('spinner').className='active'
+
+						let nb_url_input = document.getElementById('nb-url-input').value
 						
 						axios({
 				            method: 'post',
@@ -59,7 +61,8 @@ class CreateNotebookModal extends Component {
 				            data: {
 				            	title : title,
 				            	description: summary,
-				            	posts: []
+				            	posts: [],
+				            	title_c: nb_url_input
 				            }
 				        }).then(function(response){
 				            console.log('creating notebook on the server', response.data)
@@ -68,8 +71,9 @@ class CreateNotebookModal extends Component {
 							document.getElementById('spinner').className=''
 				            
 				            if(response.data.success === true){
-				            	obj.remote_id = response.data.res[0]._id
-				            	obj.owners_remote_ids = response.data.res[0].owners
+				            	obj.remote_id = response.data.res._id
+				            	obj.owners_remote_ids = response.data.res.owners
+				            	obj.title_c = response.data.res.title_c
 				            	window.db.notebooks.insert(obj, function(err,newDoc){
 				                    if(err){
 				                    	
@@ -141,6 +145,16 @@ class CreateNotebookModal extends Component {
 
 	}
 
+	createUrl(e){
+		let t = e.target.value
+		t = t.replace(/[._"<>#%{}|\^~ `]/g, '-')
+		t = t.replace('[', '-')
+		t = t.replace(']', '-')
+		t = t.replace('/', '-')
+		t = t.replace(/\\/g, "-")
+		document.getElementById('nb-url-input').value = t
+	}
+
   	render() {
 
   		console.log('going to render CreateNotebookModal')
@@ -169,7 +183,11 @@ class CreateNotebookModal extends Component {
 			)
 		}
 
+	    let url = "https://umbrellanote.com/" + localStorage.username + "/"
+
 	    return (
+
+
 	    	<div className={this.props.active ? 'create-notebook-modal modal open' : 'create-notebook-modal modal' }>
 				<div className="body">
 					<div className="close"><button onClick={() => {this.props.deactivateModals()}}><svg className="" viewBox="0 0 24 24"><path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"/><path d="M0 0h24v24h-24z" fill="none"/></svg></button></div>
@@ -177,7 +195,7 @@ class CreateNotebookModal extends Component {
 						<p>New Notebook</p>
 						<form onSubmit={(e) => {this.createNotebook(e)}} className="form-group" >
 							<label>Title</label>
-							<input className="form-item" type="text" name="title" required />
+							<input onChange={this.createUrl} className="form-item" type="text" name="title" required />
 							<label>Description</label>
 							<textarea className="form-item" name="summary"></textarea>
 							<div className="covers">
@@ -190,7 +208,11 @@ class CreateNotebookModal extends Component {
 								<OnOff checked={this.state.publish_nb_online} handleOnOffSwitch={this.handleOnOffSwitch} title="Publish Notebook Online" />		
 								<div className={this.state.publish_nb_online ? "options" : "options hidden"}>
 
-									{/*ADD OPTIONS HERE */}
+									<label>Notebook will be published at the following url</label>
+									<div className="nb-url">
+										<div>{url}</div>
+										<input id="nb-url-input" className="form-item" type="text" name="t" required />
+									</div>
 								
 								</div>
 							</div>
